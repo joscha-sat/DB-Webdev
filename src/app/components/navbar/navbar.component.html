@@ -1,1 +1,40 @@
-<p>navbar works!</p>
+<nav class="navbar" role="navigation" aria-label="main navigation" #nav>
+
+  <div class="navbar-brand">
+    <a role="button" (click)="navBarItems()" class="navbar-burger" aria-label="menu" aria-expanded="false"
+      data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div class="navbar-menu" #navlinks>
+    <div class="navbar-start">
+      <a class="navbar-item" routerLink="/Startseite">
+        Startseite
+      </a>
+
+      <a class="navbar-item" routerLink="/ZweiteSeite">
+        zweite Seite
+      </a>
+
+    </div>
+
+    <div class="navbar-end">
+      <a (click)="toggleTheme()" class="navbar-item">
+        Darkmode
+      </a>
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-primary">
+            <strong>Registrieren</strong>
+          </a>
+          <a class="button is-light">
+            Einloggen
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

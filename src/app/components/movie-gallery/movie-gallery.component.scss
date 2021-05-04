@@ -1,0 +1,77 @@
+@use 'src/app/Styles/index'as *;
+
+/* Eltern-Grid (Gesamtcontainer) */
+.grid {
+  display: grid;
+  justify-content: center;
+  grid-gap: 1.25rem;
+  grid-auto-flow: row;
+
+  max-width: 1500px;
+  margin: auto;
+
+  grid-template-columns: repeat(auto-fit, minmax(100px, 325px));
+}
+
+/* Bilder im Grid */
+.grid img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  object-position: 50% 50%;
+
+  border: 1px solid grey;
+  border-radius: 0.313rem;
+}
+
+/* Das "Gehäuse" / Element in dem die Bilder sind */
+.figure {
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: $panel_color;
+  color: white;
+  overflow: hidden;
+}
+
+/* Das "Gehäuse" / Element in dem der Titel + Buttons sind */
+figcaption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .titel {
+    font-size: $h2_font_size;
+    font-size: bold;
+  }
+}
+
+/* Das Unter-"Gehäuse" / Unter-Element in dem die zwei Buttons sind */
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 1rem;
+}
+
+/* der button-tag */
+button {
+  margin-top: $padding_4;
+  font-weight: bold;
+}
+
+/* Eltern-Element für die Searchbar */
+.field {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
+/* Die Searchbar, also das <input> tag selbst */
+.searchbar input {
+  width: 100%;
+  padding: 0.5rem;
+}

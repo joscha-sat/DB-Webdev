@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
+
+// FONT SIZES // -------------------------------------------------------------- //
+
+// 36px, da 1rem = 10px durch html { font-size: 62.5%;} // Default 1rem = 16px
+
+$font_family: "Noto Sans", serif;
+
+$title_biggest_font_size: 3rem;
+$h1_font_size: 2.25rem;
+$h2_font_size: 1.5rem;
+$h3_font_size: 1.25rem;
+$normal_text_font_size: 1.125rem;
+$small_text_font_size: 0.875rem;
+$smallest_text_font_size: 0.75rem;
+
+// MARGIN + PADDING // -------------------------------------------------------------- //
+
+$marging_1: 0.5rem;
+$marging_2: 0.625rem;
+$marging_3: 1rem;
+$marging_4: 1.5rem;
+$marging_5: 2rem;
+$marging_6: 2.5rem;
+$marging_7: 3rem;
+
+$padding_1: 0.5rem;
+$padding_2: 0.625rem;
+$padding_3: 1rem;
+$padding_4: 1.5rem;
+$padding_5: 2rem;
+$padding_6: 2.5rem;
+$padding_7: 3rem;

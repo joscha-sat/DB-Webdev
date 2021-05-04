@@ -1,1 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+//dateien aus styles
+@use './app/styles/index'as *;
+
+// Bluma
+@import "./node_modules/bulma/bulma.sass";
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+* {
+  transition: color 0.2s, background 0.5s;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --color-page-background: #{$body_background_color_light};
+  --color-text: #{$text_color_light};
+  --color-bg-container: #{$container_background_color_light};
+}
+
+.dark {
+  --color-page-background: #{$body_background_color_dark};
+  --color-text: #{$text_color_dark};
+  --color-bg-container: #{$container_background_color_dark};
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font_family;
+  font-size: $normal_text_font_size;
+  color: var(--color-text);
+
+  background: var(--color-page-background);
+  line-height: 1.6;
+
+  word-break: break-word;
+  min-height: 100vh;
+}
+
+:is(h1, h2, h3, ul, p) {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
