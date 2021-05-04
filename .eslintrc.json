@@ -36,7 +36,7 @@
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-inferrable-types": "off",
     "@typescript-eslint/indent": ["error", 2],
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/consistent-type-assertions": "error",
 
     //erzwingt Typ-Zuweisung
