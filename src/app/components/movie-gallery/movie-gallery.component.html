@@ -1,4 +1,5 @@
-<!-------------------------------------------------------------------------------------------- || SORTIERE FILMTITEL || -->
+<!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
+
 <div class="field">
   <p class="control has-icons-left">
     <input type="text" class="input is-normal" placeholder="Film suchen..." [(ngModel)]="search" />
@@ -8,9 +9,10 @@
   </p>
 </div>
 
-<!-- Container || START || -->
+<!-- Container: Film-Gallerie || START || -->
+
 <div class="grid">
-  <!-- Film mit Titel, Bild und zwei Buttons || START || -->
+
   <figure class="figure" *ngFor="let film of filteredFilme()">
 
     <div class="images">
@@ -28,8 +30,7 @@
       </div>
     </figcaption>
 
-    <!-- Film mit Titel, Bild und zwei Buttons || ENDE || -->
   </figure>
 
-  <!-- Container || ENDE || -->
+  <!--  Container: Film-Gallerie || ENDE || -->
 </div>

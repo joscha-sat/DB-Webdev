@@ -23,15 +23,16 @@
 
     <div class="navbar-end">
       <a (click)="toggleTheme()" class="navbar-item">
-        Darkmode
+        <i *ngIf="darkTheme" class="far fa-moon"></i>
+        <i *ngIf="!darkTheme" class="fas fa-sun"></i>
       </a>
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
+          <a class="button is-primary is-rounded">
             <strong>Registrieren</strong>
           </a>
-          <a class="button is-light">
-            Einloggen
+          <a class="button is-primary is-rounded">
+            <strong>Einloggen</strong>
           </a>
         </div>
       </div>
