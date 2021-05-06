@@ -1,0 +1,14 @@
+<div class="container notification is-info mt-5" *ngIf="asyncUsers !== null ">
+
+  <div class="block">
+    Test-Daten eines Kunden, abgerufen aus einer Test-Datenbank
+  </div>
+
+  <!-- Keyword | async ergänzen -->
+  <ul *ngFor="let user of asyncUsers | async">
+    <li>Kunden-ID: {{user.id}}</li>
+    <li>User: {{user.benutzername}}</li>
+    <li>Email: {{user.email}}</li>
+    <li>Geburtsdatum: {{user.geburtsdatum}}</li>
+  </ul>
+</div>

@@ -1,6 +1,5 @@
 @use 'src/app/Styles/index'as *;
 
-
 .inhalt {
   @include container(); // aus _mixins.scss
 }
