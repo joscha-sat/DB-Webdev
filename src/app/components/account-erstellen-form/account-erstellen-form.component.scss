@@ -1,0 +1,10 @@
+@use 'src/app/Styles/index'as *;
+
+.container {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  border-radius: 10px;
+}
+
+.label {
+  color: white;
+}

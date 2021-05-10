@@ -12,6 +12,7 @@ import { ZweiteSeiteComponent } from './pages/zweite-seite/zweite-seite.componen
 import { KundenComponent } from './components/kunden/kunden.component';
 import { AccountErstellenFormComponent } from './components/account-erstellen-form/account-erstellen-form.component';
 import { RegistrierenComponent } from './pages/registrieren/registrieren.component';
+import { TitelComponent } from './components/titel/titel.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { RegistrierenComponent } from './pages/registrieren/registrieren.compone
     KundenComponent,
     AccountErstellenFormComponent,
     RegistrierenComponent,
+    TitelComponent,
   ],
 
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
