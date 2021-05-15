@@ -32,8 +32,14 @@
   text-align: center;
   background-color: var(--card);
   border: 1px solid var(--border);
-  color: white;
+  color: var(--text);
   overflow: hidden;
+
+  &:hover {
+    cursor: pointer;
+    background: var(--hover_card);
+    color: var(--hover_text);
+  }
 }
 
 /* Das "Gehäuse" / Element in dem der Titel + Buttons sind */
@@ -58,8 +64,9 @@ figcaption {
 
 /* der button-tag */
 button {
-  margin-top: $padding_4;
+  margin-top: $margin_4;
   font-weight: bold;
+  padding: $padding_4;
 }
 
 /* Eltern-Element für die Searchbar */

@@ -1,5 +1,4 @@
-export interface Kunde
-{
+export interface Kunde {
   id: number;
 
   geburtsdatum: string;
