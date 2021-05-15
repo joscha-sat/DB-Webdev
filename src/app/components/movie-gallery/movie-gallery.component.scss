@@ -30,7 +30,8 @@
   padding: 0.75rem;
   font-size: 1.2rem;
   text-align: center;
-  background-color: $panel_color;
+  background-color: var(--card);
+  border: 1px solid var(--border);
   color: white;
   overflow: hidden;
 }

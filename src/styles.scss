@@ -4,6 +4,92 @@
 // Bulma
 @import "./node_modules/bulma/bulma.sass";
 
+:root {
+  // Background
+  --background: #{$background_color_light};
+  --card: #{$card_color_light};
+
+  // Hover
+  --hover_card: #{$hover_color_light};
+  --hover_text: #{$hover_text_color_light};
+
+  // Border
+  --border: #{$border_color_light};
+  --border_radius: #{$border_radius};
+
+  // Text
+  --primary_text: #{$primary_text_color_light};
+  --secondary_text: #{$secondary_text_color_light};
+}
+
+.dark {
+  // Background
+  --background: #{$background_color_dark};
+  --card: #{$card_color_dark};
+
+  // Hover
+  --hover_card: #{$hover_color_dark};
+  --hover_text: #{$hover_text_color_dark};
+
+  // Border
+  --border: #{$border_color_dark};
+  --border_radius: #{$border_radius};
+
+  // Text
+  --primary_text: #{$primary_text_color_dark};
+  --secondary_text: #{$secondary_text_color_dark};
+}
+
+body {
+  background-color: var(--background);
+  color: var(--primary_text);
+
+  font-family: $font_family;
+  font-size: $normal_text_font_size;
+
+  line-height: 1.6;
+  word-break: break-word;
+
+  margin: 0;
+  padding: 0;
+
+  h1 {
+    font-size: $h1_font_size;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: $h2_font_size;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: $h3_font_size;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 *,
 ::before,
 ::after {
@@ -11,55 +97,5 @@
 }
 
 * {
-  transition: color 0.2s, background 0.5s;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-  scroll-behavior: smooth;
-}
-
-:root {
-  --color-page-background: #{$body_background_color_light};
-  --color-text: #{$text_color_light};
-  --color-bg-container: #{$container_background_color_light};
-}
-
-.dark {
-  --color-page-background: #{$body_background_color_dark};
-  --color-text: #{$text_color_dark};
-  --color-bg-container: #{$container_background_color_dark};
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: $font_family;
-  font-size: $normal_text_font_size;
-  color: var(--color-text);
-
-  background: var(--color-page-background);
-  line-height: 1.6;
-
-  word-break: break-word;
-  min-height: 100vh;
-}
-
-:is(h1, h2, h3, ul, p) {
-  margin: 0;
-}
-
-ul {
-  padding: 0;
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+  transition: color 0.1s, background 0.1s;
 }

@@ -1,10 +1,10 @@
 // Node.js + Express + MySQL Verbindung aufsetzen:
 
-let express = require('express');
-let path = require('path');
-let mysql = require('mysql');
+const express: any = require('express');
+const path: any = require('path');
+const mysql: any = require('mysql');
 
-let app = express();
+const app: any = express();
 
 // damit verschiedene Host interagieren können
 
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 // create Connection zu MySQL
 
-let con = mysql.createConnection({
+const con: any = mysql.createConnection({
   host: 'localhost',
   port: '3306',
   user: 'root',
@@ -50,7 +50,7 @@ app.listen(3000, function () {
 // || HTTP - METHODEN || ---------------------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getUser', (req, res) => {
-  let sql = 'SELECT * FROM kunde ';
+  const sql = 'SELECT * FROM kunde ';
 
   con.query(sql, (err, result) => {
     if (err) {

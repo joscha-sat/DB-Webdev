@@ -38,10 +38,11 @@
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/consistent-type-assertions": "error",
+    "@typescript-eslint/no-var-requires": "off",
 
     //erzwingt Typ-Zuweisung
     "@typescript-eslint/typedef": [
-      "error",
+      "warn",
       {
         "arrayDestructuring": true,
         "arrowParameter": true,

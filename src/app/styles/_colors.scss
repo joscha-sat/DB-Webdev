@@ -1,21 +1,43 @@
-// COLORS LIGHT // -------------------------------------------------------------- //
-$title_color_light: #393939;
-$text_color_light: #070707;
+// ------------------------------------------------- || COLORS LIGHT ||
 
-//$body_gradient: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-$body_background_color_light: #fbfefd;
+// Text
 
-$container_background_color_light: lightgrey;
+$primary_text_color_light: #14171a;
+$secondary_text_color_light: #657786;
 
-// COLORS DARK // -------------------------------------------------------------- //
+// Hintergründe | Background
 
-$title_color_dark: #fbfefd;
-$text_color_dark: #ffffff;
+$background_color_light: #f7f7f7;
+$card_color_light: #ffffff;
 
-$body_background_color_dark: #393939;
-$container_background_color_dark: #070707;
+// Hover
 
-// weitere allgemeine Farben // ------------------------------------------------ //
+$hover_color_light: #dfe3ee;
+$hover_text_color_light: #009366;
 
-// $panel_gradient: linear-gradient(60deg, #29323c 0%, #485563 100%);
-$panel_color: #232323;
+// Rahmen | Border
+
+$border_color_light: #181818;
+
+// ------------------------------------------------- || COLORS DARK ||
+
+// Text
+
+$primary_text_color_dark: #e4e6eb;
+$secondary_text_color_dark: #b0b3b8;
+
+// Background | Hintergrund
+
+$background_color_dark: #181818;
+$card_color_dark: #242526;
+
+// Hover
+
+$hover_color_dark: #3a3b3c;
+$hover_text_color_dark: yellowgreen;
+
+// Border | Rahmen
+
+$border_color_dark: #f7f7f7;
+
+// ----------------------------------------------------- || WEITERE ||
