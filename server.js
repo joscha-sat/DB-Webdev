@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/typedef */
+
 // Node.js + Express + MySQL Verbindung aufsetzen:
 
 const express = require('express');
