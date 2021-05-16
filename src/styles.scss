@@ -1,5 +1,5 @@
-//dateien aus styles
-@use './app/styles/index'as *;
+//dateien aus scss
+@use 'app/scss/index' as *;
 
 // Bulma
 @import "./node_modules/bulma/bulma.sass";
