@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/typedef */
 // Node.js + Express + MySQL Verbindung aufsetzen:
 
-const express: any = require('express');
-const path: any = require('path');
-const mysql: any = require('mysql');
+const express = require('express');
+const path = require('path');
+const mysql = require('mysql');
 
-const app: any = express();
+const app = express();
 
 // damit verschiedene Host interagieren können
 
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
 
 // create Connection zu MySQL
 
-const con: any = mysql.createConnection({
+const con = mysql.createConnection({
   host: 'localhost',
   port: '3306',
   user: 'root',
