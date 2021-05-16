@@ -34,6 +34,7 @@ export class NavbarComponent {
   ngAfterViewInit(): void {
     const darkMode: string | null = localStorage.getItem('darkMode');
     if (darkMode === 'enabled') {
+      this.darkmodeService.enableDarkMode();
       this.nav.nativeElement.classList.remove('is-dark');
       this.nav.nativeElement.classList.add('is-light');
       this.darkTheme = true;
