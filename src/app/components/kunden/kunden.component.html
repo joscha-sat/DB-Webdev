@@ -1,10 +1,11 @@
+<!-- für Variante asyncUser -->
+
 <div class="container notification is-info mt-5">
 
   <div class="block">
     Test-Daten von Kunden, abgerufen aus unserer Datenbank (npm run server muss aktiv sein)
   </div>
 
-  <!-- Keyword | async ergänzen -->
   <ul *ngFor="let user of asyncUsers | async">
     <li>Kunden-ID: {{  user.id  }}</li>
     <li>User: {{  user.benutzername  }}</li>

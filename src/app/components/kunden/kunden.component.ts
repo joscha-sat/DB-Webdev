@@ -9,9 +9,16 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./kunden.component.scss'],
 })
 export class KundenComponent implements OnInit {
+  // --------------------------------------------------------------------------------- || Constructor ||
   constructor(private http: HttpService) {}
 
+  // ------------------------------------------------------------------------- || Variables + Objects ||
+
+  //  mit Keyword | async in HTML
+
   asyncUsers: Observable<Kunde[]> = this.http.getUsers();
+
+  // ------------------------------------------------------------------------------------ || ngOnInit ||
 
   ngOnInit(): void {}
 }

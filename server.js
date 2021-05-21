@@ -1,21 +1,16 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-/* eslint-disable @typescript-eslint/typedef */
+// const path = require('path');
+// app.use(express.static(path.join(__dirname, '/dist/Angular-SCSS')));
 
 // Node.js + Express + MySQL Verbindung aufsetzen:
 
 const express = require('express');
-// const path = require('path');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
 const app = express();
 
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
 app.use(bodyParser.json());
-// app.use(express.static(path.join(__dirname, '/dist/Angular-SCSS')));
 
 // damit verschiedene Host interagieren können
 
@@ -60,17 +55,7 @@ app.listen(3000, function () {
 
 // || HTTP - METHODEN || ---------------------------------------------------------------------------------------------------------------------------------------- //
 
-app.get('/getUser', (req, res) => {
-  const sql = 'SELECT * FROM kunde ';
-
-  con.query(sql, (err, result) => {
-    if (err) {
-      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
-      throw err;
-    }
-    res.send(result);
-  });
-});
+// || POST Methoden / Daten hochladen || ------------------------------------------------------------------------------------------------------------------------ //
 
 app.post('/addUser', (req, res) => {
   const geburtsdatum = req.body.user.geburtsdatum;
@@ -90,6 +75,20 @@ app.post('/addUser', (req, res) => {
       throw err;
     }
     console.log('Datenbank-Speicherung erfolgreich!');
+    res.send(result);
+  });
+});
+
+// || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getUser', (req, res) => {
+  const sql = 'SELECT * FROM kunde ';
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
     res.send(result);
   });
 });
