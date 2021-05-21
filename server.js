@@ -5,10 +5,17 @@
 // Node.js + Express + MySQL Verbindung aufsetzen:
 
 const express = require('express');
-const path = require('path');
+// const path = require('path');
 const mysql = require('mysql');
+const bodyParser = require('body-parser');
 
 const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+// app.use(express.static(path.join(__dirname, '/dist/Angular-SCSS')));
 
 // damit verschiedene Host interagieren können
 
@@ -28,11 +35,11 @@ app.use((req, res, next) => {
 // create Connection zu MySQL
 
 const con = mysql.createConnection({
-  host: 'localhost',
+  host: 'w01a5f2a.kasserver.com',
   port: '3306',
-  user: 'root',
-  password: 'DBPasswort2!',
-  database: 'dbweb',
+  user: 'd03677fe',
+  password: 'bAgbzsDzMVBRmUX2',
+  database: 'd03677fe',
 });
 
 // Connect
@@ -61,6 +68,28 @@ app.get('/getUser', (req, res) => {
       console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
       throw err;
     }
+    res.send(result);
+  });
+});
+
+app.post('/addUser', (req, res) => {
+  const geburtsdatum = req.body.user.geburtsdatum;
+  const passwort = req.body.user.passwort;
+  const email = req.body.user.email;
+  const name = req.body.user.name;
+
+  const sql =
+    'INSERT INTO kunde (geburtsdatum, passwort, email, name)' +
+    'VALUES (?, ? , ?, ?)';
+
+  const values = [geburtsdatum, passwort, email, name];
+
+  con.query(sql, values, (err, result) => {
+    if (err) {
+      console.log('Datenbank-Speicherung fehlgeschlagen!');
+      throw err;
+    }
+    console.log('Datenbank-Speicherung erfolgreich!');
     res.send(result);
   });
 });

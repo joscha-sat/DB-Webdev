@@ -7,8 +7,6 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  darkTheme: boolean;
-
   constructor(private darkmodeService: DarkmodeService) {}
 
   // Navigations-Icon-toggle
@@ -26,8 +24,6 @@ export class NavbarComponent {
 
     this.nav.nativeElement.classList.toggle('is-dark');
     this.nav.nativeElement.classList.toggle('is-light');
-
-    this.darkTheme = !this.darkTheme;
   }
 
   //Init
@@ -37,11 +33,9 @@ export class NavbarComponent {
       this.darkmodeService.enableDarkMode();
       this.nav.nativeElement.classList.remove('is-dark');
       this.nav.nativeElement.classList.add('is-light');
-      this.darkTheme = true;
     } else {
       this.nav.nativeElement.classList.remove('is-light');
       this.nav.nativeElement.classList.add('is-dark');
-      this.darkTheme = false;
     }
   }
 }

@@ -1,8 +1,9 @@
 export interface Kunde {
-  id: number;
+  id?: number;
 
-  geburtsdatum: string;
+  geburtsdatum: Date;
+
   passwort: string;
   email: string;
-  benutzername: string;
+  name: string;
 }

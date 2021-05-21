@@ -31,7 +31,7 @@
     "camelcase": "warn",
     "lines-between-class-members": "warn",
     "no-underscore-dangle": "error",
-    "no-unused-vars": "warn",
+    "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-inferrable-types": "off",
@@ -42,7 +42,7 @@
 
     //erzwingt Typ-Zuweisung
     "@typescript-eslint/typedef": [
-      "warn",
+      "off",
       {
         "arrayDestructuring": true,
         "arrowParameter": true,
