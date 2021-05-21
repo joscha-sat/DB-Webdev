@@ -31,7 +31,7 @@ app.use((req, res, next) => {
 
 const con = mysql.createConnection({
   host: 'w01a5f2a.kasserver.com',
-  port: '3306',
+  port: 3306,
   user: 'd03677fe',
   password: 'bAgbzsDzMVBRmUX2',
   database: 'd03677fe',
