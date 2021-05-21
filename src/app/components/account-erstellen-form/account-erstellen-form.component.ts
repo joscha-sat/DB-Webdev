@@ -39,9 +39,7 @@ export class AccountErstellenFormComponent implements OnInit {
     this.router.navigate(['/Startseite']);
 
     // den neuen Spieler in das Array aus dem Service hinzufügen
-    this.httpService.addUser(neuerKunde).subscribe((data) => {
-      console.log(data);
-    });
+    this.httpService.addUser(neuerKunde).subscribe();
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
