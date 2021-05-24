@@ -58,6 +58,32 @@
 
     </div>
 
+    <!-- Input-ERSCHEINUNGSJAHR -->
+
+    <div class="field form-group">
+      <label class="label">Erscheinungsjahr</label>
+      <div class="control has-icons-left block">
+        <input class="input is-info form-control" type="number" placeholder="Erscheinungsjahr"
+          formControlName="erscheinungsjahr">
+        <span class="icon is-small is-left">
+          <i class="fas fa-calendar-alt"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- Error-ERSCHEINUNGSJAHR -->
+
+    <div class="error" *ngIf="form.get('erscheinungsjahr').touched && form.get('erscheinungsjahr').invalid">
+
+      <div *ngIf="form.get('erscheinungsjahr').errors.required">
+        Erscheinungsjahr darf nicht leer sein
+        <span class="icon is-small is-left">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+
+    </div>
+
     <!-- Input-GENRE -->
 
     <div class="field form-group">
@@ -103,31 +129,7 @@
 
     </div>
 
-    <!-- Input-ERSCHEINUNGSJAHR -->
 
-    <div class="field form-group">
-      <label class="label">Erscheinungsjahr</label>
-      <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="number" placeholder="Erscheinungsjahr"
-          formControlName="erscheinungsjahr">
-        <span class="icon is-small is-left">
-          <i class="fas fa-calendar-alt"></i>
-        </span>
-      </div>
-    </div>
-
-    <!-- Error-ERSCHEINUNGSJAHR -->
-
-    <div class="error" *ngIf="form.get('erscheinungsjahr').touched && form.get('erscheinungsjahr').invalid">
-
-      <div *ngIf="form.get('erscheinungsjahr').errors.required">
-        Erscheinungsjahr darf nicht leer sein
-        <span class="icon is-small is-left">
-          <i class="fas fa-exclamation-triangle"></i>
-        </span>
-      </div>
-
-    </div>
 
     <!-- Input-ALTERSFREIGABE -->
 
