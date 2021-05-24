@@ -30,7 +30,7 @@
     "import/no-unresolved": "off",
     "camelcase": "warn",
     "lines-between-class-members": "warn",
-    "no-underscore-dangle": "error",
+    "no-underscore-dangle": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-empty-function": "off",
@@ -38,23 +38,23 @@
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/consistent-type-assertions": "error",
-    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-var-requires": "off"
 
     //erzwingt Typ-Zuweisung
-    "@typescript-eslint/typedef": [
-      "off",
-      {
-        "arrayDestructuring": true,
-        "arrowParameter": true,
-        "memberVariableDeclaration": true,
-        "objectDestructuring": true,
-        "parameter": true,
-        "propertyDeclaration": true,
-        "variableDeclaration": true,
-        "callSignature": true,
-        "arrowCallSignature": true,
-        "variableDeclarationIgnoreFunction": true
-      }
-    ]
+    // "@typescript-eslint/typedef": [
+    //   "off",
+    //   {
+    //     "arrayDestructuring": true,
+    //     "arrowParameter": true,
+    //     "memberVariableDeclaration": true,
+    //     "objectDestructuring": true,
+    //     "parameter": true,
+    //     "propertyDeclaration": true,
+    //     "variableDeclaration": true,
+    //     "callSignature": true,
+    //     "arrowCallSignature": true,
+    //     "variableDeclarationIgnoreFunction": true
+    //   }
+    // ]
   }
 }

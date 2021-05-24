@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Kunde } from 'src/app/interfaces/kunde';
-import { HttpService } from 'src/app/services/http.service';
+import { KundeHttpService } from 'src/app/services/kunde-http.service';
 
 @Component({
   selector: 'app-account-erstellen-form',
@@ -12,7 +12,7 @@ import { HttpService } from 'src/app/services/http.service';
 export class AccountErstellenFormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
-    private httpService: HttpService,
+    private httpService: KundeHttpService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}

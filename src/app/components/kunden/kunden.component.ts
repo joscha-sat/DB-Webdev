@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Kunde } from 'src/app/interfaces/kunde';
-import { HttpService } from 'src/app/services/http.service';
+import { KundeHttpService } from 'src/app/services/kunde-http.service';
 
 @Component({
   selector: 'app-kunden',
@@ -9,16 +8,27 @@ import { HttpService } from 'src/app/services/http.service';
   styleUrls: ['./kunden.component.scss'],
 })
 export class KundenComponent implements OnInit {
-  // --------------------------------------------------------------------------------- || Constructor ||
-  constructor(private http: HttpService) {}
+  // ------------------------------------------------------------------------------------ || Constructor ||
+  constructor(private http: KundeHttpService) {}
 
-  // ------------------------------------------------------------------------- || Variables + Objects ||
+  // ------------------------------------------------------------------------------------ || Variables + Objects ||
 
-  //  mit Keyword | async in HTML
+  kunden: Kunde[];
 
-  asyncUsers: Observable<Kunde[]> = this.http.getUsers();
+  // ------------------------------------------------------------------------------------ || Methods ||
+
+  getAlleKunden(): void {
+    this.http.getUsers().subscribe((k) => (this.kunden = k));
+  }
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Kunden beim laden der Component ausgeben lassen
+    this.getAlleKunden();
+    // Kunden-Array updaten, wenn veränderungen passieren
+    this.http.updater$.subscribe(() => {
+      this.getAlleKunden();
+    });
+  }
 }

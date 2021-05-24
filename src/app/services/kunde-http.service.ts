@@ -1,21 +1,24 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Kunde } from '../interfaces/kunde';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HttpService {
+export class KundeHttpService {
   // --------------------------------------------------------------------------------- || Constructor ||
 
   constructor(private http: HttpClient) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-  };
+  private _updater$ = new Subject<void>();
+
+  get updater$(): Subject<void> {
+    return this._updater$;
+  }
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
@@ -24,10 +27,12 @@ export class HttpService {
   }
 
   addUser(user: Kunde): Observable<Kunde> {
-    return this.http.post<Kunde>(
-      'http://localhost:3000/addUser',
-      { user },
-      this.httpOptions
-    );
+    return this.http
+      .post<Kunde>('http://localhost:3000/addUser', { user })
+      .pipe(
+        tap(() => {
+          this._updater$.next();
+        })
+      );
   }
 }

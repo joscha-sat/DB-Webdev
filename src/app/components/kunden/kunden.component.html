@@ -6,7 +6,7 @@
     Test-Daten von Kunden, abgerufen aus unserer Datenbank (npm run server muss aktiv sein)
   </div>
 
-  <ul *ngFor="let user of asyncUsers | async">
+  <ul *ngFor="let user of kunden">
     <li>Kunden-ID: {{  user.id  }}</li>
     <li>User: {{  user.benutzername  }}</li>
     <li>Email: {{  user.email  }}</li>

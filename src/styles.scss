@@ -4,6 +4,16 @@
 // Bulma
 @import "./node_modules/bulma/bulma.sass";
 
+html {
+  scroll-behavior: smooth;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 :root {
   // Background
   --background: #{$background_color_light};
@@ -86,15 +96,7 @@ body {
   }
 }
 
-html {
-  scroll-behavior: smooth;
-}
 
-*,
-::before,
-::after {
-  box-sizing: border-box;
-}
 
 * {
   transition: color 0.1s, background 0.1s;

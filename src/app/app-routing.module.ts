@@ -5,10 +5,23 @@ import { StartseiteComponent } from './pages/startseite/startseite.component';
 import { ZweiteSeiteComponent } from './pages/zweite-seite/zweite-seite.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/Startseite', pathMatch: 'full' },
-  { path: 'Startseite', component: StartseiteComponent },
-  { path: 'ZweiteSeite', component: ZweiteSeiteComponent },
-  { path: 'Registrieren', component: RegistrierenComponent },
+  {
+    path: '',
+    redirectTo: '/Startseite',
+    pathMatch: 'full',
+  },
+  {
+    path: 'Startseite',
+    component: StartseiteComponent,
+  },
+  {
+    path: 'ZweiteSeite',
+    component: ZweiteSeiteComponent,
+  },
+  {
+    path: 'Registrieren',
+    component: RegistrierenComponent,
+  },
 ];
 
 @NgModule({
