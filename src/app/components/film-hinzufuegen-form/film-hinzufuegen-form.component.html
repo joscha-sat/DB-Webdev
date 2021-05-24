@@ -6,8 +6,8 @@
 
     <div class="field form-group">
       <label class="label">Film-Titel</label>
-      <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="text" placeholder="Film-Titel" formControlName="titel"
+      <div class="control black-border has-icons-left block">
+        <input class="input form-control" type="text" placeholder="Film-Titel" formControlName="titel"
           [ngClass]="{ 'is-danger': form.get('titel').touched && form.get('titel').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-video"></i>
@@ -37,7 +37,7 @@
     <div class="field form-group">
       <label class="label">Dauer</label>
       <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="number" placeholder="Dauer in Minuten " formControlName="dauer"
+        <input class="input form-control" type="number" placeholder="Dauer in Minuten " formControlName="dauer"
           [ngClass]="{ 'is-danger': form.get('dauer').touched && form.get('dauer').invalid }">
         <span class="icon is-small is-left">
           <i class="far fa-clock"></i>
@@ -63,7 +63,7 @@
     <div class="field form-group">
       <label class="label">Erscheinungsjahr</label>
       <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="number" placeholder="Erscheinungsjahr"
+        <input class="input form-control" type="number" placeholder="Erscheinungsjahr"
           formControlName="erscheinungsjahr">
         <span class="icon is-small is-left">
           <i class="fas fa-calendar-alt"></i>
@@ -88,9 +88,9 @@
 
     <div class="field form-group">
       <label class="label">Genre</label>
-      <div class="control has-icons-left">
+      <div class="control has-icons-left genre">
 
-        <div class="select is-info">
+        <div class="select">
           <select class="form-control" formControlName="genre"
             [ngClass]="{ 'is-invalid': form.get('genre').touched && form.get('genre').invalid }">
             <option selected>Action</option>
@@ -137,7 +137,7 @@
       <label class="label">Altersfreigabe</label>
       <div class="control has-icons-left">
 
-        <div class="select is-info">
+        <div class="select">
           <select class="form-control" formControlName="altersfreigabe"
             [ngClass]="{ 'is-invalid': form.get('genre').touched && form.get('genre').invalid }">
             <option selected>0</option>

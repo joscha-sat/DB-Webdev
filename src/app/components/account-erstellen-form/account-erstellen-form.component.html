@@ -7,7 +7,7 @@
     <div class="field form-group">
       <label class="label">Name</label>
       <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="text" placeholder="Name" formControlName="name"
+        <input class="input form-control" type="text" placeholder="Name" formControlName="name"
           [ngClass]="{ 'is-danger': form.get('name').touched && form.get('name').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
@@ -37,7 +37,7 @@
     <div class="field form-group">
       <label class="label">Email</label>
       <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="email" placeholder="Email " formControlName="email"
+        <input class="input form-control" type="email" placeholder="Email " formControlName="email"
           [ngClass]="{ 'is-danger': form.get('email').touched && form.get('email').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-envelope"></i>
@@ -67,7 +67,7 @@
     <div class="field form-group">
       <label class="label">Passwort</label>
       <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="password" placeholder="Passwort" formControlName="passwort"
+        <input class="input form-control" type="password" placeholder="Passwort" formControlName="passwort"
           [ngClass]="{ 'is-danger': form.get('passwort').touched && form.get('passwort').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-key"></i>
@@ -97,7 +97,7 @@
     <div class="field form-group">
       <label class="label">Geburtsdatum</label>
       <div class="control has-icons-left block">
-        <input class="input is-info form-control" type="date" placeholder="Geburtsdatum" formControlName="geburtsdatum"
+        <input class="input form-control" type="date" placeholder="Geburtsdatum" formControlName="geburtsdatum"
           [ngClass]="{ 'is-danger': form.get('geburtsdatum').touched && form.get('geburtsdatum').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-calendar-alt"></i>

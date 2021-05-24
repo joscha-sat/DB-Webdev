@@ -1,12 +1,13 @@
 @use '../../scss/index'as *;
 
 .container {
-  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
 .label {
-  color: white;
+  color: var(--text);
 }
 
 .error {

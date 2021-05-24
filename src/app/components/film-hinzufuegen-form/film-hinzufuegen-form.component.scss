@@ -2,6 +2,7 @@
 
 .container {
   background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 10px;
 }
 
@@ -18,7 +19,6 @@
 .buttons {
   margin-top: $margin_7;
 }
-
 
 .preview {
   height: 150px;
