@@ -1,0 +1,47 @@
+<!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
+
+<div class="field">
+  <p class="control has-icons-left">
+    <input type="text" class="input is-dark" placeholder="Film suchen..." [(ngModel)]="search" />
+    <span class="icon is-small is-left">
+      <i class="fas fa-search"></i>
+    </span>
+  </p>
+</div>
+
+<!-- Container: Film-Gallerie || START || -->
+
+<div class="grid">
+
+  <figure class="figure" *ngFor="let film of filteredFilme()">
+
+    <div class="images">
+      <img [src]="film.bild" />
+    </div>
+
+    <figcaption>
+      <div class="titel">
+        <h2>{{  film.titel  }}</h2>
+
+        <div class="infos">
+          <span class="testzweck">nur aus Testzwecken hier</span>
+          ID: {{film.id}} <br>
+          Dauer: {{film.filmdauer}} min. <br>
+          Genre: {{film.genre}} <br>
+          Altersfreigabe: {{film.altersfreigabe}} <br>
+          Erscheinungsjahr: {{film.erscheinungsjahr}} <br>
+        </div>
+
+
+      </div>
+
+      <div class="buttons">
+        <button class="button is-light">Details</button>
+        <button class="button is-light">Tickets</button>
+      </div>
+    </figcaption>
+
+  </figure>
+
+  <!--  Container: Film-Gallerie || ENDE || -->
+</div>

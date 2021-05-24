@@ -15,6 +15,7 @@ import { KundenComponent } from './components/kunden/kunden.component';
 import { AccountErstellenFormComponent } from './components/account-erstellen-form/account-erstellen-form.component';
 import { RegistrierenComponent } from './pages/registrieren/registrieren.component';
 import { TitelComponent } from './components/titel/titel.component';
+import { MovieGalleryComponent } from './components/movie-gallery/movie-gallery.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { TitelComponent } from './components/titel/titel.component';
     StartseiteComponent,
     ZweiteSeiteComponent,
     NavbarComponent,
-    // MovieGalleryComponent
+    MovieGalleryComponent,
     KundenComponent,
     AccountErstellenFormComponent,
     RegistrierenComponent,
