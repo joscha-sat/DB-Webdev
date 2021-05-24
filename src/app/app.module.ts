@@ -1,3 +1,5 @@
+// import { MovieGalleryComponent } from './components/movie-gallery/movie-gallery.component';
+import { FilmHinzufuegenFormComponent } from './components/film-hinzufuegen-form/film-hinzufuegen-form.component';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -5,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MovieGalleryComponent } from './components/movie-gallery/movie-gallery.component';
+
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StartseiteComponent } from './pages/startseite/startseite.component';
 import { ZweiteSeiteComponent } from './pages/zweite-seite/zweite-seite.component';
@@ -20,11 +22,12 @@ import { TitelComponent } from './components/titel/titel.component';
     StartseiteComponent,
     ZweiteSeiteComponent,
     NavbarComponent,
-    MovieGalleryComponent,
+    // MovieGalleryComponent
     KundenComponent,
     AccountErstellenFormComponent,
     RegistrierenComponent,
     TitelComponent,
+    FilmHinzufuegenFormComponent,
   ],
 
   imports: [

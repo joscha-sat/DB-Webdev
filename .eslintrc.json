@@ -30,7 +30,7 @@
     "import/no-unresolved": "off",
     "camelcase": "warn",
     "lines-between-class-members": "warn",
-    "no-underscore-dangle": "error",
+    "no-underscore-dangle": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-empty-function": "off",
