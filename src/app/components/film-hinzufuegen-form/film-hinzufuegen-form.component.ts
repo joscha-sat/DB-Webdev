@@ -43,6 +43,7 @@ export class FilmHinzufuegenFormComponent implements OnInit {
     };
 
     this.form.reset();
+    this.router.navigate(['/Startseite']);
 
     this.httpService.addMovie(newMovie).subscribe();
   }
