@@ -6,6 +6,7 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const multer = require('multer');
 
 const app = express();
 
@@ -55,6 +56,41 @@ app.listen(3000, function () {
 
 // || HTTP - METHODEN || ---------------------------------------------------------------------------------------------------------------------------------------- //
 
+// || POST Methode / Bild-String lokal Speichern || ------------------------------------------------------------------------------------------------------------- //
+let MIME_TYPE_MAP = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg',
+};
+//verarbeitung von Files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    //cbS für callback
+    const isValid = MIME_TYPE_MAP[file.mimetype]; //null, wenn es kein jpg/png ist
+    let error = new Error('Invalid mime type');
+    if (isValid) {
+      error = null;
+    }
+    cb(error, 'src/assets');
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname;
+    cb(null, name);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/uploadImage', upload.single('myFile'), (req, res) => {
+  try {
+    return res.status(201).json({
+      message: 'File uploded successfully',
+    });
+  } catch (error) {
+    console.error(error);
+  }
+});
+
 // || POST Methoden / Daten hochladen || ------------------------------------------------------------------------------------------------------------------------ //
 
 app.post('/addUser', (req, res) => {
@@ -64,7 +100,7 @@ app.post('/addUser', (req, res) => {
   const name = req.body.user.name;
 
   const sql =
-    'INSERT INTO kunde (geburtsdatum, passwort, email, name)' +
+    'INSERT INTO Kunde (geburtsdatum, passwort, email, name)' +
     'VALUES (?, ? , ?, ?)';
 
   const values = [geburtsdatum, passwort, email, name];
@@ -79,10 +115,53 @@ app.post('/addUser', (req, res) => {
   });
 });
 
+app.post('/addMovie', (req, res) => {
+  const titel = req.body.movie.titel;
+  const filmdauer = req.body.movie.dauer;
+  const genre = req.body.movie.genre;
+  const erscheinungsjahr = req.body.movie.erscheinungsjahr;
+  const altersfreigabe = req.body.movie.altersfreigabe;
+  const bild = 'assets/' + req.body.movie.bild;
+
+  const sql =
+    'INSERT INTO Film (titel, filmdauer, genre, erscheinungsjahr, altersfreigabe, bild)' +
+    'VALUES (?, ? , ?, ?, ?, ?)';
+
+  const values = [
+    titel,
+    filmdauer,
+    genre,
+    erscheinungsjahr,
+    altersfreigabe,
+    bild,
+  ];
+
+  con.query(sql, values, (err, result) => {
+    if (err) {
+      console.log('Datenbank-Speicherung fehlgeschlagen!');
+      throw err;
+    }
+    console.log('Datenbank-Speicherung erfolgreich!');
+    res.send(result);
+  });
+});
+
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getUser', (req, res) => {
-  const sql = 'SELECT * FROM kunde ';
+  const sql = 'SELECT * FROM Kunde ';
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
+app.get('/getMovies', (req, res) => {
+  const sql = 'SELECT * FROM Film ';
 
   con.query(sql, (err, result) => {
     if (err) {
