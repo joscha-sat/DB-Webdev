@@ -2,14 +2,16 @@
 
 <div class="container notification is-info mt-5">
 
+  <button (click)='ueber18()'>über 18?</button>
+
   <div class="block">
     Test-Daten von Kunden, abgerufen aus unserer Datenbank (npm run server muss aktiv sein)
   </div>
 
-  <ul *ngFor="let user of asyncUsers | async">
+  <ul *ngFor="let user of users">
     <li>Kunden-ID: {{  user.id  }}</li>
-    <li>User: {{  user.benutzername  }}</li>
+    <li>User: {{  user.name }}</li>
     <li>Email: {{  user.email  }}</li>
-    <li>Geburtsdatum: {{  user.geburtsdatum  }}</li>
+    <li>Geburtsdatum: {{  user.geburtsdatum | date }}</li>
   </ul>
 </div>
