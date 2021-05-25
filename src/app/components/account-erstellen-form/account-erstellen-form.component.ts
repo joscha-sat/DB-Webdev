@@ -33,8 +33,6 @@ export class AccountErstellenFormComponent implements OnInit {
       geburtsdatum: this.form.value.geburtsdatum,
     };
 
-    console.log(neuerKunde);
-
     this.form.reset();
     this.router.navigate(['/Startseite']);
 
