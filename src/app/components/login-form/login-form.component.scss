@@ -1,0 +1,21 @@
+@use '../../scss/index'as *;
+
+.container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.label {
+  color: var(--text);
+}
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: $small_text_font_size;
+  margin-bottom: $margin_3;
+}
+
+.buttons {
+  margin-top: $margin_7;
+}

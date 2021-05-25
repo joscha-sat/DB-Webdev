@@ -16,6 +16,8 @@ import { AccountErstellenFormComponent } from './components/account-erstellen-fo
 import { RegistrierenComponent } from './pages/registrieren/registrieren.component';
 import { TitelComponent } from './components/titel/titel.component';
 import { MovieGalleryComponent } from './components/movie-gallery/movie-gallery.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MovieGalleryComponent } from './components/movie-gallery/movie-gallery.
     RegistrierenComponent,
     TitelComponent,
     FilmHinzufuegenFormComponent,
+    LoginFormComponent,
+    LoginComponent,
   ],
 
   imports: [

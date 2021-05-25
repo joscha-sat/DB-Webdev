@@ -2,7 +2,7 @@
 
 <div class="container notification is-info mt-5">
 
-  <button (click)='ueber18()'>über 18?</button>
+
 
   <div class="block">
     Test-Daten von Kunden, abgerufen aus unserer Datenbank (npm run server muss aktiv sein)
@@ -13,5 +13,6 @@
     <li>User: {{  user.name }}</li>
     <li>Email: {{  user.email  }}</li>
     <li>Geburtsdatum: {{  user.geburtsdatum | date }}</li>
+    <li>über 18: {{  ueber18(user.geburtsdatum) }}</li>
   </ul>
 </div>

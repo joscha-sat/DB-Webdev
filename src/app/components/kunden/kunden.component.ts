@@ -15,8 +15,7 @@ export class KundenComponent implements OnInit {
 
   users: Kunde[];
 
-  ueber18(): void {
-    const users: Kunde[] = this.users;
+  ueber18(date: string): string {
     const today: Date = new Date();
     const vor18Jahren: Date = new Date(
       today.getFullYear() - 18,
@@ -24,12 +23,12 @@ export class KundenComponent implements OnInit {
       today.getDate()
     );
 
-    let i: number;
+    const geburtsdatum = new Date(date);
 
-    for (i = 0; i < users.length; i++) {
-      const geburtsdatum = new Date(users[i].geburtsdatum);
-      console.log(geburtsdatum < vor18Jahren);
+    if (geburtsdatum < vor18Jahren) {
+      return 'Ja';
     }
+    return 'Nein';
   }
 
   // ------------------------------------------------------------------------------------ || methods ||

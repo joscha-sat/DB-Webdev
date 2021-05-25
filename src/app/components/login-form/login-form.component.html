@@ -1,0 +1,75 @@
+<app-titel>Login</app-titel>
+
+<form [formGroup]="form" (ngSubmit)="form.valid && onLogin()">
+  <div class="container is-max-desktop p-5 mt-5">
+    <!-- Input-EMAIL -->
+
+    <div class="field form-group">
+      <label class="label">Email</label>
+      <div class="control has-icons-left block">
+        <input class="input form-control" type="email" placeholder="Email " formControlName="email"
+          [ngClass]="{ 'is-danger': form.get('email').touched && form.get('email').invalid }">
+        <span class="icon is-small is-left">
+          <i class="fas fa-envelope"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- Error-EMAIL -->
+
+    <div class="error" *ngIf="form.get('email').touched && form.get('email').invalid">
+      <div *ngIf="form.get('email').errors.required">
+        Email darf nicht leer sein
+        <span class="icon is-small is-left">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+
+      <div *ngIf="form.get('email').errors.email">
+        Keine korrekte Email-Syntax
+      </div>
+    </div>
+
+    <!-- Input-PASSWORT -->
+
+    <div class="field form-group">
+      <label class="label">Passwort</label>
+      <div class="control has-icons-left block">
+        <input class="input form-control" type="password" placeholder="Passwort" formControlName="passwort"
+          [ngClass]="{ 'is-danger': form.get('passwort').touched && form.get('passwort').invalid }">
+        <span class="icon is-small is-left">
+          <i class="fas fa-key"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- Error-PASSWORT -->
+
+    <div class="error" *ngIf="form.get('passwort').touched && form.get('passwort').invalid">
+
+      <div *ngIf="form.get('passwort').errors.required">
+        Passwort darf nicht leer sein
+        <span class="icon is-small is-left">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+
+      <div *ngIf="form.get('passwort').errors.minlength">
+        Passwort muss mind. 6 Zeichen enthalten
+      </div>
+
+    </div>
+
+    <!-- BUTTONS -->
+
+    <div class="field is-grouped buttons">
+      <div class="control block">
+        <button type="submit" [disabled]="!form.valid" class="button is-success">Einloggen</button>
+      </div>
+      <div class="control block">
+        <button routerLink='/Startseite' class="button is-link is-light">Abbrechen</button>
+      </div>
+    </div>
+
+  </div>
+</form>

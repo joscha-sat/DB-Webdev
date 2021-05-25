@@ -35,4 +35,10 @@ export class KundeHttpService {
         })
       );
   }
+
+  loginUser(email: string, passwort: string): Observable<Kunde> {
+    return this.http.get<Kunde>(
+      `http://localhost:3000/loginUser/${email}/${passwort}`
+    );
+  }
 }

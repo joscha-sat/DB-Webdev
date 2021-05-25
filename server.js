@@ -7,6 +7,7 @@ const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const multer = require('multer');
+const bcrypt = require('bcrypt');
 
 const app = express();
 
@@ -57,15 +58,15 @@ app.listen(3000, function () {
 // || HTTP - METHODEN || ---------------------------------------------------------------------------------------------------------------------------------------- //
 
 // || POST Methode / Bild-String lokal Speichern || ------------------------------------------------------------------------------------------------------------- //
+
 let MIME_TYPE_MAP = {
   'image/png': 'png',
   'image/jpeg': 'jpg',
   'image/jpg': 'jpg',
 };
-//verarbeitung von Files
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    //cbS für callback
     const isValid = MIME_TYPE_MAP[file.mimetype]; //null, wenn es kein jpg/png ist
     let error = new Error('Invalid mime type');
     if (isValid) {
@@ -95,9 +96,9 @@ app.post('/uploadImage', upload.single('myFile'), (req, res) => {
 
 app.post('/addUser', (req, res) => {
   const geburtsdatum = req.body.user.geburtsdatum;
-  const passwort = req.body.user.passwort;
   const email = req.body.user.email;
   const name = req.body.user.name;
+  const passwort = bcrypt.hashSync(req.body.user.passwort, 10);
 
   const sql =
     'INSERT INTO Kunde (geburtsdatum, passwort, email, name)' +
@@ -168,6 +169,22 @@ app.get('/getMovies', (req, res) => {
       console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
       throw err;
     }
+    res.send(result);
+  });
+});
+
+app.get('/loginUser/:email/:passwort', (req, res) => {
+  const email = req.params.email;
+  const passwort = bcrypt.hashSync(req.params.passwort, 10);
+
+  const sql = `SELECT * FROM Kunde WHERE email = '${email}' AND passwort ='${passwort}'`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    console.log('User bekommen ' + email);
     res.send(result);
   });
 });
