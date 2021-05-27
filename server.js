@@ -188,3 +188,19 @@ app.get('/loginUser/:email/:passwort', (req, res) => {
     res.send(result);
   });
 });
+
+// || DELETE Methoden / Daten löschen || ------------------------------------------------------------------------------------------------------------------------ //
+
+app.delete('/deleteOneMovie/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = `DELETE FROM Film WHERE id = ${id}`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('löschen fehlgeschlagen!');
+      throw err;
+    }
+    console.log('löschen erfolgreich!');
+    res.send(result);
+  });
+});

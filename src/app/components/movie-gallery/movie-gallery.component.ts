@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ArrayFilterService } from 'src/app/Services/array-filter.service';
+import { FilmHttpService } from 'src/app/services/film-http.service';
 
 @Component({
   selector: 'app-movie-gallery',
@@ -7,14 +8,26 @@ import { ArrayFilterService } from 'src/app/Services/array-filter.service';
   styleUrls: ['./movie-gallery.component.scss'],
 })
 export class MovieGalleryComponent {
-  constructor(private suchenService: ArrayFilterService) {}
+  // --------------------------------------------------------------------------------- || Constructor ||
+  constructor(
+    private suchenService: ArrayFilterService,
+    private httpService: FilmHttpService
+  ) {}
+  // ------------------------------------------------------------------------- || Variables + Objects ||
 
-  // Suchen und gefilterte Filme
-  @Input() search: string = '';
-
-  @Input() array: [];
+  // ------------------------------------------------------------------------------------- || Methods ||
 
   filteredFilme(): string[] {
     return this.suchenService.filteredFilmTitel(this.array, this.search);
   }
+
+  deleteOneMovie(id: number): void {
+    this.httpService.deleteOneMovie(id).subscribe();
+  }
+
+  // ------------------------------------------------------------------------------------- || @Inputs ||
+
+  @Input() search: string = '';
+
+  @Input() array: [];
 }

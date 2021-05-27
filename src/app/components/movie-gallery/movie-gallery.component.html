@@ -16,7 +16,7 @@
   <figure class="figure" *ngFor="let film of filteredFilme()">
 
     <div class="images">
-      <img [src]="film.bild" alt="film.titel"/>
+      <img [src]="film.bild" alt="film.titel" />
     </div>
 
     <figcaption>
@@ -38,6 +38,7 @@
       <div class="buttons">
         <button class="button is-light">Details</button>
         <button class="button is-light">Tickets</button>
+        <button (click)='deleteOneMovie(film.id)' class="button is-danger">löschen</button>
       </div>
     </figcaption>
 

@@ -49,4 +49,14 @@ export class FilmHttpService {
         })
       );
   }
+
+  deleteOneMovie(id: number): Observable<Film> {
+    return this.http
+      .delete<Film>('http://localhost:3000/deleteOneMovie/' + id)
+      .pipe(
+        tap(() => {
+          this._updater$.next();
+        })
+      );
+  }
 }
