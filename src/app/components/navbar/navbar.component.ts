@@ -1,4 +1,3 @@
-import { DarkmodeService } from './../../Services/darkmode.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
@@ -7,7 +6,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent {
-  constructor(private darkmodeService: DarkmodeService) {}
+  constructor() {}
 
   // Navigations-Icon-toggle
   @ViewChild('navlinks') links: ElementRef;
@@ -16,26 +15,5 @@ export class NavbarComponent {
 
   navBarItems(): void {
     this.links.nativeElement.classList.toggle('is-active');
-  }
-
-  // Darkmode-toggle
-  toggleTheme(): void {
-    this.darkmodeService.darkModeToggleF();
-
-    this.nav.nativeElement.classList.toggle('is-dark');
-    this.nav.nativeElement.classList.toggle('is-light');
-  }
-
-  //Init
-  ngAfterViewInit(): void {
-    const darkMode: string | null = localStorage.getItem('darkMode');
-    if (darkMode === 'enabled') {
-      this.darkmodeService.enableDarkMode();
-      this.nav.nativeElement.classList.remove('is-dark');
-      this.nav.nativeElement.classList.add('is-light');
-    } else {
-      this.nav.nativeElement.classList.remove('is-light');
-      this.nav.nativeElement.classList.add('is-dark');
-    }
   }
 }

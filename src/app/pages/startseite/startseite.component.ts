@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Film } from 'src/app/Interfaces/film';
+import { Movie } from 'src/app/interfaces/movie';
 import { FilmHttpService } from 'src/app/services/film-http.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class StartseiteComponent {
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
-  filme: Film[];
+  filme: Movie[];
 
   search: string = '';
 

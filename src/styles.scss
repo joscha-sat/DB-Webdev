@@ -6,38 +6,20 @@
 
 :root {
   // Background
-  --background: #{$background_color_light};
-  --card: #{$card_color_light};
+  --background: #{$background_color};
+  --card: #{$card_color};
 
   // Hover
-  --hover_card: #{$hover_color_light};
-  --hover_text: #{$hover_text_color_light};
+  --hover_card: #{$hover_color};
+  --hover_text: #{$hover_text_color};
 
   // Border
-  --border: #{$border_color_light};
-  --border_radius: #{$border_radius};
+  --border: #{$border_color};
+  --border_radius: #{$border};
 
   // Text
-  --primary_text: #{$primary_text_color_light};
-  --secondary_text: #{$secondary_text_color_light};
-}
-
-.dark {
-  // Background
-  --background: #{$background_color_dark};
-  --card: #{$card_color_dark};
-
-  // Hover
-  --hover_card: #{$hover_color_dark};
-  --hover_text: #{$hover_text_color_dark};
-
-  // Border
-  --border: #{$border_color_dark};
-  --border_radius: #{$border_radius};
-
-  // Text
-  --primary_text: #{$primary_text_color_dark};
-  --secondary_text: #{$secondary_text_color_dark};
+  --primary_text: #{$primary_text_color};
+  --secondary_text: #{$secondary_text_color};
 }
 
 body {

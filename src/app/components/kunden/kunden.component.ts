@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Kunde } from 'src/app/interfaces/kunde';
+import { User } from 'src/app/interfaces/user';
 import { KundeHttpService } from 'src/app/services/kunde-http.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class KundenComponent implements OnInit {
 
   // --------------------------------------------------------------------------------- || Variables + Objects ||
 
-  users: Kunde[];
+  users: User[];
 
   ueber18(date: Date): string {
     const today: Date = new Date();

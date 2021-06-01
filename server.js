@@ -32,11 +32,11 @@ app.use((req, res, next) => {
 // create Connection zu MySQL
 
 const con = mysql.createConnection({
-  host: 'w01a5f2a.kasserver.com',
-  port: 3306,
-  user: 'd03677fe',
-  password: 'bAgbzsDzMVBRmUX2',
-  database: 'd03677fe',
+  host: '195.37.176.178',
+  port: 20133,
+  user: '21_DB_Grp_2',
+  password: `pS!'NWkk5hrb84ijZr3EPJ2+qqd/aV*4`,
+  database: '21_DB_Gruppe2',
 });
 
 // Connect
@@ -101,7 +101,7 @@ app.post('/addUser', (req, res) => {
   const passwort = bcrypt.hashSync(req.body.user.passwort, 10);
 
   const sql =
-    'INSERT INTO Kunde (geburtsdatum, passwort, email, name)' +
+    'INSERT INTO user (geburtsdatum, passwort, email, name)' +
     'VALUES (?, ? , ?, ?)';
 
   const values = [geburtsdatum, passwort, email, name];
@@ -118,24 +118,17 @@ app.post('/addUser', (req, res) => {
 
 app.post('/addMovie', (req, res) => {
   const titel = req.body.movie.titel;
-  const filmdauer = req.body.movie.filmdauer;
+  const dauer = req.body.movie.filmdauer;
   const genre = req.body.movie.genre;
   const erscheinungsjahr = req.body.movie.erscheinungsjahr;
   const altersfreigabe = req.body.movie.altersfreigabe;
   const bild = 'assets/' + req.body.movie.bild;
 
   const sql =
-    'INSERT INTO Film (titel, filmdauer, genre, erscheinungsjahr, altersfreigabe, bild)' +
+    'INSERT INTO movie (titel, dauer, genre, erscheinungsjahr, altersfreigabe, bild)' +
     'VALUES (?, ? , ?, ?, ?, ?)';
 
-  const values = [
-    titel,
-    filmdauer,
-    genre,
-    erscheinungsjahr,
-    altersfreigabe,
-    bild,
-  ];
+  const values = [titel, dauer, genre, erscheinungsjahr, altersfreigabe, bild];
 
   con.query(sql, values, (err, result) => {
     if (err) {
@@ -150,7 +143,7 @@ app.post('/addMovie', (req, res) => {
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getUser', (req, res) => {
-  const sql = 'SELECT * FROM Kunde ';
+  const sql = 'SELECT * FROM user ';
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -162,7 +155,7 @@ app.get('/getUser', (req, res) => {
 });
 
 app.get('/getMovies', (req, res) => {
-  const sql = 'SELECT * FROM Film ';
+  const sql = 'SELECT * FROM movie ';
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -177,7 +170,7 @@ app.get('/loginUser/:email/:passwort', (req, res) => {
   const email = req.params.email;
   const passwort = bcrypt.hashSync(req.params.passwort, 10);
 
-  const sql = `SELECT * FROM Kunde WHERE email = '${email}' AND passwort ='${passwort}'`;
+  const sql = `SELECT * FROM user WHERE email = '${email}' AND passwort ='${passwort}'`;
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -193,7 +186,7 @@ app.get('/loginUser/:email/:passwort', (req, res) => {
 
 app.delete('/deleteOneMovie/:id', (req, res) => {
   const id = req.params.id;
-  const sql = `DELETE FROM Film WHERE id = ${id}`;
+  const sql = `DELETE FROM movie WHERE id = ${id}`;
 
   con.query(sql, (err, result) => {
     if (err) {

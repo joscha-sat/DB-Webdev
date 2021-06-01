@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Film } from '../Interfaces/film';
+import { Movie } from '../interfaces/movie';
 
 @Injectable({
   providedIn: 'root',
@@ -36,13 +36,13 @@ export class FilmHttpService {
       });
   }
 
-  getMovies(): Observable<Film[]> {
-    return this.http.get<Film[]>('http://localhost:3000/getMovies');
+  getMovies(): Observable<Movie[]> {
+    return this.http.get<Movie[]>('http://localhost:3000/getMovies');
   }
 
-  addMovie(movie: Film): Observable<Film> {
+  addMovie(movie: Movie): Observable<Movie> {
     return this.http
-      .post<Film>('http://localhost:3000/addMovie', { movie })
+      .post<Movie>('http://localhost:3000/addMovie', { movie })
       .pipe(
         tap(() => {
           this._updater$.next();
@@ -50,9 +50,9 @@ export class FilmHttpService {
       );
   }
 
-  deleteOneMovie(id: number): Observable<Film> {
+  deleteOneMovie(id: number): Observable<Movie> {
     return this.http
-      .delete<Film>('http://localhost:3000/deleteOneMovie/' + id)
+      .delete<Movie>('http://localhost:3000/deleteOneMovie/' + id)
       .pipe(
         tap(() => {
           this._updater$.next();

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { Kunde } from '../interfaces/kunde';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +22,13 @@ export class KundeHttpService {
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
-  getUsers(): Observable<Kunde[]> {
-    return this.http.get<Kunde[]>('http://localhost:3000/getUser');
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:3000/getUser');
   }
 
-  addUser(user: Kunde): Observable<Kunde> {
+  addUser(user: User): Observable<User> {
     return this.http
-      .post<Kunde>('http://localhost:3000/addUser', { user })
+      .post<User>('http://localhost:3000/addUser', { user })
       .pipe(
         tap(() => {
           this._updater$.next();
@@ -36,8 +36,8 @@ export class KundeHttpService {
       );
   }
 
-  loginUser(email: string, passwort: string): Observable<Kunde> {
-    return this.http.get<Kunde>(
+  loginUser(email: string, passwort: string): Observable<User> {
+    return this.http.get<User>(
       `http://localhost:3000/loginUser/${email}/${passwort}`
     );
   }

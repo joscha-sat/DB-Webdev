@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Kunde } from 'src/app/interfaces/kunde';
+import { User } from 'src/app/interfaces/user';
 import { KundeHttpService } from 'src/app/services/kunde-http.service';
 
 @Component({
@@ -26,7 +26,7 @@ export class AccountErstellenFormComponent implements OnInit {
       return;
     }
 
-    const neuerKunde: Kunde = {
+    const neuerKunde: User = {
       name: this.form.value.name,
       email: this.form.value.email,
       passwort: this.form.value.passwort,

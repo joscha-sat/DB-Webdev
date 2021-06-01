@@ -1,13 +1,13 @@
-<app-titel>Film hinzufügen</app-titel>
+<app-titel>Movie hinzufügen</app-titel>
 <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
   <div class="container is-max-desktop p-5 mt-5">
 
     <!-- Input-TITEL -->
 
     <div class="field form-group">
-      <label class="label">Film-Titel</label>
+      <label class="label">Movie-Titel</label>
       <div class="control black-border has-icons-left block">
-        <input class="input form-control" type="text" placeholder="Film-Titel" formControlName="titel"
+        <input class="input form-control" type="text" placeholder="Movie-Titel" formControlName="titel"
           [ngClass]="{ 'is-danger': form.get('titel').touched && form.get('titel').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-video"></i>
@@ -20,14 +20,10 @@
     <div class="error" *ngIf="form.get('titel').touched && form.get('titel').invalid">
 
       <div *ngIf="form.get('titel').errors.required">
-        Film-Titel darf nicht leer sein
+        Movie-Titel darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
         </span>
-      </div>
-
-      <div *ngIf="form.get('titel').errors.minlength">
-        Der Film-Titel muss mind. 3 Zeichen enthalten
       </div>
 
     </div>
@@ -203,7 +199,7 @@
 
     <div class="field is-grouped buttons">
       <div class="control block">
-        <button type="submit" [disabled]="!form.valid" class="button is-success">Film hinzufüen</button>
+        <button type="submit" [disabled]="!form.valid" class="button is-success">Movie hinzufüen</button>
       </div>
       <div class="control block">
         <button routerLink='/Startseite' class="button is-link is-light">Abbrechen</button>

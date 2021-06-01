@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Film } from 'src/app/Interfaces/film';
+import { Movie } from 'src/app/interfaces/movie';
 import { ArrayFilterService } from 'src/app/Services/array-filter.service';
 import { FilmHttpService } from 'src/app/services/film-http.service';
 
@@ -18,7 +18,7 @@ export class MovieGalleryComponent {
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
-  filteredFilme(): Film[] {
+  filteredFilme(): Movie[] {
     return this.suchenService.filteredFilmTitel(this.array, this.search);
   }
 

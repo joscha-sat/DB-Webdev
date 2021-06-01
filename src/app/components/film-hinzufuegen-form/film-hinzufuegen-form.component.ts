@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Film } from 'src/app/Interfaces/film';
+import { Movie } from 'src/app/interfaces/movie';
 
 import { FilmHttpService } from 'src/app/services/film-http.service';
 
@@ -33,7 +33,7 @@ export class FilmHinzufuegenFormComponent implements OnInit {
     // Bild lokal im assets Ordner abspeichern
     this.httpService.uploadImage(this.selectedImage);
 
-    const newMovie: Film = {
+    const newMovie: Movie = {
       titel: this.form.value.titel,
       filmdauer: this.form.value.filmdauer,
       genre: this.form.value.genre,
@@ -65,7 +65,7 @@ export class FilmHinzufuegenFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      titel: ['', [Validators.required, Validators.minLength(3)]],
+      titel: ['', [Validators.required]],
       filmdauer: ['', [Validators.required]],
       genre: ['', [Validators.required]],
       erscheinungsjahr: ['', [Validators.required]],

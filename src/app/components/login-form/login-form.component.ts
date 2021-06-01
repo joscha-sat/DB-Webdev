@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KundeHttpService } from '../../services/kunde-http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Kunde } from '../../interfaces/kunde';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login-form',
@@ -20,7 +20,7 @@ export class LoginFormComponent implements OnInit {
   // ------------------------------------------------------------------------- || Variables + Objects ||
   form: FormGroup;
 
-  user: Kunde;
+  user: User;
 
   // ------------------------------------------------------------------------------------- || Methods ||
   onLogin(): void {
