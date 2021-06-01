@@ -35,7 +35,7 @@ export class FilmHinzufuegenFormComponent implements OnInit {
 
     const newMovie: Film = {
       titel: this.form.value.titel,
-      dauer: this.form.value.dauer,
+      filmdauer: this.form.value.filmdauer,
       genre: this.form.value.genre,
       erscheinungsjahr: this.form.value.erscheinungsjahr,
       altersfreigabe: this.form.value.altersfreigabe,
@@ -66,7 +66,7 @@ export class FilmHinzufuegenFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       titel: ['', [Validators.required, Validators.minLength(3)]],
-      dauer: ['', [Validators.required]],
+      filmdauer: ['', [Validators.required]],
       genre: ['', [Validators.required]],
       erscheinungsjahr: ['', [Validators.required]],
       altersfreigabe: ['', [Validators.required]],

@@ -118,7 +118,7 @@ app.post('/addUser', (req, res) => {
 
 app.post('/addMovie', (req, res) => {
   const titel = req.body.movie.titel;
-  const filmdauer = req.body.movie.dauer;
+  const filmdauer = req.body.movie.filmdauer;
   const genre = req.body.movie.genre;
   const erscheinungsjahr = req.body.movie.erscheinungsjahr;
   const altersfreigabe = req.body.movie.altersfreigabe;

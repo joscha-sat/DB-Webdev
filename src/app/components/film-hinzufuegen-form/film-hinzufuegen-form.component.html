@@ -37,8 +37,8 @@
     <div class="field form-group">
       <label class="label">Dauer</label>
       <div class="control has-icons-left block">
-        <input class="input form-control" type="number" placeholder="Dauer in Minuten " formControlName="dauer"
-          [ngClass]="{ 'is-danger': form.get('dauer').touched && form.get('dauer').invalid }">
+        <input class="input form-control" type="number" placeholder="Dauer in Minuten " formControlName="filmdauer"
+          [ngClass]="{ 'is-danger': form.get('filmdauer').touched && form.get('filmdauer').invalid }">
         <span class="icon is-small is-left">
           <i class="far fa-clock"></i>
         </span>
@@ -47,9 +47,9 @@
 
     <!-- Error-DAUER -->
 
-    <div class="error" *ngIf="form.get('dauer').touched && form.get('dauer').invalid">
+    <div class="error" *ngIf="form.get('filmdauer').touched && form.get('filmdauer').invalid">
 
-      <div *ngIf="form.get('dauer').errors.required">
+      <div *ngIf="form.get('filmdauer').errors.required">
         Dauer darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>

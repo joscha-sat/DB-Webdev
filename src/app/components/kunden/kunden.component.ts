@@ -15,7 +15,7 @@ export class KundenComponent implements OnInit {
 
   users: Kunde[];
 
-  ueber18(date: string): string {
+  ueber18(date: Date): string {
     const today: Date = new Date();
     const vor18Jahren: Date = new Date(
       today.getFullYear() - 18,

@@ -1,6 +1,6 @@
 export interface Film {
-  filmId?: number;
-  dauer: number;
+  id?: number;
+  filmdauer: number;
   titel: string;
   erscheinungsjahr: number;
   altersfreigabe: number;

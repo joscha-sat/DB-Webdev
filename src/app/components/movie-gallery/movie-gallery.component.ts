@@ -31,4 +31,8 @@ export class MovieGalleryComponent {
   @Input() search: string = '';
 
   @Input() array: [];
+
+  deleteMovie(id: number): void {
+    this.httpService.deleteOneMovie(id).subscribe();
+  }
 }
