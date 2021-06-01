@@ -21,14 +21,22 @@
 
     </div>
 
+
+
     <div class="navbar-end">
+
+      <div class="navbar-item" *ngIf="loggedIn"> hallo {{user.name}}</div>
+
       <div class="navbar-item">
         <div class="buttons">
-          <a routerLink="/Registrieren" class="button is-primary">
+          <a routerLink="/Registrieren" class="button is-primary" *ngIf="!loggedIn">
             <strong>Registrieren</strong>
           </a>
-          <a routerLink="/Login" class="button is-primary">
+          <a routerLink="/Login" class="button is-primary" *ngIf="!loggedIn">
             <strong>Einloggen</strong>
+          </a>
+          <a (click)="logout()" class="button is-danger" *ngIf="loggedIn">
+            <strong>Logout</strong>
           </a>
         </div>
       </div>

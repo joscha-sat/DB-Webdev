@@ -1,9 +1,9 @@
 export interface User {
-  id?: number;
+  user_id?: number;
 
-  geburtsdatum: Date;
+  date_of_birth: Date;
 
-  passwort: string;
+  password: string;
   email: string;
   name: string;
 }

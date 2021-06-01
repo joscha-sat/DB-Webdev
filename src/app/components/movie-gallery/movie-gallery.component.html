@@ -13,21 +13,21 @@
 
 <div class="grid">
 
-  <figure class="figure" *ngFor="let film of filteredFilme()">
+  <figure class="figure" *ngFor="let movie of filteredFilme()">
 
     <div class="images">
-      <img [src]="film.bild" [alt]='film.titel' />
+      <img [src]="movie.image" [alt]='movie.title' />
     </div>
 
     <figcaption>
       <div class="titel">
-        <h2>{{ film.titel }}</h2>
+        <h2>{{ movie.title }}</h2>
       </div>
 
       <div class="buttons">
         <button class="button is-light">Details</button>
         <button class="button is-light">Tickets</button>
-        <button (click)='deleteMovie(film.id)' class="button is-danger">löschen</button>
+        <button (click)='deleteMovie(movie.movie_id)' class="button is-danger">löschen</button>
       </div>
     </figcaption>
 

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Movie } from 'src/app/interfaces/movie';
 
-import { FilmHttpService } from 'src/app/services/film-http.service';
+import { MovieHttpService } from 'src/app/services/movie-http.service';
 
 @Component({
   selector: 'app-film-hinzufuegen-form',
@@ -13,7 +13,7 @@ import { FilmHttpService } from 'src/app/services/film-http.service';
 export class FilmHinzufuegenFormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
-    private httpService: FilmHttpService,
+    private httpService: MovieHttpService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -34,12 +34,12 @@ export class FilmHinzufuegenFormComponent implements OnInit {
     this.httpService.uploadImage(this.selectedImage);
 
     const newMovie: Movie = {
-      titel: this.form.value.titel,
-      filmdauer: this.form.value.filmdauer,
+      title: this.form.value.title,
+      duration: this.form.value.duration,
+      release_year: this.form.value.release_year,
       genre: this.form.value.genre,
-      erscheinungsjahr: this.form.value.erscheinungsjahr,
-      altersfreigabe: this.form.value.altersfreigabe,
-      bild: this.selectedImage.name,
+      fks: this.form.value.fks,
+      image: this.selectedImage.name,
     };
 
     this.form.reset();
@@ -65,12 +65,12 @@ export class FilmHinzufuegenFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      titel: ['', [Validators.required]],
-      filmdauer: ['', [Validators.required]],
+      title: ['', [Validators.required]],
+      duration: ['', [Validators.required]],
+      release_year: ['', [Validators.required]],
       genre: ['', [Validators.required]],
-      erscheinungsjahr: ['', [Validators.required]],
-      altersfreigabe: ['', [Validators.required]],
-      bild: ['', [Validators.required]],
+      fks: ['', [Validators.required]],
+      image: ['', [Validators.required]],
     });
   }
 }

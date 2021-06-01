@@ -8,6 +8,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -94,17 +95,45 @@ app.post('/uploadImage', upload.single('myFile'), (req, res) => {
 
 // || POST Methoden / Daten hochladen || ------------------------------------------------------------------------------------------------------------------------ //
 
-app.post('/addUser', (req, res) => {
-  const geburtsdatum = req.body.user.geburtsdatum;
-  const email = req.body.user.email;
-  const name = req.body.user.name;
-  const passwort = bcrypt.hashSync(req.body.user.passwort, 10);
+app.post('/register', (req, res) => {
+  const email = req.body.newUser.email;
+  const password = req.body.newUser.password;
+
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) {
+      console.log('error');
+      throw err;
+    } else {
+      con.query(
+        `INSERT INTO user (email, password) VALUES ('${email}', '${hash}')`,
+        (err) => {
+          if (err) {
+            console.log('error');
+            throw err;
+          }
+          console.log('registriert');
+          return res.status(201).send({
+            message: 'registriert',
+          });
+        }
+      );
+    }
+  });
+});
+
+app.post('/addMovie', (req, res) => {
+  const title = req.body.movie.title;
+  const duration = req.body.movie.duration;
+  const genre = req.body.movie.genre;
+  const release_year = req.body.movie.release_year;
+  const fks = req.body.movie.fks;
+  const image = 'assets/' + req.body.movie.image;
 
   const sql =
-    'INSERT INTO user (geburtsdatum, passwort, email, name)' +
-    'VALUES (?, ? , ?, ?)';
+    'INSERT INTO movie (title, duration, genre, release_year, fks, image)' +
+    'VALUES (?, ? , ?, ?, ?, ?)';
 
-  const values = [geburtsdatum, passwort, email, name];
+  const values = [title, duration, genre, release_year, fks, image];
 
   con.query(sql, values, (err, result) => {
     if (err) {
@@ -116,33 +145,53 @@ app.post('/addUser', (req, res) => {
   });
 });
 
-app.post('/addMovie', (req, res) => {
-  const titel = req.body.movie.titel;
-  const dauer = req.body.movie.filmdauer;
-  const genre = req.body.movie.genre;
-  const erscheinungsjahr = req.body.movie.erscheinungsjahr;
-  const altersfreigabe = req.body.movie.altersfreigabe;
-  const bild = 'assets/' + req.body.movie.bild;
+app.post('/login', (req, res) => {
+  const email = req.body.loginData.email;
+  const password = req.body.loginData.password;
 
-  const sql =
-    'INSERT INTO movie (titel, dauer, genre, erscheinungsjahr, altersfreigabe, bild)' +
-    'VALUES (?, ? , ?, ?, ?, ?)';
-
-  const values = [titel, dauer, genre, erscheinungsjahr, altersfreigabe, bild];
-
-  con.query(sql, values, (err, result) => {
+  con.query(`SELECT * FROM user WHERE email = '${email}'`, (err, result) => {
     if (err) {
-      console.log('Datenbank-Speicherung fehlgeschlagen!');
       throw err;
     }
-    console.log('Datenbank-Speicherung erfolgreich!');
-    res.send(result);
+    if (!result.length) {
+      console.log('Email oder Passwort ist falsch!');
+      return res.status(400).send({
+        message: 'Email oder Passwort ist falsch!',
+      });
+    }
+    bcrypt.compare(password, result[0]['password'], (pErr, pResult) => {
+      if (pErr) {
+        console.log('Email oder Passwort ist falsch!');
+        throw pErr;
+      }
+      if (pResult) {
+        const token = jwt.sign(
+          {
+            email: result[0].email,
+            userid: result[0].userid,
+          },
+          'einGeheimnisZuHabenIstImmerGut-HierIstMeinGeheimnis',
+          { expiresIn: '1h' }
+        );
+        console.log('logged in!');
+        return res.status(200).send({
+          message: 'logged in!',
+          token,
+          expiresIn: 3600,
+          user: result[0],
+        });
+      }
+      console.log('Email oder Passwort ist falsch!');
+      return res.status(400).send({
+        message: 'Email oder Passwort falsch!',
+      });
+    });
   });
 });
 
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
 
-app.get('/getUser', (req, res) => {
+app.get('/getUsers', (req, res) => {
   const sql = 'SELECT * FROM user ';
 
   con.query(sql, (err, result) => {
@@ -166,27 +215,11 @@ app.get('/getMovies', (req, res) => {
   });
 });
 
-app.get('/loginUser/:email/:passwort', (req, res) => {
-  const email = req.params.email;
-  const passwort = bcrypt.hashSync(req.params.passwort, 10);
-
-  const sql = `SELECT * FROM user WHERE email = '${email}' AND passwort ='${passwort}'`;
-
-  con.query(sql, (err, result) => {
-    if (err) {
-      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
-      throw err;
-    }
-    console.log('User bekommen ' + email);
-    res.send(result);
-  });
-});
-
 // || DELETE Methoden / Daten löschen || ------------------------------------------------------------------------------------------------------------------------ //
 
 app.delete('/deleteOneMovie/:id', (req, res) => {
   const id = req.params.id;
-  const sql = `DELETE FROM movie WHERE id = ${id}`;
+  const sql = `DELETE FROM movie WHERE movie_id = ${id}`;
 
   con.query(sql, (err, result) => {
     if (err) {

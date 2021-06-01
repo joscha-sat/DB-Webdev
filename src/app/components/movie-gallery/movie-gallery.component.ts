@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Movie } from 'src/app/interfaces/movie';
 import { ArrayFilterService } from 'src/app/Services/array-filter.service';
-import { FilmHttpService } from 'src/app/services/film-http.service';
+import { MovieHttpService } from 'src/app/services/movie-http.service';
 
 @Component({
   selector: 'app-movie-gallery',
@@ -12,7 +12,7 @@ export class MovieGalleryComponent {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
     private suchenService: ArrayFilterService,
-    private httpService: FilmHttpService
+    private httpService: MovieHttpService
   ) {}
   // ------------------------------------------------------------------------- || Variables + Objects ||
 

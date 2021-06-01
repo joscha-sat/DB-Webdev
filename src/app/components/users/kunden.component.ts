@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
-import { KundeHttpService } from 'src/app/services/kunde-http.service';
+import { UserHttpService } from 'src/app/services/user-http.service';
 
 @Component({
   selector: 'app-kunden',
@@ -9,7 +9,7 @@ import { KundeHttpService } from 'src/app/services/kunde-http.service';
 })
 export class KundenComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
-  constructor(private http: KundeHttpService) {}
+  constructor(private http: UserHttpService) {}
 
   // --------------------------------------------------------------------------------- || Variables + Objects ||
 

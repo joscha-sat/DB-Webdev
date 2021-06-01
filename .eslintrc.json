@@ -28,7 +28,7 @@
     "import/prefer-default-export": "off",
     "no-undef": "off",
     "import/no-unresolved": "off",
-    "camelcase": "warn",
+    "camelcase": "off",
     "lines-between-class-members": "warn",
     "no-underscore-dangle": "off",
     "no-unused-vars": "off",

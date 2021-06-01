@@ -7,7 +7,7 @@ import { Movie } from '../interfaces/movie';
 export class ArrayFilterService {
   filteredFilmTitel(array: Array<any>, search: string): Array<Movie> {
     return array.filter((filme: any) => {
-      return filme.titel.toLowerCase().match(search.toLowerCase());
+      return filme.title.toLowerCase().match(search.toLowerCase());
     });
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { KundeHttpService } from '../../services/kunde-http.service';
+import { UserHttpService } from '../../services/user-http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from '../../interfaces/user';
@@ -12,7 +12,7 @@ import { User } from '../../interfaces/user';
 export class LoginFormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
-    private httpService: KundeHttpService,
+    private httpService: UserHttpService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -31,7 +31,7 @@ export class LoginFormComponent implements OnInit {
     const email = this.form.value.email;
     const passwort = this.form.value.passwort;
 
-    this.httpService.loginUser(email, passwort).subscribe();
+    this.httpService.loginUser(email, passwort);
 
     this.form.reset();
   }

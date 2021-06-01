@@ -7,7 +7,7 @@ import { Movie } from '../interfaces/movie';
 @Injectable({
   providedIn: 'root',
 })
-export class FilmHttpService {
+export class MovieHttpService {
   // --------------------------------------------------------------------------------- || Constructor ||
 
   constructor(private http: HttpClient) {}

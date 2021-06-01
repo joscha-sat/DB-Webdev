@@ -5,10 +5,10 @@
     <!-- Input-TITEL -->
 
     <div class="field form-group">
-      <label class="label">Movie-Titel</label>
+      <label class="label">Film-Titel</label>
       <div class="control black-border has-icons-left block">
-        <input class="input form-control" type="text" placeholder="Movie-Titel" formControlName="titel"
-          [ngClass]="{ 'is-danger': form.get('titel').touched && form.get('titel').invalid }">
+        <input class="input form-control" type="text" placeholder="Film-Titel" formControlName="title"
+          [ngClass]="{ 'is-danger': form.get('title').touched && form.get('title').invalid }">
         <span class="icon is-small is-left">
           <i class="fas fa-video"></i>
         </span>
@@ -17,9 +17,9 @@
 
     <!-- Error-TITEL -->
 
-    <div class="error" *ngIf="form.get('titel').touched && form.get('titel').invalid">
+    <div class="error" *ngIf="form.get('title').touched && form.get('title').invalid">
 
-      <div *ngIf="form.get('titel').errors.required">
+      <div *ngIf="form.get('title').errors.required">
         Movie-Titel darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
@@ -33,8 +33,8 @@
     <div class="field form-group">
       <label class="label">Dauer</label>
       <div class="control has-icons-left block">
-        <input class="input form-control" type="number" placeholder="Dauer in Minuten " formControlName="filmdauer"
-          [ngClass]="{ 'is-danger': form.get('filmdauer').touched && form.get('filmdauer').invalid }">
+        <input class="input form-control" type="number" placeholder="Dauer in Minuten " formControlName="duration"
+          [ngClass]="{ 'is-danger': form.get('duration').touched && form.get('duration').invalid }">
         <span class="icon is-small is-left">
           <i class="far fa-clock"></i>
         </span>
@@ -43,9 +43,9 @@
 
     <!-- Error-DAUER -->
 
-    <div class="error" *ngIf="form.get('filmdauer').touched && form.get('filmdauer').invalid">
+    <div class="error" *ngIf="form.get('duration').touched && form.get('duration').invalid">
 
-      <div *ngIf="form.get('filmdauer').errors.required">
+      <div *ngIf="form.get('duration').errors.required">
         Dauer darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
@@ -60,7 +60,7 @@
       <label class="label">Erscheinungsjahr</label>
       <div class="control has-icons-left block">
         <input class="input form-control" type="number" placeholder="Erscheinungsjahr"
-          formControlName="erscheinungsjahr">
+          formControlName="release_year">
         <span class="icon is-small is-left">
           <i class="fas fa-calendar-alt"></i>
         </span>
@@ -69,9 +69,9 @@
 
     <!-- Error-ERSCHEINUNGSJAHR -->
 
-    <div class="error" *ngIf="form.get('erscheinungsjahr').touched && form.get('erscheinungsjahr').invalid">
+    <div class="error" *ngIf="form.get('release_year').touched && form.get('release_year').invalid">
 
-      <div *ngIf="form.get('erscheinungsjahr').errors.required">
+      <div *ngIf="form.get('release_year').errors.required">
         Erscheinungsjahr darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
@@ -134,8 +134,8 @@
       <div class="control has-icons-left">
 
         <div class="select">
-          <select class="form-control" formControlName="altersfreigabe"
-            [ngClass]="{ 'is-invalid': form.get('genre').touched && form.get('genre').invalid }">
+          <select class="form-control" formControlName="fks"
+            [ngClass]="{ 'is-invalid': form.get('fks').touched && form.get('fks').invalid }">
             <option selected>0</option>
             <option>6</option>
             <option>12</option>
@@ -151,7 +151,7 @@
 
     <!-- Error-ALTERSFREIGABE -->
 
-    <div class="error" *ngIf="form.get('altersfreigabe').touched && form.get('altersfreigabe').invalid">
+    <div class="error" *ngIf="form.get('fks').touched && form.get('fks').invalid">
 
       <div *ngIf="form.get('altersfreigabe').errors.required">
         Altersfreigabe darf nicht leer sein
@@ -169,16 +169,16 @@
 
       <div>
         <button class="button" (click)="filePicker.click()" type="button"> Bild hochladen </button>
-        <input type="file" style="visibility: hidden;" formControlName="bild" #filePicker
+        <input type="file" style="visibility: hidden;" formControlName="image" #filePicker
           (change)="onFileChanged($event)">
       </div>
 
 
       <!-- Errors: Bildpfad -->
 
-      <div *ngIf="form.get('bild').touched && form.get('bild').invalid" class="invalid-feedback">
+      <div *ngIf="form.get('image').touched && form.get('image').invalid" class="invalid-feedback">
 
-        <div *ngIf="form.get('bild').errors.required">
+        <div *ngIf="form.get('image').errors.required">
           Bild darf nicht leer sein!
         </div>
 
