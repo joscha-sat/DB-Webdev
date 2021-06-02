@@ -95,31 +95,99 @@ app.post('/uploadImage', upload.single('myFile'), (req, res) => {
 
 // || POST Methoden / Daten hochladen || ------------------------------------------------------------------------------------------------------------------------ //
 
+// || REGISTRIEREN || --------------------------------------------------------------------------------------------------------------------------- //
+
 app.post('/register', (req, res) => {
+  const name = req.body.newUser.name;
   const email = req.body.newUser.email;
   const password = req.body.newUser.password;
+  const date_of_birth = req.body.newUser.date_of_birth;
 
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log('error');
       throw err;
     } else {
-      con.query(
-        `INSERT INTO user (email, password) VALUES ('${email}', '${hash}')`,
-        (err) => {
-          if (err) {
-            console.log('error');
-            throw err;
-          }
-          console.log('registriert');
-          return res.status(201).send({
-            message: 'registriert',
-          });
+      const sql = `INSERT INTO user (date_of_birth, password, email, name ) VALUES ('${date_of_birth}', '${hash}', '${email}', '${name}')`;
+      con.query(sql, (err) => {
+        if (err) {
+          console.log('error');
+          throw err;
         }
-      );
+        console.log('registriert');
+        return res.status(201).send({
+          message: 'registriert',
+        });
+      });
     }
   });
 });
+
+// || EINLOGGEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.post('/login', (req, res) => {
+  const email = req.body.loginData.email;
+  const password = req.body.loginData.password;
+
+  // erst prüfen, ob es den User anhand seiner Email gibt
+
+  con.query(`SELECT * FROM user WHERE email = '${email}'`, (err, result) => {
+    // Bei Error, Error werfen
+
+    if (err) {
+      throw err;
+    }
+
+    // Falls nicht, dann Error ausgeben | (!result.length) = kein Ergebnis in Form eines Users zu der Email gefunden
+
+    if (!result.length) {
+      console.log('Email oder Passwort ist falsch!');
+      return res.status(400).send({
+        message: 'Email oder Passwort ist falsch!',
+      });
+    }
+
+    // Falls User anhand seiner Email gefunden wurde, dann das eingegebene Passwort mit dem Passwort aus der DB mit bcrypt prüfen
+
+    bcrypt.compare(password, result[0]['password'], (pErr, pResult) => {
+      // Bei Error, Error werfen
+
+      if (pErr) {
+        console.log('Email oder Passwort ist falsch!');
+        throw pErr;
+      }
+
+      // Falls das Passwort übereinstimmt, dann ein jwt Token erstellen und wichtige Daten zurückgeben, wie Token,Ablaufzeit des Token und den User selbst
+
+      if (pResult) {
+        const token = jwt.sign(
+          {
+            email: result[0].email,
+            userid: result[0].userid,
+          },
+          'einGeheimnisZuHabenIstImmerGut-HierIstMeinGeheimnis',
+          { expiresIn: '1h' }
+        );
+        console.log('logged in!');
+        return res.status(200).send({
+          message: 'logged in!',
+          token,
+          expiresIn: 3600,
+          user: result[0],
+        });
+      }
+
+      // Falls etwas schief gegangen ist, Error ausgeben
+
+      console.log('Email oder Passwort ist falsch!');
+      return res.status(400).send({
+        message: 'Email oder Passwort falsch!',
+      });
+    });
+  });
+});
+
+// || FILM HINZUFÜGEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.post('/addMovie', (req, res) => {
   const title = req.body.movie.title;
@@ -145,51 +213,9 @@ app.post('/addMovie', (req, res) => {
   });
 });
 
-app.post('/login', (req, res) => {
-  const email = req.body.loginData.email;
-  const password = req.body.loginData.password;
-
-  con.query(`SELECT * FROM user WHERE email = '${email}'`, (err, result) => {
-    if (err) {
-      throw err;
-    }
-    if (!result.length) {
-      console.log('Email oder Passwort ist falsch!');
-      return res.status(400).send({
-        message: 'Email oder Passwort ist falsch!',
-      });
-    }
-    bcrypt.compare(password, result[0]['password'], (pErr, pResult) => {
-      if (pErr) {
-        console.log('Email oder Passwort ist falsch!');
-        throw pErr;
-      }
-      if (pResult) {
-        const token = jwt.sign(
-          {
-            email: result[0].email,
-            userid: result[0].userid,
-          },
-          'einGeheimnisZuHabenIstImmerGut-HierIstMeinGeheimnis',
-          { expiresIn: '1h' }
-        );
-        console.log('logged in!');
-        return res.status(200).send({
-          message: 'logged in!',
-          token,
-          expiresIn: 3600,
-          user: result[0],
-        });
-      }
-      console.log('Email oder Passwort ist falsch!');
-      return res.status(400).send({
-        message: 'Email oder Passwort falsch!',
-      });
-    });
-  });
-});
-
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
+
+// || ALLE USER ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getUsers', (req, res) => {
   const sql = 'SELECT * FROM user ';
@@ -202,6 +228,8 @@ app.get('/getUsers', (req, res) => {
     res.send(result);
   });
 });
+
+// || ALLE FILME ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getMovies', (req, res) => {
   const sql = 'SELECT * FROM movie ';
@@ -216,6 +244,8 @@ app.get('/getMovies', (req, res) => {
 });
 
 // || DELETE Methoden / Daten löschen || ------------------------------------------------------------------------------------------------------------------------ //
+
+// || EINEN FILM NACH ID LÖSCHEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.delete('/deleteOneMovie/:id', (req, res) => {
   const id = req.params.id;

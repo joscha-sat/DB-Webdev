@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserHttpService } from '../../services/user-http.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-login-form',
@@ -13,14 +11,11 @@ export class LoginFormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
     private httpService: UserHttpService,
-    private formBuilder: FormBuilder,
-    private router: Router
+    private formBuilder: FormBuilder
   ) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
   form: FormGroup;
-
-  user: User;
 
   // ------------------------------------------------------------------------------------- || Methods ||
   onLogin(): void {

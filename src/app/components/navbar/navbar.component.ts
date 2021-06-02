@@ -14,15 +14,13 @@ import { User } from '../../interfaces/user';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(public loginService: UserHttpService) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
   loggedIn = false;
-
-  private loginStatusSub: Subscription;
 
   user: User;
 
@@ -38,7 +36,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   getLoggedInUser(): void {
     this.user = this.loginService.getUser();
-    console.log(this.user);
+  }
+
+  getIsLoggedIn(): void {
+    this.loggedIn = this.loginService.getIsLoggedIn();
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
@@ -50,20 +51,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {
-    this.loggedIn = this.loginService.getIsLoggedIn();
-    this.loginStatusSub = this.loginService
-      .getLoginStatusListener()
-      .subscribe((login) => {
-        this.loggedIn = login;
-      });
+    // Initialwert setzen für den Status loggedIn
+    this.getIsLoggedIn();
 
+    // Initialwert für den User setzen
+    this.getLoggedInUser();
+
+    // auf Veränderungen des Users reagieren
     this.loginService.updater$.subscribe(() => {
+      this.getIsLoggedIn();
       this.getLoggedInUser();
     });
-    this.getLoggedInUser();
-  }
-
-  ngOnDestroy(): void {
-    this.loginStatusSub.unsubscribe();
   }
 }
