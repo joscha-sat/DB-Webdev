@@ -31,10 +31,10 @@
 
       <div class="navbar-item">
         <div class="buttons">
-          <a routerLink="/Registrieren" class="button is-primary" *ngIf="!loggedIn">
+          <a routerLink="/Registrieren" class="button is-dark" *ngIf="!loggedIn">
             <strong>Registrieren</strong>
           </a>
-          <a routerLink="/Login" class="button is-primary" *ngIf="!loggedIn">
+          <a routerLink="/Login" class="button is-dark" *ngIf="!loggedIn">
             <strong>Einloggen</strong>
           </a>
           <a (click)="logout()" class="button is-danger" *ngIf="loggedIn">

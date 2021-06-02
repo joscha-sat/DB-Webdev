@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MovieHttpService } from '../../services/movie-http.service';
 import { Movie } from '../../interfaces/movie';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
+
+import { UserHttpService } from '../../services/user-http.service';
 
 @Component({
   selector: 'app-movie-details-tickets',
@@ -13,8 +14,8 @@ export class MovieDetailsTicketsComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
     private httpM: MovieHttpService,
-    private route: ActivatedRoute,
-    private sanitizer: DomSanitizer
+    private httpU: UserHttpService,
+    private route: ActivatedRoute
   ) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
@@ -23,7 +24,12 @@ export class MovieDetailsTicketsComponent implements OnInit {
 
   movieId: number;
 
+  loggedIn: boolean = false;
+
   // ------------------------------------------------------------------------------------- || Methods ||
+  getIsLoggedIn(): void {
+    this.loggedIn = this.httpU.getIsLoggedIn();
+  }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
@@ -39,6 +45,14 @@ export class MovieDetailsTicketsComponent implements OnInit {
           this.oneMovie = result[0];
         });
       }
+    });
+
+    // Initialwert setzen für den Status loggedIn
+    this.getIsLoggedIn();
+
+    // auf Veränderungen des Users reagieren
+    this.httpU.updater$.subscribe(() => {
+      this.getIsLoggedIn();
     });
   }
 }

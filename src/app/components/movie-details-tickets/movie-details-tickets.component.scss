@@ -25,3 +25,19 @@
   display: flex;
   justify-content: space-between;
 }
+
+#ticket {
+  margin-bottom: $margin_7;
+}
+#ticket_button{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button {
+  font-size: $h3_font_size;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  padding: $padding_5;
+  border: 1px solid var(--border);
+}
