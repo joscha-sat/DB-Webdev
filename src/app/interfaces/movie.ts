@@ -6,4 +6,7 @@ export interface Movie {
   fks: number;
   genre: string;
   image: string;
+  description: string;
+  trailer: string;
 }
+

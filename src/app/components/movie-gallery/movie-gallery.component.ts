@@ -35,4 +35,8 @@ export class MovieGalleryComponent {
   deleteMovie(id: number): void {
     this.httpService.deleteOneMovie(id).subscribe();
   }
+
+  seeDetails(movie_id: number): void {
+    this.httpService.getOneMovie(movie_id);
+  }
 }

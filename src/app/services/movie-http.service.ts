@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Movie } from '../interfaces/movie';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,9 +11,13 @@ import { Movie } from '../interfaces/movie';
 export class MovieHttpService {
   // --------------------------------------------------------------------------------- || Constructor ||
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
+
+  movie: Movie;
+
+  movie_id: number;
 
   private _updater$ = new Subject<void>();
 
@@ -38,6 +43,12 @@ export class MovieHttpService {
 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>('http://localhost:3000/getMovies');
+  }
+
+  getOneMovie(movie_id: number): Observable<Movie> {
+    return this.http.get<Movie>(
+      'http://localhost:3000/getOneMovie/' + movie_id
+    );
   }
 
   addMovie(movie: Movie): Observable<Movie> {

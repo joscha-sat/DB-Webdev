@@ -196,12 +196,23 @@ app.post('/addMovie', (req, res) => {
   const release_year = req.body.movie.release_year;
   const fks = req.body.movie.fks;
   const image = 'assets/' + req.body.movie.image;
+  const description = req.body.movie.description;
+  const trailer = req.body.movie.trailer;
 
   const sql =
-    'INSERT INTO movie (title, duration, genre, release_year, fks, image)' +
-    'VALUES (?, ? , ?, ?, ?, ?)';
+    'INSERT INTO movie (title, duration, genre, release_year, fks, image, description, trailer)' +
+    'VALUES (?, ? , ?, ?, ?, ?, ?, ?)';
 
-  const values = [title, duration, genre, release_year, fks, image];
+  const values = [
+    title,
+    duration,
+    genre,
+    release_year,
+    fks,
+    image,
+    description,
+    trailer,
+  ];
 
   con.query(sql, values, (err, result) => {
     if (err) {
@@ -239,6 +250,23 @@ app.get('/getMovies', (req, res) => {
       console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
       throw err;
     }
+    res.send(result);
+  });
+});
+
+// || EINEN FILM ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getOneMovie/:movie_id', (req, res) => {
+  const movie_id = req.params.movie_id;
+
+  const sql = `SELECT * FROM movie WHERE movie_id = '${movie_id}' `;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    console.log(`Film ${result.title} abgerufen!`);
     res.send(result);
   });
 });

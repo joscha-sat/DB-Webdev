@@ -1,0 +1,57 @@
+
+<app-titel class="block">Film: {{oneMovie.title}}</app-titel>
+
+<!-- BESCHREIBUNG ZUM FILM -->
+<div class="container block">
+  <div class="description block">
+    <h2>Beschreibung:</h2>
+    {{oneMovie.description}}
+  </div>
+</div>
+
+<!-- VIDEO -->
+
+<div class="trailer-container">
+  <div class="video">
+
+    <div class="block">
+      <h2>Trailer:</h2>
+    </div>
+
+    <iframe id="trailer" [src]="oneMovie.trailer | safe" allowfullscreen>
+    </iframe>
+
+  </div>
+</div>
+
+<!-- WEITERE INFOS ZUM FILM -->
+
+<div class="container block" id="infos">
+
+  <div class="duration block">
+    <h3>Dauer: </h3>
+    {{oneMovie.duration}} Minuten
+  </div>
+
+  <div class="genre block">
+    <h3>Genre: </h3>
+    {{oneMovie.genre}}
+  </div>
+
+  <div class="fks block">
+    <h3>FKS: </h3>
+    {{oneMovie.fks}}
+  </div>
+
+  <div class="release_year block">
+    <h3>Erscheinungsjahr: </h3>
+    {{oneMovie.release_year}}
+  </div>
+
+</div>
+
+<div class="container">
+  Hallo
+</div>
+
+

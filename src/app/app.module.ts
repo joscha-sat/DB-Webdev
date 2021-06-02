@@ -18,6 +18,9 @@ import { TitelComponent } from './components/title/titel.component';
 import { MovieGalleryComponent } from './components/movie-gallery/movie-gallery.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginComponent } from './pages/login/login.component';
+import { MovieDetailsTicketsComponent } from './components/movie-details-tickets/movie-details-tickets.component';
+import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { SafePipe } from './pipes/safe.pipe';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { LoginComponent } from './pages/login/login.component';
     FilmHinzufuegenFormComponent,
     LoginFormComponent,
     LoginComponent,
+    MovieDetailsTicketsComponent,
+    MovieDetailsComponent,
+    SafePipe,
   ],
 
   imports: [

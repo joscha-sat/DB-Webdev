@@ -1,4 +1,5 @@
-<app-titel>Movie hinzufügen</app-titel>
+<script src="film-hinzufuegen-form.component.ts"></script>
+<app-titel>Film hinzufügen</app-titel>
 <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
   <div class="container is-max-desktop p-5 mt-5">
 
@@ -162,6 +163,65 @@
 
     </div>
 
+    <!-- Input-BESCHREIBUNG -->
+
+    <div class="field form-group">
+      <label class="label">Beschreibung</label>
+      <div class="control has-icons-left block">
+        <input class="textarea form-control" type="text" placeholder="Beschreibung"
+               formControlName="description">
+        <span class="icon is-small is-left">
+         <i class="fas fa-align-left"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- Error-BESCHREIBUNG -->
+
+    <div class="error" *ngIf="form.get('description').touched && form.get('description').invalid">
+
+      <div *ngIf="form.get('description').errors.required">
+        Beschreibung darf nicht leer sein
+        <span class="icon is-small is-left">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+
+      <div *ngIf="form.get('description').errors.minlength">
+        Beschreibung muss mind. 20 Zeichen enthalten.
+      </div>
+
+    </div>
+
+    <!-- Input-TRAILER -->
+
+    <div class="field form-group">
+      <label class="label">Trailer-Link</label>
+      <div class="control has-icons-left block">
+        <input class="input form-control" type="text" placeholder="Trailer-Link"
+               formControlName="trailer">
+        <span class="icon is-small is-left">
+        <i class="fas fa-film"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- Error-TRAILER -->
+
+    <div class="error" *ngIf="form.get('trailer').touched && form.get('trailer').invalid">
+
+      <div *ngIf="form.get('trailer').errors.required">
+        Trailer darf nicht leer sein
+        <span class="icon is-small is-left">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
+
+      <div *ngIf="form.get('trailer').errors.minlength">
+        Trailer muss mind. 20 Zeichen enthalten.
+      </div>
+
+    </div>
     <!-- Input-BILD -->
 
     <div class="form-group bild">

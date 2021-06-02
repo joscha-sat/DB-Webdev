@@ -40,6 +40,8 @@ export class FilmHinzufuegenFormComponent implements OnInit {
       genre: this.form.value.genre,
       fks: this.form.value.fks,
       image: this.selectedImage.name,
+      description: this.form.value.description,
+      trailer: this.form.value.trailer,
     };
 
     this.form.reset();
@@ -70,6 +72,8 @@ export class FilmHinzufuegenFormComponent implements OnInit {
       release_year: ['', [Validators.required]],
       genre: ['', [Validators.required]],
       fks: ['', [Validators.required]],
+      description: ['', [Validators.required, Validators.minLength(20)]],
+      trailer: ['', [Validators.required, Validators.minLength(20)]],
       image: ['', [Validators.required]],
     });
   }

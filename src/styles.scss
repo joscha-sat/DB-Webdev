@@ -15,7 +15,7 @@
 
   // Border
   --border: #{$border_color};
-  --border_radius: #{$border};
+  --border_radius: #{$border_radius};
 
   // Text
   --primary_text: #{$primary_text_color};
@@ -23,8 +23,8 @@
 }
 
 body {
-  background-color: var(--background);
-  color: var(--primary_text);
+  background: var(--background);
+  color: var(--secondary_text);
 
   font-family: $font_family;
   font-size: $normal_text_font_size;
@@ -37,18 +37,21 @@ body {
 
   h1 {
     font-size: $h1_font_size;
+    color: var(--primary_text);
     font-weight: bold;
     margin: 0;
   }
 
   h2 {
     font-size: $h2_font_size;
+    color: var(--primary_text);
     font-weight: bold;
     margin: 0;
   }
 
   h3 {
     font-size: $h3_font_size;
+    color: var(--primary_text);
     font-weight: bold;
     margin: 0;
   }
@@ -70,6 +73,7 @@ body {
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--background);
 }
 
 *,
