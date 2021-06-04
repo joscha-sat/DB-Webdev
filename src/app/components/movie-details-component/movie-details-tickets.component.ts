@@ -4,6 +4,7 @@ import { Movie } from '../../interfaces/movie';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { UserHttpService } from '../../services/user-http.service';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-movie-details-tickets',

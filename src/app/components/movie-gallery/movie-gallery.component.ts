@@ -22,10 +22,6 @@ export class MovieGalleryComponent {
     return this.suchenService.filteredFilmTitel(this.array, this.search);
   }
 
-  deleteOneMovie(id: number): void {
-    this.httpService.deleteOneMovie(id).subscribe();
-  }
-
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
   @Input() search: string = '';
@@ -34,9 +30,5 @@ export class MovieGalleryComponent {
 
   deleteMovie(id: number): void {
     this.httpService.deleteOneMovie(id).subscribe();
-  }
-
-  seeDetails(movie_id: number): void {
-    this.httpService.getOneMovie(movie_id);
   }
 }

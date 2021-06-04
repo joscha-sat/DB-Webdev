@@ -1,12 +1,6 @@
-import {
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserHttpService } from '../../services/user-http.service';
-import { Subscription } from 'rxjs';
+
 import { User } from '../../interfaces/user';
 
 @Component({

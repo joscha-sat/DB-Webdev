@@ -9,4 +9,3 @@ export interface Movie {
   description: string;
   trailer: string;
 }
-

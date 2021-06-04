@@ -1,5 +1,4 @@
-
-<app-titel class="block">Film: {{oneMovie.title}}</app-titel>
+<app-titel class="block">Film Details zu: {{oneMovie.title}}</app-titel>
 
 <!-- BESCHREIBUNG ZUM FILM -->
 <div class="container block">
@@ -52,9 +51,7 @@
 
 <div class="container" id="ticket">
   <div *ngIf="loggedIn; else doLogIn" id="ticket_button">
-    <button class="button is-primary" [routerLink]="['/Tickets/movie_id/user_id', oneMovie.movie_id]">Tickets erwerben</button>
+    <button class="button is-primary" [routerLink]="['/Tickets/', oneMovie.movie_id]">Tickets erwerben</button>
   </div>
   <ng-template #doLogIn>Bitte <a routerLink="/Login">einloggen</a>, um Tickets erwerben zu können</ng-template>
 </div>
-
-

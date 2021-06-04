@@ -9,13 +9,13 @@
   </p>
 </div>
 
-<!-- Container: Movie-Gallerie || START || -->
+<!-- Container: Movie-Galerie || START || -->
 
 <div class="grid">
 
-  <figure class="figure" *ngFor="let movie of filteredFilme()" >
+  <figure class="figure" *ngFor="let movie of filteredFilme()">
 
-    <div class="images" [routerLink]="['/Movie_details/', movie.movie_id]">
+    <div class="images" [routerLink]="['/Details/', movie.movie_id]">
       <img [src]="movie.image" [alt]='movie.title' />
     </div>
 
@@ -25,7 +25,7 @@
       </div>
 
       <div class="buttons">
-        <button [routerLink]="['/Movie_details/', movie.movie_id]" class="button is-light">Details</button>
+        <button [routerLink]="['/Details/', movie.movie_id]" class="button is-light">Details</button>
         <button (click)='deleteMovie(movie.movie_id)' class="button is-danger">löschen</button>
       </div>
     </figcaption>

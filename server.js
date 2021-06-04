@@ -266,7 +266,6 @@ app.get('/getOneMovie/:movie_id', (req, res) => {
       console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
       throw err;
     }
-    console.log(`Film ${result.title} abgerufen!`);
     res.send(result);
   });
 });

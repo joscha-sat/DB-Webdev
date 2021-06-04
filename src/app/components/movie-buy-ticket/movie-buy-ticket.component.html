@@ -1,0 +1,166 @@
+<app-titel> Tickets für: {{ oneMovie.title }} </app-titel>
+
+<div class="all-container">
+  <div class="movie_image">
+    <img [src]="oneMovie.image" [alt]="oneMovie.title" />
+  </div>
+
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="form.valid && onBuyTickets()">
+      <div class="container is-max-desktop p-5 mt-5">
+        <label class="label">Sitzplatz</label>
+
+        <div class="flex-container">
+          <div>
+            <img src="assets/kinoplatz/saal.jpg" alt="Kinosaal" style="
+                max-width: 375px;
+                object-fit: cover;
+                object-position: center center;
+              " />
+          </div>
+
+          <!-- Input-REIHE -->
+
+          <div class="field form-group">
+            <div class="flex-container">
+              <label class="label">Reihe</label>
+              <div class="select">
+                <select class="form-control" formControlName="letter" [ngClass]="{
+                    'is-invalid':
+                      form.get('letter').touched && form.get('letter').invalid
+                  }">
+                  <option selected>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                  <option>D</option>
+                  <option>E</option>
+                  <option>F</option>
+                  <option>G</option>
+                  <option>H</option>
+                  <option>I</option>
+                  <option>J</option>
+                </select>
+
+                <!-- ERROR-REIHE -->
+
+                <div class="error" *ngIf="form.get('letter').touched && form.get('letter').invalid">
+
+                  <div *ngIf="form.get('letter').errors.required">
+                    Reihe darf nicht leer sein
+                    <span class="icon is-small is-left">
+                     <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- Input-PLATZ -->
+
+              <label class="label">Platz</label>
+              <div class="select">
+                <select class="form-control" formControlName="number" [ngClass]="{
+                    'is-invalid':
+                      form.get('number').touched && form.get('number').invalid
+                  }">
+                  <option selected>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                </select>
+
+                <!-- ERROR-PLATZ -->
+
+                <div class="error" *ngIf="form.get('number').touched && form.get('number').invalid">
+
+                  <div *ngIf="form.get('number').errors.required">
+                    Platz darf nicht leer sein
+                    <span class="icon is-small is-left">
+                     <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input-GETRÄNK -->
+
+        <div class="field form-group">
+          <div class="flex-container mt-6">
+            <label class="label">Getränk</label>
+            <div class="select">
+              <select class="form-control" formControlName="letter" [ngClass]="{
+                  'is-invalid':
+                    form.get('letter').touched && form.get('letter').invalid
+                }">
+                <option selected></option>
+                <option>Wasser</option>
+                <option>Cola</option>
+                <option>Fanta</option>
+                <option>Sprite</option>
+                <option>Mezzomix</option>
+                <option>Eistee</option>
+                <option>Becks</option>
+                <option>Prosecco</option>
+                <option>Krombacher Weizen</option>
+                <option>Rose</option>
+              </select>
+            </div>
+
+            <!-- Input-GETRÄNK-GRÖßE -->
+
+            <label class="label">Größe</label>
+            <div class="select">
+              <select class="form-control" formControlName="number" [ngClass]="{
+                  'is-invalid':
+                    form.get('number').touched && form.get('number').invalid
+                }">
+                <option selected></option>
+                <option>0,2 Liter</option>
+                <option>0,25 Liter</option>
+                <option>0,33 Liter</option>
+                <option>0,5 Liter</option>
+                <option>0,7 Liter</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!--    PREIS    -->
+
+        <div class="mt-6">
+          Gesamtpreis:
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="field is-grouped buttons">
+          <div class="control block">
+            <button type="submit" [disabled]="!form.valid" class="button is-success">
+              Tickets kaufen
+            </button>
+          </div>
+          <div class="control block">
+            <button routerLink="/Startseite" class="button is-link is-light">
+              Abbrechen
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+  </div>
+
+
+</div>

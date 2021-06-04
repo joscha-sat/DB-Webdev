@@ -1,0 +1,47 @@
+@use '../../scss/index'as *;
+
+.all-container {
+  display: flex;
+  flex-direction: row;
+
+  gap: $margin_5;
+
+  place-content: center;
+  place-items: center;
+}
+
+
+.container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--border_radius);
+}
+
+.label {
+  color: var(--text);
+}
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: $small_text_font_size;
+  margin-bottom: $margin_3;
+}
+
+.buttons {
+  margin-top: $margin_7;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.movie_image img {
+  width: 325px;
+  height: 550px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border: 1px solid var(--border);
+  border-radius: var(--border_radius);
+}
