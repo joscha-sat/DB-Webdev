@@ -56,7 +56,9 @@ export class MovieBuyTicketComponent implements OnInit {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
 
-  onBuyTickets(): void {}
+  onBuyTickets(): void {
+    console.log(this.sitzplatz);
+  }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
 

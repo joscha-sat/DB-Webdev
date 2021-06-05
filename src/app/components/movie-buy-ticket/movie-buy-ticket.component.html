@@ -21,80 +21,88 @@
           </div>
 
           <!-- Input-REIHE -->
-          <section>
-            <div class="field form-group" *ngFor="let address of sitzplatz; let i = index;">
-              <div class="flex-container" id="reihe_platz">
-                <label class="label">Reihe</label>
-                <label class="label" id="platz">Platz</label>
-              </div>
 
-              <div class="flex-container">
 
-                <div class="select">
-                  <select class="form-control" formControlName="letter">
-                    <option selected>A</option>
-                    <option>B</option>
-                    <option>C</option>
-                    <option>D</option>
-                    <option>E</option>
-                    <option>F</option>
-                    <option>G</option>
-                    <option>H</option>
-                    <option>I</option>
-                    <option>J</option>
-                  </select>
+          <div>
+            <section *ngFor="let einSitzplatz of sitzplatz; let i = index;">
+              <div class="field">
+                <div class="flex-container" id="reihe_platz">
+                  <label class="label">Reihe</label>
+                  <label class="label" id="platz">Platz</label>
+                </div>
 
-                  <!-- ERROR-REIHE -->
+                <div class="flex-container">
 
-                  <div class="error" *ngIf="ticketform.get('letter').touched && ticketform.get('letter').invalid">
+                  <div class="select form-group">
+                    <select class="form-control" [(ngModel)]="einSitzplatz.reihe" name="reihe_{{einSitzplatz.id}}" formControlName="letter">
+                      <option selected>A</option>
+                      <option>B</option>
+                      <option>C</option>
+                      <option>D</option>
+                      <option>E</option>
+                      <option>F</option>
+                      <option>G</option>
+                      <option>H</option>
+                      <option>I</option>
+                      <option>J</option>
+                    </select>
 
-                    <div *ngIf="ticketform.get('letter').errors.required">
-                      Reihe darf nicht leer sein
-                      <span class="icon is-small is-left">
+                    <!-- ERROR-REIHE -->
+
+                    <div class="error" *ngIf="ticketform.get('letter').touched && ticketform.get('letter').invalid">
+
+                      <div *ngIf="ticketform.get('letter').errors.required">
+                        Reihe darf nicht leer sein
+                        <span class="icon is-small is-left">
                      <i class="fas fa-exclamation-triangle"></i>
                     </span>
+                      </div>
+
                     </div>
 
                   </div>
 
-                </div>
+                  <!-- Input-PLATZ -->
 
-                <!-- Input-PLATZ -->
+                  <div class="select form-group">
+                    <select class="form-control" [(ngModel)]="einSitzplatz.platz" name="platz_{{einSitzplatz.id}}" formControlName="number">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
 
-                <div class="select">
-                  <select class="form-control" formControlName="number">
-                    <option selected>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                    <option>7</option>
-                    <option>8</option>
-                    <option>9</option>
-                    <option>10</option>
-                  </select>
+                    <!-- ERROR-PLATZ -->
 
-                  <!-- ERROR-PLATZ -->
+                    <div class="error" *ngIf="ticketform.get('number').touched && ticketform.get('number').invalid">
 
-                  <div class="error" *ngIf="ticketform.get('number').touched && ticketform.get('number').invalid">
-
-                    <div *ngIf="ticketform.get('number').errors.required">
-                      Platz darf nicht leer sein
-                      <span class="icon is-small is-left">
+                      <div *ngIf="ticketform.get('number').errors.required">
+                        Platz darf nicht leer sein
+                        <span class="icon is-small is-left">
                      <i class="fas fa-exclamation-triangle"></i>
                     </span>
-                    </div>
+                      </div>
 
+                    </div>
                   </div>
+                  <button *ngIf="sitzplatz.length > 1" class="button is-danger" (click)="removeSitzplatz(i)">löschen</button>
                 </div>
-                  <button class="button is-danger" (click)="removeSitzplatz(i)">löschen</button>
               </div>
-            </div>
-            <button type="button" class="button is-info mt-3" (click)="addSitzplatz()">Ticket hinzufügen</button>
-          </section>
+            </section>
+
+            <button type="button" class="button is-info mt-5" (click)="addSitzplatz()">Ticket hinzufügen</button>
+          </div>
+
+
 
         </div>
+
 
         <!-- Input-GETRÄNK -->
 
