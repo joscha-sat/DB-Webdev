@@ -1,8 +1,7 @@
 import {
   Component,
-  ComponentFactoryResolver,
-  ComponentRef,
   OnInit,
+  Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -11,7 +10,7 @@ import { UserHttpService } from '../../services/user-http.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Movie } from '../../interfaces/movie';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormComponent } from './form/form.component';
+
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -26,10 +25,17 @@ export class MovieBuyTicketComponent implements OnInit {
     private httpU: UserHttpService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
+
+  sitzplatz: any = [
+    {
+      id: 1,
+      reihe: '',
+      platz: '',
+    },
+  ];
 
   form: FormGroup;
 
@@ -40,6 +46,19 @@ export class MovieBuyTicketComponent implements OnInit {
   loggedIn: boolean = false;
 
   // ------------------------------------------------------------------------------------- || Methods ||
+
+  addSitzplatz(): void {
+    this.sitzplatz.push({
+      id: this.sitzplatz.length + 1,
+      reihe: '',
+      platz: '',
+    });
+  }
+
+  removeSitzplatz(i: number): void {
+    this.sitzplatz.splice(i, 1);
+  }
+
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
@@ -50,9 +69,6 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // ---------------------------------------------------------------------------------- || @ViewChild ||
 
-  @ViewChild('parent', { read: ViewContainerRef }) target: ViewContainerRef | any;
-
-  private componentRef: ComponentRef<any> | any;
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {
@@ -80,12 +96,5 @@ export class MovieBuyTicketComponent implements OnInit {
       drinks: ['', []],
       size: ['', []],
     });
-  }
-
-  add(): void {
-    const childComponent = this.componentFactoryResolver.resolveComponentFactory(
-      FormComponent
-    );
-    this.componentRef = this.target.createComponent(childComponent);
   }
 }

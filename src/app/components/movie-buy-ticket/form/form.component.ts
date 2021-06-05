@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -8,7 +8,7 @@ import {FormGroup} from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
@@ -21,5 +21,10 @@ export class FormComponent implements OnInit {
   // ---------------------------------------------------------------------------------- || @ViewChild ||
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      letter: ['', []],
+      number: ['', []],
+    });
+  }
 }

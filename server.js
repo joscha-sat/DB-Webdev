@@ -166,13 +166,13 @@ app.post('/login', (req, res) => {
             userid: result[0].userid,
           },
           'einGeheimnisZuHabenIstImmerGut-HierIstMeinGeheimnis',
-          { expiresIn: '1h' }
+          { expiresIn: '3h' }
         );
         console.log('logged in!');
         return res.status(200).send({
           message: 'logged in!',
           token,
-          expiresIn: 3600,
+          expiresIn: 3600 * 3,
           user: result[0],
         });
       }
