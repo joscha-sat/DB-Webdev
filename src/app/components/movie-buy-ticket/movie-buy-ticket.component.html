@@ -22,13 +22,15 @@
           <!-- Input-REIHE -->
 
           <div class="field form-group">
-            <div class="flex-container">
+            <div class="flex-container" id="reihe_platz">
               <label class="label">Reihe</label>
+              <label class="label">Platz</label>
+            </div>
+
+            <div class="flex-container">
+
               <div class="select">
-                <select class="form-control" formControlName="letter" [ngClass]="{
-                    'is-invalid':
-                      form.get('letter').touched && form.get('letter').invalid
-                  }">
+                <select class="form-control" formControlName="letter">
                   <option selected>A</option>
                   <option>B</option>
                   <option>C</option>
@@ -58,12 +60,8 @@
 
               <!-- Input-PLATZ -->
 
-              <label class="label">Platz</label>
               <div class="select">
-                <select class="form-control" formControlName="number" [ngClass]="{
-                    'is-invalid':
-                      form.get('number').touched && form.get('number').invalid
-                  }">
+                <select class="form-control" formControlName="number">
                   <option selected>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -91,6 +89,9 @@
 
               </div>
             </div>
+            <div class="parent" #parent></div>
+
+            <button class="button mt-5" (click)="add()">weiteres Ticket</button>
           </div>
         </div>
 

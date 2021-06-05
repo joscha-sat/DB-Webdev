@@ -11,6 +11,7 @@ import { UserHttpService } from '../../services/user-http.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Movie } from '../../interfaces/movie';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormComponent } from './form/form.component';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -23,7 +24,7 @@ export class MovieBuyTicketComponent implements OnInit {
   constructor(
     private httpM: MovieHttpService,
     private httpU: UserHttpService,
-    private myroute: ActivatedRoute,
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private componentFactoryResolver: ComponentFactoryResolver
   ) {}
@@ -49,13 +50,13 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // ---------------------------------------------------------------------------------- || @ViewChild ||
 
-  @ViewChild('parent', { read: ViewContainerRef }) target: ViewContainerRef;
+  @ViewChild('parent', { read: ViewContainerRef }) target: ViewContainerRef | any;
 
-  private componentRef: ComponentRef<any>;
+  private componentRef: ComponentRef<any> | any;
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {
-    this.myroute.paramMap.subscribe((paramMap: ParamMap) => {
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('movie_id')) {
         this.movieId = +paramMap.get('movie_id');
 
@@ -79,5 +80,12 @@ export class MovieBuyTicketComponent implements OnInit {
       drinks: ['', []],
       size: ['', []],
     });
+  }
+
+  add(): void {
+    const childComponent = this.componentFactoryResolver.resolveComponentFactory(
+      FormComponent
+    );
+    this.componentRef = this.target.createComponent(childComponent);
   }
 }
