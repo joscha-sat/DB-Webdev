@@ -22,7 +22,6 @@ import { MovieDetailsTicketsComponent } from './components/movie-details-compone
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy-ticket.component';
-import { FormComponent } from './components/movie-buy-ticket/form/form.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { FormComponent } from './components/movie-buy-ticket/form/form.component
     MovieDetailsComponent,
     SafePipe,
     MovieBuyTicketComponent,
-    FormComponent,
   ],
 
   imports: [

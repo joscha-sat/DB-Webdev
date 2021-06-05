@@ -6,7 +6,7 @@
   </div>
 
   <div class="form">
-    <form [formGroup]="form" (ngSubmit)="form.valid && onBuyTickets()">
+    <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onBuyTickets()">
       <div class="container is-max-desktop p-5 mt-5">
 
         <label class="label">Sitzplatz</label>
@@ -22,7 +22,6 @@
 
           <!-- Input-REIHE -->
           <section>
-            <button type="button" class="button is-info mb-2" (click)="addSitzplatz()">Ticket hinzufügen</button>
             <div class="field form-group" *ngFor="let address of sitzplatz; let i = index;">
               <div class="flex-container" id="reihe_platz">
                 <label class="label">Reihe</label>
@@ -47,9 +46,9 @@
 
                   <!-- ERROR-REIHE -->
 
-                  <div class="error" *ngIf="form.get('letter').touched && form.get('letter').invalid">
+                  <div class="error" *ngIf="ticketform.get('letter').touched && ticketform.get('letter').invalid">
 
-                    <div *ngIf="form.get('letter').errors.required">
+                    <div *ngIf="ticketform.get('letter').errors.required">
                       Reihe darf nicht leer sein
                       <span class="icon is-small is-left">
                      <i class="fas fa-exclamation-triangle"></i>
@@ -78,9 +77,9 @@
 
                   <!-- ERROR-PLATZ -->
 
-                  <div class="error" *ngIf="form.get('number').touched && form.get('number').invalid">
+                  <div class="error" *ngIf="ticketform.get('number').touched && ticketform.get('number').invalid">
 
-                    <div *ngIf="form.get('number').errors.required">
+                    <div *ngIf="ticketform.get('number').errors.required">
                       Platz darf nicht leer sein
                       <span class="icon is-small is-left">
                      <i class="fas fa-exclamation-triangle"></i>
@@ -89,13 +88,10 @@
 
                   </div>
                 </div>
-
-
                   <button class="button is-danger" (click)="removeSitzplatz(i)">löschen</button>
-
-
               </div>
             </div>
+            <button type="button" class="button is-info mt-3" (click)="addSitzplatz()">Ticket hinzufügen</button>
           </section>
 
         </div>
@@ -106,7 +102,7 @@
           <div class="flex-container mt-6">
             <label class="label">Getränk</label>
             <div class="select">
-              <select class="form-control" formControlName="letter">
+              <select class="form-control" formControlName="drinks">
                 <option selected></option>
                 <option>Wasser</option>
                 <option>Cola</option>
@@ -125,7 +121,7 @@
 
             <label class="label">Größe</label>
             <div class="select">
-              <select class="form-control" formControlName="number">
+              <select class="form-control" formControlName="size">
                 <option selected></option>
                 <option>0,2 Liter</option>
                 <option>0,25 Liter</option>
@@ -143,7 +139,7 @@
           <div class="flex-container mt-6">
             <label class="label">Snack</label>
             <div class="select">
-              <select class="form-control" formControlName="letter">
+              <select class="form-control" formControlName="snacks">
                 <option selected></option>
                 <option>Popcorn süß</option>
                 <option>Popcorn salzig</option>
@@ -172,7 +168,7 @@
 
             <label class="label">Größe</label>
             <div class="select">
-              <select class="form-control" formControlName="number">
+              <select class="form-control" formControlName="size">
                 <option selected></option>
                 <option>35g</option>
                 <option>70g</option>
@@ -197,7 +193,7 @@
 
         <div class="field is-grouped buttons">
           <div class="control block">
-            <button type="submit" [disabled]="!form.valid" class="button is-success">
+            <button type="submit" [disabled]="!ticketform.valid" class="button is-success">
               Tickets kaufen
             </button>
           </div>

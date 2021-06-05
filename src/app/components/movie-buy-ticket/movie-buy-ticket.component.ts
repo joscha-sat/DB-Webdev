@@ -1,16 +1,9 @@
-import {
-  Component,
-  OnInit,
-  Type,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MovieHttpService } from '../../services/movie-http.service';
 import { UserHttpService } from '../../services/user-http.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Movie } from '../../interfaces/movie';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -24,7 +17,7 @@ export class MovieBuyTicketComponent implements OnInit {
     private httpM: MovieHttpService,
     private httpU: UserHttpService,
     private route: ActivatedRoute,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
@@ -37,7 +30,7 @@ export class MovieBuyTicketComponent implements OnInit {
     },
   ];
 
-  form: FormGroup;
+  ticketform: FormGroup;
 
   oneMovie: Movie;
 
@@ -69,7 +62,6 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // ---------------------------------------------------------------------------------- || @ViewChild ||
 
-
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -90,7 +82,7 @@ export class MovieBuyTicketComponent implements OnInit {
       this.getIsLoggedIn();
     });
 
-    this.form = this.formBuilder.group({
+    this.ticketform = this.formBuilder.group({
       letter: ['', [Validators.required]],
       number: ['', [Validators.required]],
       drinks: ['', []],
