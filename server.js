@@ -5,6 +5,7 @@
 
 const express = require('express');
 const mysql = require('mysql');
+const path = require('path');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
@@ -14,6 +15,13 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+app.use(express.static(path.join(__dirname, '/dist/dbweb')));
+
+// application -------------------------------------------------------------
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: __dirname + '/dbweb' });
+});
 
 // damit verschiedene Host interagieren können
 
