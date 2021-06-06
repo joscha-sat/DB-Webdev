@@ -21,6 +21,11 @@ export class AccountErstellenFormComponent implements OnInit {
   form: FormGroup;
 
   // ------------------------------------------------------------------------------------- || Methods ||
+
+  isMitarbeiter(): boolean {
+    return this.form.value.role === 'Mitarbeiter';
+  }
+
   onSubmit(): void {
     if (this.form.invalid) {
       return;
@@ -31,6 +36,7 @@ export class AccountErstellenFormComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password,
       date_of_birth: this.form.value.date_of_birth,
+      admin_secret: this.form.value.secret,
     };
 
     this.form.reset();
@@ -45,12 +51,24 @@ export class AccountErstellenFormComponent implements OnInit {
   // ---------------------------------------------------------------------------------- || @ViewChild ||
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       date_of_birth: ['', [Validators.required]],
+      secret: [''],
+      role: ['Kunde', [Validators.required]],
+    });
+
+    this.form.get('role').valueChanges.subscribe((value) => {
+      if (value === 'Mitarbeiter') {
+        this.form.get('secret').setValidators([Validators.required]);
+      } else {
+        this.form.get('secret').clearValidators();
+      }
+      this.form.get('secret').updateValueAndValidity();
     });
   }
 }

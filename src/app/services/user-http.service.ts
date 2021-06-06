@@ -16,6 +16,8 @@ export class UserHttpService {
 
   isAuthenticated = false;
 
+  isAdmin = false;
+
   token: string | any;
 
   userid: string | any;
@@ -36,6 +38,10 @@ export class UserHttpService {
 
   getIsLoggedIn(): boolean {
     return this.isAuthenticated;
+  }
+
+  getIsAdmin(): boolean {
+    return this.isAdmin;
   }
 
   getToken(): any {
@@ -80,6 +86,10 @@ export class UserHttpService {
 
           this.user = response.user;
 
+          if (this.user.isAdmin === 'true') {
+            this.isAdmin = true;
+          }
+
           const now = new Date(); //Timestamp des Moments
           const expirationDate = new Date(
             now.getTime() + expiresInDuration * 1000 // aktuelle Zeit + 1h bis sich Token auflöst
@@ -100,6 +110,8 @@ export class UserHttpService {
     this.token = null;
 
     this.isAuthenticated = false;
+
+    this.isAdmin = false;
 
     this._updater$.next();
 
@@ -133,6 +145,10 @@ export class UserHttpService {
       this.token = authInformation.token;
 
       this.isAuthenticated = true;
+
+      if (authInformation.user.isAdmin === 'true') {
+        this.isAdmin = true;
+      }
 
       this.userid = authInformation.userid;
 

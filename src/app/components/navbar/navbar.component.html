@@ -2,7 +2,7 @@
 
   <div class="navbar-brand">
     <a role="button" (click)="navBarItems()" class="navbar-burger" aria-label="menu" aria-expanded="false"
-      data-target="navbarBasicExample">
+       data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -17,7 +17,7 @@
         Startseite
       </a>
 
-      <a class="navbar-item" routerLink="/ZweiteSeite">
+      <a class="navbar-item" routerLink="/ZweiteSeite" *ngIf='isAdmin'>
         Film Hinzufügen +
       </a>
 

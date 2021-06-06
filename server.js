@@ -94,7 +94,7 @@ const upload = multer({ storage: storage });
 app.post('/uploadImage', upload.single('myFile'), (req, res) => {
   try {
     return res.status(201).json({
-      message: 'File uploded successfully',
+      message: 'File uploaded successfully',
     });
   } catch (error) {
     console.error(error);
@@ -110,13 +110,17 @@ app.post('/register', (req, res) => {
   const email = req.body.newUser.email;
   const password = req.body.newUser.password;
   const date_of_birth = req.body.newUser.date_of_birth;
+  const admin_secret = req.body.newUser.admin_secret;
 
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
       console.log('error');
       throw err;
     } else {
-      const sql = `INSERT INTO user (date_of_birth, password, email, name ) VALUES ('${date_of_birth}', '${hash}', '${email}', '${name}')`;
+      const sql = `INSERT INTO user (date_of_birth, password, email, name, isAdmin ) VALUES ('${date_of_birth}', '${hash}', '${email}', '${name}', '${
+        admin_secret === 45678
+      }')`;
+
       con.query(sql, (err) => {
         if (err) {
           console.log('error');

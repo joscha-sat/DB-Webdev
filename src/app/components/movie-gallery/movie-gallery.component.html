@@ -25,8 +25,9 @@
       </div>
 
       <div class="buttons">
-        <button [routerLink]="['/Details/', movie.movie_id]" class="button is-light">Details</button>
-        <button (click)='deleteMovie(movie.movie_id)' class="button is-danger">löschen</button>
+        <button *ngIf="!isAdmin" [routerLink]="['/Details/', movie.movie_id]" class="button is-light">Details</button>
+        <button *ngIf="!isAdmin" [routerLink]="['/Tickets/', movie.movie_id]" class="button is-light">Tickets</button>
+        <button *ngIf="isAdmin" (click)='deleteMovie(movie.movie_id)' class="button is-danger">löschen</button>
       </div>
     </figcaption>
 

@@ -16,6 +16,8 @@ export class NavbarComponent implements OnInit {
 
   loggedIn = false;
 
+  isAdmin = false;
+
   user: User;
 
   // ------------------------------------------------------------------------------------- || Methods ||
@@ -36,6 +38,10 @@ export class NavbarComponent implements OnInit {
     this.loggedIn = this.loginService.getIsLoggedIn();
   }
 
+  getIsAdmin(): void {
+    this.isAdmin = this.loginService.getIsAdmin();
+  }
+
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
   // ---------------------------------------------------------------------------------- || @ViewChild ||
@@ -45,15 +51,15 @@ export class NavbarComponent implements OnInit {
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {
-    // Initialwert setzen für den Status loggedIn
+    // Initialwerte
     this.getIsLoggedIn();
-
-    // Initialwert für den User setzen
+    this.getIsAdmin();
     this.getLoggedInUser();
 
     // auf Veränderungen des Users reagieren
     this.loginService.updater$.subscribe(() => {
       this.getIsLoggedIn();
+      this.getIsAdmin();
       this.getLoggedInUser();
     });
   }
