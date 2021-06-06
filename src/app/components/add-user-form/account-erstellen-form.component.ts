@@ -42,7 +42,7 @@ export class AccountErstellenFormComponent implements OnInit {
     this.form.reset();
     this.router.navigate(['/Startseite']);
 
-    // den neuen Spieler in das Array aus dem Service hinzufügen
+    // den neuen User in das Array aus dem Service hinzufügen
     this.httpService.registerUser(neuerKunde).subscribe();
   }
 
@@ -61,6 +61,8 @@ export class AccountErstellenFormComponent implements OnInit {
       secret: [''],
       role: ['Kunde', [Validators.required]],
     });
+
+    // Validation mit Bedingung
 
     this.form.get('role').valueChanges.subscribe((value) => {
       if (value === 'Mitarbeiter') {

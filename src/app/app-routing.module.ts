@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistrierenComponent } from './pages/registrieren/registrieren.component';
 import { StartseiteComponent } from './pages/startseite/startseite.component';
-import { ZweiteSeiteComponent } from './pages/zweite-seite/zweite-seite.component';
+import { AddMoviePage } from './pages/add-movie-page/add-movie-page';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy-ticket.component';
+import { UserGuard } from './guard/user.guard';
+import { AdminGuard } from './guard/admin.guard';
 
 const routes: Routes = [
   {
@@ -18,8 +20,9 @@ const routes: Routes = [
     component: StartseiteComponent,
   },
   {
-    path: 'ZweiteSeite',
-    component: ZweiteSeiteComponent,
+    path: 'Film_Hinzufuegen',
+    component: AddMoviePage,
+    canActivate: [AdminGuard],
   },
   {
     path: 'Registrieren',
@@ -36,6 +39,7 @@ const routes: Routes = [
   {
     path: 'Tickets/:movie_id',
     component: MovieBuyTicketComponent,
+    canActivate: [UserGuard],
   },
 ];
 

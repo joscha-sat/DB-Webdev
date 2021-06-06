@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StartseiteComponent } from './pages/startseite/startseite.component';
-import { ZweiteSeiteComponent } from './pages/zweite-seite/zweite-seite.component';
+import { AddMoviePage } from './pages/add-movie-page/add-movie-page';
 import { KundenComponent } from './components/users/kunden.component';
 import { AccountErstellenFormComponent } from './components/add-user-form/account-erstellen-form.component';
 import { RegistrierenComponent } from './pages/registrieren/registrieren.component';
@@ -22,12 +22,14 @@ import { MovieDetailsTicketsComponent } from './components/movie-details-compone
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy-ticket.component';
+import { UserGuard } from './guard/user.guard';
+import { AdminGuard } from './guard/admin.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     StartseiteComponent,
-    ZweiteSeiteComponent,
+    AddMoviePage,
     NavbarComponent,
     MovieGalleryComponent,
     KundenComponent,
@@ -50,7 +52,7 @@ import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [UserGuard, AdminGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
