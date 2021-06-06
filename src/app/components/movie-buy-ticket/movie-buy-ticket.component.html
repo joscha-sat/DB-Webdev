@@ -5,7 +5,7 @@
     <img [src]="oneMovie.image" [alt]="oneMovie.title" />
   </div>
 
-  <div class="form">
+
     <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onBuyTickets()">
       <div class="container is-max-desktop p-5 mt-5">
 
@@ -20,22 +20,20 @@
               " />
           </div>
 
-          <!-- Input-REIHE -->
+          <div class="flex-column">
 
+              <div
+                formArrayName="sitzplatz"
+                *ngFor="let item of ticketform.get('sitzplatz')['controls']; let i = index;"
+              >
+                <div [formGroupName]="i">
 
-          <div>
-            <section *ngFor="let einSitzplatz of sitzplatz; let i = index;">
-              <div class="field">
-                <div class="flex-container" id="reihe_platz">
-                  <label class="label">Reihe</label>
-                  <label class="label" id="platz">Platz</label>
-                </div>
+                  <label>Reihe</label>
 
-                <div class="flex-container">
+                  <div class="select is-small">
 
-                  <div class="select form-group">
-                    <select class="form-control" [(ngModel)]="einSitzplatz.reihe" name="reihe_{{einSitzplatz.id}}" formControlName="letter">
-                      <option selected>A</option>
+                    <select class="select ml-4" formControlName="reihe">
+                      <option>A</option>
                       <option>B</option>
                       <option>C</option>
                       <option>D</option>
@@ -46,60 +44,32 @@
                       <option>I</option>
                       <option>J</option>
                     </select>
-
-                    <!-- ERROR-REIHE -->
-
-                    <div class="error" *ngIf="ticketform.get('letter').touched && ticketform.get('letter').invalid">
-
-                      <div *ngIf="ticketform.get('letter').errors.required">
-                        Reihe darf nicht leer sein
-                        <span class="icon is-small is-left">
-                     <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                      </div>
-
-                    </div>
-
                   </div>
 
-                  <!-- Input-PLATZ -->
 
-                  <div class="select form-group">
-                    <select class="form-control" [(ngModel)]="einSitzplatz.platz" name="platz_{{einSitzplatz.id}}" formControlName="number">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      <option value="7">7</option>
-                      <option value="8">8</option>
-                      <option value="9">9</option>
-                      <option value="10">10</option>
+                  <label class="ml-4">Platz</label>
+                  <div class="select is-small ml-4">
+                    <select formControlName="platz">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
                     </select>
-
-                    <!-- ERROR-PLATZ -->
-
-                    <div class="error" *ngIf="ticketform.get('number').touched && ticketform.get('number').invalid">
-
-                      <div *ngIf="ticketform.get('number').errors.required">
-                        Platz darf nicht leer sein
-                        <span class="icon is-small is-left">
-                     <i class="fas fa-exclamation-triangle"></i>
-                    </span>
-                      </div>
-
-                    </div>
                   </div>
-                  <button *ngIf="sitzplatz.length > 1" class="button is-danger" (click)="removeSitzplatz(i)">löschen</button>
+
+                  <button *ngIf="ticketform.get('sitzplatz')['controls'].length > 1" class="button is-danger is-small ml-4" type="button" (click)="deleteTicket(i)">löschen</button>
                 </div>
-              </div>
-            </section>
-
-            <button type="button" class="button is-info mt-5" (click)="addSitzplatz()">Ticket hinzufügen</button>
           </div>
-
-
+            <div>
+              <button class="button is-info" type="button" (click)="addTicket()">Add Ticket</button>
+            </div>
+        </div>
 
         </div>
 
@@ -109,7 +79,7 @@
         <div class="field form-group">
           <div class="flex-container mt-6">
             <label class="label">Getränk</label>
-            <div class="select">
+            <div class="select is-small">
               <select class="form-control" formControlName="drinks">
                 <option selected></option>
                 <option>Wasser</option>
@@ -128,7 +98,7 @@
             <!-- Input-GETRÄNK-GRÖßE -->
 
             <label class="label">Größe</label>
-            <div class="select">
+            <div class="select is-small">
               <select class="form-control" formControlName="size">
                 <option selected></option>
                 <option>0,2 Liter</option>
@@ -146,7 +116,7 @@
         <div class="field form-group">
           <div class="flex-container mt-6">
             <label class="label">Snack</label>
-            <div class="select">
+            <div class="select is-small">
               <select class="form-control" formControlName="snacks">
                 <option selected></option>
                 <option>Popcorn süß</option>
@@ -175,7 +145,7 @@
             <!-- Input-SNACKS-GRÖßE -->
 
             <label class="label">Größe</label>
-            <div class="select">
+            <div class="select is-small">
               <select class="form-control" formControlName="size">
                 <option selected></option>
                 <option>35g</option>
@@ -216,5 +186,3 @@
     </form>
   </div>
 
-
-</div>

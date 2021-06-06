@@ -3,7 +3,7 @@ import { MovieHttpService } from '../../services/movie-http.service';
 import { UserHttpService } from '../../services/user-http.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Movie } from '../../interfaces/movie';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -22,13 +22,7 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
-  sitzplatz: any = [
-    {
-      id: 1,
-      reihe: '',
-      platz: '',
-    },
-  ];
+  sitzplaetze: FormArray | undefined;
 
   ticketform: FormGroup;
 
@@ -40,25 +34,28 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
-  addSitzplatz(): void {
-    this.sitzplatz.push({
-      id: this.sitzplatz.length + 1,
-      reihe: '',
-      platz: '',
-    });
-  }
-
-  removeSitzplatz(i: number): void {
-    this.sitzplatz.splice(i, 1);
-  }
-
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
 
-  onBuyTickets(): void {
-    console.log(this.sitzplatz);
+  createTicket(): FormGroup {
+    return this.formBuilder.group({
+      reihe: ['', [Validators.required]],
+      platz: ['', [Validators.required]],
+    });
   }
+
+  addTicket(): void {
+    this.sitzplaetze = this.ticketform?.get('sitzplatz') as FormArray;
+    this.sitzplaetze.push(this.createTicket());
+  }
+
+  deleteTicket(i: number): void {
+    this.sitzplaetze = this.ticketform?.get('sitzplatz') as FormArray;
+    this.sitzplaetze.removeAt(i);
+  }
+
+  onBuyTickets(): void {}
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
@@ -85,9 +82,9 @@ export class MovieBuyTicketComponent implements OnInit {
     });
 
     this.ticketform = this.formBuilder.group({
-      letter: ['', [Validators.required]],
-      number: ['', [Validators.required]],
+      sitzplatz: this.formBuilder.array([this.createTicket()]),
       drinks: ['', []],
+      snacks: ['', []],
       size: ['', []],
     });
   }
