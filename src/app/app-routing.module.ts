@@ -25,6 +25,11 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
+    path: 'Film_Bearbeiten/:movie_id',
+    component: AddMoviePage,
+    canActivate: [AdminGuard],
+  },
+  {
     path: 'Registrieren',
     component: RegistrierenComponent,
   },
