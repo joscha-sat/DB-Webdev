@@ -70,4 +70,36 @@ export class MovieHttpService {
         })
       );
   }
+
+  updateMovie(
+    movie_id: number,
+    title: string,
+    duration: number,
+    release_year: number,
+    genre: string,
+    fsk: number,
+    image: string,
+    description: string,
+    trailer: string
+  ): void {
+    const Movie_Daten: Movie | FormData = {
+      movie_id,
+      title,
+      duration,
+      release_year,
+      genre,
+      fsk,
+      image: 'assets/' + image,
+      description,
+      trailer,
+    };
+
+    this.http
+      .patch(`http://localhost:3000/updateMovie/'${movie_id}'`, {
+        Movie_Daten,
+      })
+      .subscribe(() => {
+        this.router.navigate(['/Startseite']);
+      });
+  }
 }

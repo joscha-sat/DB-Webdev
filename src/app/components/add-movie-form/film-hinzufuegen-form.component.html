@@ -1,5 +1,6 @@
 <script src="film-hinzufuegen-form.component.ts"></script>
-<app-titel>Film hinzufügen</app-titel>
+<app-titel *ngIf="mode === 'Film_Hinzufuegen'">Film hinzufügen</app-titel>
+<app-titel *ngIf="mode === 'Film_Bearbeiten'">Film bearbeiten</app-titel>
 <form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
   <div class="container is-max-desktop p-5 mt-5">
 
@@ -134,8 +135,8 @@
       <div class="control has-icons-left">
 
         <div class="select">
-          <select class="form-control" formControlName="fks"
-            [ngClass]="{ 'is-invalid': form.get('fks').touched && form.get('fks').invalid }">
+          <select class="form-control" formControlName="fsk"
+            [ngClass]="{ 'is-invalid': form.get('fsk').touched && form.get('fsk').invalid }">
             <option selected>0</option>
             <option>6</option>
             <option>12</option>
@@ -151,7 +152,7 @@
 
     <!-- Error-ALTERSFREIGABE -->
 
-    <div class="error" *ngIf="form.get('fks').touched && form.get('fks').invalid">
+    <div class="error" *ngIf="form.get('fsk').touched && form.get('fsk').invalid">
 
       <div *ngIf="form.get('altersfreigabe').errors.required">
         Altersfreigabe darf nicht leer sein
@@ -256,7 +257,7 @@
 
     <div class="field is-grouped buttons">
       <div class="control block">
-        <button type="submit" [disabled]="!form.valid" class="button is-success">Movie hinzufüen</button>
+        <button type="submit" [disabled]="!form.valid" class="button is-success">speichern</button>
       </div>
       <div class="control block">
         <button routerLink='/Startseite' class="button is-link is-light">Abbrechen</button>

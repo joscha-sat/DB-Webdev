@@ -212,7 +212,7 @@ app.post('/addMovie', (req, res) => {
   const trailer = req.body.movie.trailer;
 
   const sql =
-    'INSERT INTO movie (title, duration, genre, release_year, fks, image, description, trailer)' +
+    'INSERT INTO movie (title, duration, genre, release_year, fsk, image, description, trailer)' +
     'VALUES (?, ? , ?, ?, ?, ?, ?, ?)';
 
   const values = [
@@ -296,6 +296,32 @@ app.delete('/deleteOneMovie/:id', (req, res) => {
       throw err;
     }
     console.log('löschen erfolgreich!');
+    res.send(result);
+  });
+});
+
+// || PATCH Methoden / Daten verändern || ------------------------------------------------------------------------------------------------------------------------ //
+
+app.patch('/updateMovie/:movie_id', (req, res) => {
+  const updatedMovie = {
+    title: req.body.Movie_Daten.title,
+    duration: req.body.Movie_Daten.duration,
+    release_year: req.body.Movie_Daten.release_year,
+    genre: req.body.Movie_Daten.genre,
+    fsk: req.body.Movie_Daten.fsk,
+    image: req.body.Movie_Daten.image,
+    description: req.body.Movie_Daten.description,
+    trailer: req.body.Movie_Daten.trailer,
+  };
+
+  const sql = `UPDATE movie SET ? WHERE movie_id = ${req.params.movie_id}`;
+
+  con.query(sql, updatedMovie, (err, result) => {
+    if (err) {
+      console.log('updaten fehlgeschlagen!');
+      throw err;
+    }
+    console.log('updaten erfolgreich!');
     res.send(result);
   });
 });
