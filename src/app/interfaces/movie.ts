@@ -3,7 +3,7 @@ export interface Movie {
   duration: number;
   title: string;
   release_year: number;
-  fks: number;
+  fsk: number;
   genre: string;
   image: string;
   description: string;
