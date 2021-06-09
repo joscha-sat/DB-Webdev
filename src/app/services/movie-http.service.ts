@@ -52,8 +52,19 @@ export class MovieHttpService {
   }
 
   addMovie(movie: Movie): Observable<Movie> {
+    const movie_data = new FormData();
+
+    movie_data.append('duration', String(movie.duration));
+    movie_data.append('title', movie.title);
+    movie_data.append('release_year', String(movie.release_year));
+    movie_data.append('fsk', String(movie.fsk));
+    movie_data.append('genre', movie.genre);
+    movie_data.append('image', movie.image, movie.title);
+    movie_data.append('description', movie.description);
+    movie_data.append('trailer', movie.trailer);
+
     return this.http
-      .post<Movie>('http://localhost:3000/addMovie', { movie })
+      .post<Movie>('http://localhost:3000/addMovie', movie_data)
       .pipe(
         tap(() => {
           this._updater$.next();
@@ -71,35 +82,34 @@ export class MovieHttpService {
       );
   }
 
-  updateMovie(
-    movie_id: number,
-    title: string,
-    duration: number,
-    release_year: number,
-    genre: string,
-    fsk: number,
-    image: string,
-    description: string,
-    trailer: string
-  ): void {
-    const Movie_Daten: Movie | FormData = {
-      movie_id,
-      title,
-      duration,
-      release_year,
-      genre,
-      fsk,
-      image: 'assets/' + image,
-      description,
-      trailer,
-    };
+  updateMovie(update_Movie: Movie): any {
+    let movie_daten: Movie | FormData;
 
-    this.http
-      .patch(`http://localhost:3000/updateMovie/'${movie_id}'`, {
-        Movie_Daten,
-      })
-      .subscribe(() => {
-        this.router.navigate(['/Startseite']);
-      });
+    if (typeof update_Movie.image === 'object') {
+      movie_daten = new FormData();
+
+      movie_daten.append('movie_id', String(update_Movie.movie_id));
+      movie_daten.append('duration', String(update_Movie.duration));
+      movie_daten.append('title', update_Movie.title);
+      movie_daten.append('release_year', String(update_Movie.release_year));
+      movie_daten.append('fsk', String(update_Movie.fsk));
+      movie_daten.append('genre', update_Movie.genre);
+      movie_daten.append('image', update_Movie.image, update_Movie.title);
+      movie_daten.append('trailer', update_Movie.trailer);
+      movie_daten.append('description', update_Movie.description);
+    } else {
+      movie_daten = update_Movie;
+    }
+
+    return this.http
+      .patch(
+        `http://localhost:3000/updateMovie/'${update_Movie.movie_id}'`,
+        movie_daten
+      )
+      .pipe(
+        tap(() => {
+          this._updater$.next();
+        })
+      );
   }
 }

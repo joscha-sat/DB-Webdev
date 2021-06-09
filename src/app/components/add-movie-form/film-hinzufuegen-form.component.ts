@@ -4,6 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Movie } from 'src/app/interfaces/movie';
 
 import { MovieHttpService } from 'src/app/services/movie-http.service';
+import {mimeType} from './mime-type.validation';
 
 @Component({
   selector: 'app-film-hinzufuegen-form',
@@ -29,8 +30,6 @@ export class FilmHinzufuegenFormComponent implements OnInit {
 
   form: FormGroup;
 
-  selectedImage: File;
-
   preview: string;
 
   // ------------------------------------------------------------------------------------- || Methods ||
@@ -39,49 +38,67 @@ export class FilmHinzufuegenFormComponent implements OnInit {
       return;
     }
     if (this.mode === 'Film_Hinzufuegen') {
-      // Bild lokal im assets Ordner abspeichern
-      this.httpService.uploadImage(this.selectedImage);
-
       const newMovie: Movie = {
         title: this.form.value.title,
         duration: this.form.value.duration,
         release_year: this.form.value.release_year,
         genre: this.form.value.genre,
         fsk: this.form.value.fsk,
-        image: this.selectedImage.name,
+        image: this.form.value.image,
         description: this.form.value.description,
         trailer: this.form.value.trailer,
       };
 
+      this.httpService.addMovie(newMovie).subscribe();
+
       this.form.reset();
       this.router.navigate(['/Startseite']);
-
-      this.httpService.addMovie(newMovie).subscribe();
     } else {
-      this.httpService.updateMovie(
-        this.movie_id,
-        this.form.value.title,
-        this.form.value.duration,
-        this.form.value.release_year,
-        this.form.value.genre,
-        this.form.value.fsk,
-        this.form.value.image,
-        this.form.value.description,
-        this.form.value.trailer
-      );
+      // Film bearbeiten
+
+      const update_movie: Movie = {
+        movie_id: this.movie_id,
+        title: this.form.value.title,
+        duration: this.form.value.duration,
+        release_year: this.form.value.release_year,
+        genre: this.form.value.genre,
+        fsk: this.form.value.fsk,
+        image: this.form.value.image,
+        description: this.form.value.description,
+        trailer: this.form.value.trailer,
+      };
+
+      this.httpService.updateMovie(update_movie).subscribe();
+
+      this.form.reset();
+      this.router.navigate(['/Startseite']);
     }
     this.form.reset();
     this.preview = '';
   }
 
-  onFileChanged(event: Event): void {
-    this.selectedImage = (event.target as HTMLInputElement).files[0];
-    // this.form.patchValue({ image: this.selectedImage }); //storing file - object
+  onImagePicked($event: Event): void {
+    // ausgewählte File holen
+
+    const file = ($event.target as HTMLInputElement).files[0];
+
+    // input File an Form übergeben
+
+    this.form.patchValue({ image: file });
+
+    // form updaten und Validierung prüfen
+
+    this.form.get('image').updateValueAndValidity();
+
+    //  für Image Preview
+
     const reader = new FileReader();
+
     reader.onload = () => {
       this.preview = reader.result as string;
     };
-    reader.readAsDataURL(this.selectedImage);
+
+    reader.readAsDataURL(file);
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
@@ -117,12 +134,10 @@ export class FilmHinzufuegenFormComponent implements OnInit {
             release_year: result[0].release_year,
             genre: result[0].genre,
             fsk: result[0].fsk,
-            image: '',
+            image: result[0].image,
             description: result[0].description,
             trailer: result[0].trailer,
           };
-
-          console.log(this.movie);
 
           this.form.setValue({
             title: this.movie.title,

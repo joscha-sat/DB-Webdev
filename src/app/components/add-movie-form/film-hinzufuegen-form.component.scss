@@ -30,6 +30,6 @@
   object-position: 50% 50%;
 }
 
-.bild {
-  margin-bottom: $margin_4;
+input[type='file'] {
+  visibility: hidden;
 }

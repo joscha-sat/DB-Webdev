@@ -5,7 +5,7 @@ export interface Movie {
   release_year: number;
   fsk: number;
   genre: string;
-  image: string;
-  description: string;
+  image: File | string;
   trailer: string;
+  description: string;
 }

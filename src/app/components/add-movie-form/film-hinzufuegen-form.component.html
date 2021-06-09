@@ -1,7 +1,7 @@
-<script src="film-hinzufuegen-form.component.ts"></script>
+
 <app-titel *ngIf="mode === 'Film_Hinzufuegen'">Film hinzufügen</app-titel>
 <app-titel *ngIf="mode === 'Film_Bearbeiten'">Film bearbeiten</app-titel>
-<form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="container is-max-desktop p-5 mt-5">
 
     <!-- Input-TITEL -->
@@ -222,26 +222,15 @@
     </div>
     <!-- Input-BILD -->
 
-    <div class="form-group bild">
+    <div class="form-group">
       <label>Bild</label>
 
       <div>
         <button class="button" (click)="filePicker.click()" type="button"> Bild hochladen </button>
-        <input type="file" style="visibility: hidden;" formControlName="image" #filePicker
-          (change)="onFileChanged($event)">
-      </div>
-
-
-      <!-- Errors: Bildpfad -->
-
-      <div *ngIf="form.get('image').touched && form.get('image').invalid" class="invalid-feedback">
-
-        <div *ngIf="form.get('image').errors.required">
-          Bild darf nicht leer sein!
-        </div>
-
+        <input type="file" (change)="onImagePicked($event)" #filePicker>
       </div>
     </div>
+
 
     <div *ngIf="preview">
       <div class="label">
@@ -251,13 +240,21 @@
       <img [src]="preview" class="preview" alt="Movie Cover">
     </div>
 
+    <div class="image-preview" *ngIf="form.get('image').invalid">
+
+      invalid Picture!
+
+    </div>
+
+
 
 
     <!-- BUTTONS -->
 
     <div class="field is-grouped buttons">
       <div class="control block">
-        <button type="submit" [disabled]="!form.valid" class="button is-success">speichern</button>
+        <button *ngIf="mode === 'Film_Hinzufuegen'" type="submit" [disabled]="!form.valid" class="button is-success">Film hinzufügen</button>
+        <button *ngIf="mode === 'Film_Bearbeiten'" type="submit" [disabled]="!form.valid" class="button is-success">Änderungen speichern</button>
       </div>
       <div class="control block">
         <button routerLink='/Startseite' class="button is-link is-light">Abbrechen</button>

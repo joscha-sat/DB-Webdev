@@ -66,40 +66,48 @@ app.listen(3000, function () {
 
 // || HTTP - METHODEN || ---------------------------------------------------------------------------------------------------------------------------------------- //
 
-// || POST Methode / Bild-String lokal Speichern || ------------------------------------------------------------------------------------------------------------- //
+// | MULTER | ----------------------------------------------------------------- //
 
-let MIME_TYPE_MAP = {
+// mime type prüfen, nur jpg und png zulassen
+
+const MIME_TYPE_MAP = {
   'image/png': 'png',
+
   'image/jpeg': 'jpg',
+
   'image/jpg': 'jpg',
 };
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const isValid = MIME_TYPE_MAP[file.mimetype]; //null, wenn es kein jpg/png ist
-    let error = new Error('Invalid mime type');
+    // mime type prüfen, ggfalls error ausgeben
+
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+
+    let error = new Error('invalid mime type');
+
     if (isValid) {
       error = null;
     }
+
+    // relativer pfad von server.js zum Ordner, wo die img gespeichert werden sollen
+
     cb(error, 'src/assets');
   },
+
+  // Name des img: nur originalname + file_ending geht auch, aber hier best
+  // practise mit random values sodass keine doppelten Namen passieren können.
+
   filename: (req, file, cb) => {
-    const name = file.originalname;
-    cb(null, name);
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+
+    const file_ending = MIME_TYPE_MAP[file.mimetype];
+
+    cb(null, name + '-' + Date.now() + '.' + file_ending);
   },
 });
 
 const upload = multer({ storage: storage });
-
-app.post('/uploadImage', upload.single('myFile'), (req, res) => {
-  try {
-    return res.status(201).json({
-      message: 'File uploaded successfully',
-    });
-  } catch (error) {
-    console.error(error);
-  }
-});
 
 // || POST Methoden / Daten hochladen || ------------------------------------------------------------------------------------------------------------------------ //
 
@@ -201,32 +209,21 @@ app.post('/login', (req, res) => {
 
 // || FILM HINZUFÜGEN || --------------------------------------------------------------------------------------------------------------------------- //
 
-app.post('/addMovie', (req, res) => {
-  const title = req.body.movie.title;
-  const duration = req.body.movie.duration;
-  const genre = req.body.movie.genre;
-  const release_year = req.body.movie.release_year;
-  const fks = req.body.movie.fsk;
-  const image = 'assets/' + req.body.movie.image;
-  const description = req.body.movie.description;
-  const trailer = req.body.movie.trailer;
+app.post('/addMovie', upload.single('image'), (req, res) => {
+  const movie = {
+    duration: req.body.duration,
+    title: req.body.title,
+    release_year: req.body.release_year,
+    fsk: req.body.fsk,
+    genre: req.body.genre,
+    image: 'assets/' + req.file.filename,
+    trailer: req.body.trailer,
+    description: req.body.description,
+  };
 
-  const sql =
-    'INSERT INTO movie (title, duration, genre, release_year, fsk, image, description, trailer)' +
-    'VALUES (?, ? , ?, ?, ?, ?, ?, ?)';
+  const sql = 'INSERT INTO movie SET ?';
 
-  const values = [
-    title,
-    duration,
-    genre,
-    release_year,
-    fks,
-    image,
-    description,
-    trailer,
-  ];
-
-  con.query(sql, values, (err, result) => {
+  con.query(sql, movie, (err, result) => {
     if (err) {
       console.log('Datenbank-Speicherung fehlgeschlagen!');
       throw err;
@@ -302,21 +299,30 @@ app.delete('/deleteOneMovie/:id', (req, res) => {
 
 // || PATCH Methoden / Daten verändern || ------------------------------------------------------------------------------------------------------------------------ //
 
-app.patch('/updateMovie/:movie_id', (req, res) => {
-  const updatedMovie = {
-    title: req.body.Movie_Daten.title,
-    duration: req.body.Movie_Daten.duration,
-    release_year: req.body.Movie_Daten.release_year,
-    genre: req.body.Movie_Daten.genre,
-    fsk: req.body.Movie_Daten.fsk,
-    image: req.body.Movie_Daten.image,
-    description: req.body.Movie_Daten.description,
-    trailer: req.body.Movie_Daten.trailer,
+app.patch('/updateMovie/:movie_id', upload.single('image'), (req, res) => {
+  let image = req.body.image;
+
+  if (req.file) {
+    image = 'assets/' + req.file.filename;
+  }
+
+  const changedMovie = {
+    movie_id: +req.body.movie_id,
+    duration: +req.body.duration,
+    title: req.body.title,
+    release_year: +req.body.release_year,
+    fsk: +req.body.fsk,
+    genre: req.body.genre,
+    image: image,
+    trailer: req.body.trailer,
+    description: req.body.description,
   };
+
+  console.log(changedMovie);
 
   const sql = `UPDATE movie SET ? WHERE movie_id = ${req.params.movie_id}`;
 
-  con.query(sql, updatedMovie, (err, result) => {
+  con.query(sql, changedMovie, (err, result) => {
     if (err) {
       console.log('updaten fehlgeschlagen!');
       throw err;
