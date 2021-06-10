@@ -6,183 +6,180 @@
   </div>
 
 
-    <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onBuyTickets()">
-      <div class="container is-max-desktop p-5 mt-5">
+  <form [formGroup]="ticketform" (ngSubmit)="ticketform.valid && onBuyTickets()">
+    <div class="container is-max-desktop p-5 mt-5">
 
-        <label class="label">Sitzplatz</label>
+      <label class="label">Sitzplatz</label>
 
-        <div class="flex-container">
-          <div>
-            <img src="assets/kinoplatz/saal.jpg" alt="Kinosaal" style="
+      <div class="flex-container">
+        <div>
+          <img src="assets/kinoplatz/saal.jpg" alt="Kinosaal" style="
                 max-width: 375px;
                 object-fit: cover;
                 object-position: center center;
               " />
-          </div>
-
-          <div class="flex-column">
-
-              <div
-                formArrayName="sitzplatz"
-                *ngFor="let item of ticketform.get('sitzplatz')['controls']; let i = index;"
-              >
-                <div [formGroupName]="i">
-
-                  <label>Reihe</label>
-
-                  <div class="select is-small">
-
-                    <select class="select ml-4" formControlName="reihe">
-                      <option>A</option>
-                      <option>B</option>
-                      <option>C</option>
-                      <option>D</option>
-                      <option>E</option>
-                      <option>F</option>
-                      <option>G</option>
-                      <option>H</option>
-                      <option>I</option>
-                      <option>J</option>
-                    </select>
-                  </div>
-
-
-                  <label class="ml-4">Platz</label>
-                  <div class="select is-small ml-4">
-                    <select formControlName="platz">
-                      <option>1</option>
-                      <option>2</option>
-                      <option>3</option>
-                      <option>4</option>
-                      <option>5</option>
-                      <option>6</option>
-                      <option>7</option>
-                      <option>8</option>
-                      <option>9</option>
-                      <option>10</option>
-                    </select>
-                  </div>
-
-                  <button *ngIf="ticketform.get('sitzplatz')['controls'].length > 1" class="button is-danger is-small ml-4" type="button" (click)="deleteTicket(i)">löschen</button>
-                </div>
-          </div>
-            <div>
-              <button class="button is-info" type="button" (click)="addTicket()">Add Ticket</button>
-            </div>
         </div>
 
-        </div>
+        <div class="flex-column">
+
+          <div formArrayName="sitzplatz" *ngFor="let item of ticketform.get('sitzplatz')['controls']; let i = index;">
+            <div [formGroupName]="i">
+
+              <label>Reihe</label>
+
+              <div class="select is-small">
+
+                <select class="select ml-4" formControlName="reihe">
+                  <option>A</option>
+                  <option>B</option>
+                  <option>C</option>
+                  <option>D</option>
+                  <option>E</option>
+                  <option>F</option>
+                  <option>G</option>
+                  <option>H</option>
+                  <option>I</option>
+                  <option>J</option>
+                </select>
+              </div>
 
 
-        <!-- Input-GETRÄNK -->
+              <label class="ml-4">Platz</label>
+              <div class="select is-small ml-4">
+                <select formControlName="platz">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                </select>
+              </div>
 
-        <div class="field form-group">
-          <div class="flex-container mt-6">
-            <label class="label">Getränk</label>
-            <div class="select is-small">
-              <select class="form-control" formControlName="drinks">
-                <option selected></option>
-                <option>Wasser</option>
-                <option>Cola</option>
-                <option>Fanta</option>
-                <option>Sprite</option>
-                <option>Mezzomix</option>
-                <option>Eistee</option>
-                <option>Becks</option>
-                <option>Prosecco</option>
-                <option>Krombacher Weizen</option>
-                <option>Rose</option>
-              </select>
-            </div>
-
-            <!-- Input-GETRÄNK-GRÖßE -->
-
-            <label class="label">Größe</label>
-            <div class="select is-small">
-              <select class="form-control" formControlName="size">
-                <option selected></option>
-                <option>0,2 Liter</option>
-                <option>0,25 Liter</option>
-                <option>0,33 Liter</option>
-                <option>0,5 Liter</option>
-                <option>0,7 Liter</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Input-SNACKS -->
-
-        <div class="field form-group">
-          <div class="flex-container mt-6">
-            <label class="label">Snack</label>
-            <div class="select is-small">
-              <select class="form-control" formControlName="snacks">
-                <option selected></option>
-                <option>Popcorn süß</option>
-                <option>Popcorn salzig</option>
-                <option>Popcorn Karamell</option>
-                <option>Nachos Plain</option>
-                <option>Nachos Salsa</option>
-                <option>Nachos Käse</option>
-                <option>Nachos Chili</option>
-                <option>M&M's Crispy</option>
-                <option>M&M's Peanut </option>
-                <option>Nic Nac's</option>
-                <option>Utje Erdnüsse</option>
-                <option>Snickers</option>
-                <option>Twix</option>
-                <option>Cornetto Vanile</option>
-                <option>Solero Exotic</option>
-                <option>Solero Himbeere</option>
-                <option>Ben & Jerrys Cookie Dough</option>
-                <option>Ben & Jerrys half baked</option>
-                <option>Ben & Jerrys brownie fudge</option>
-                <option>Ben & Jerrys Dough(vegan)</option>
-              </select>
-            </div>
-
-            <!-- Input-SNACKS-GRÖßE -->
-
-            <label class="label">Größe</label>
-            <div class="select is-small">
-              <select class="form-control" formControlName="size">
-                <option selected></option>
-                <option>35g</option>
-                <option>70g</option>
-                <option>100g</option>
-                <option>150g</option>
-                <option>200g</option>
-                <option>250g</option>
-                <option>300g</option>
-                <option>350g</option>
-              </select>
+              <button *ngIf="ticketform.get('sitzplatz')['controls'].length > 1" class="button is-danger is-small ml-4"
+                type="button" (click)="deleteTicket(i)">löschen</button>
             </div>
           </div>
-        </div>
-
-        <!--    PREIS    -->
-
-        <div class="mt-6">
-          Gesamtpreis:
-        </div>
-
-        <!-- BUTTONS -->
-
-        <div class="field is-grouped buttons">
-          <div class="control block">
-            <button type="submit" [disabled]="!ticketform.valid" class="button is-success">
-              Tickets kaufen
-            </button>
-          </div>
-          <div class="control block">
-            <button routerLink="/Startseite" class="button is-link is-light">
-              Abbrechen
-            </button>
+          <div>
+            <button class="button is-info" type="button" (click)="addTicket()">Add Ticket</button>
           </div>
         </div>
 
       </div>
-    </form>
-  </div>
 
+
+      <!-- Input-GETRÄNK -->
+
+      <div class="field form-group">
+        <div class="flex-container mt-6">
+          <label class="label">Getränk</label>
+          <div class="select is-small">
+            <select class="form-control" formControlName="drinks">
+              <option selected></option>
+              <option>Wasser</option>
+              <option>Cola</option>
+              <option>Fanta</option>
+              <option>Sprite</option>
+              <option>Mezzomix</option>
+              <option>Eistee</option>
+              <option>Becks</option>
+              <option>Prosecco</option>
+              <option>Krombacher Weizen</option>
+              <option>Rose</option>
+            </select>
+          </div>
+
+          <!-- Input-GETRÄNK-GRÖßE -->
+
+          <label class="label">Größe</label>
+          <div class="select is-small">
+            <select class="form-control" formControlName="size">
+              <option selected></option>
+              <option>0,2 Liter</option>
+              <option>0,25 Liter</option>
+              <option>0,33 Liter</option>
+              <option>0,5 Liter</option>
+              <option>0,7 Liter</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input-SNACKS -->
+
+      <div class="field form-group">
+        <div class="flex-container mt-6">
+          <label class="label">Snack</label>
+          <div class="select is-small">
+            <select class="form-control" formControlName="snacks">
+              <option selected></option>
+              <option>Popcorn süß</option>
+              <option>Popcorn salzig</option>
+              <option>Popcorn Karamell</option>
+              <option>Nachos Plain</option>
+              <option>Nachos Salsa</option>
+              <option>Nachos Käse</option>
+              <option>Nachos Chili</option>
+              <option>M&M's Crispy</option>
+              <option>M&M's Peanut </option>
+              <option>Nic Nac's</option>
+              <option>Utje Erdnüsse</option>
+              <option>Snickers</option>
+              <option>Twix</option>
+              <option>Cornetto Vanile</option>
+              <option>Solero Exotic</option>
+              <option>Solero Himbeere</option>
+              <option>Ben & Jerrys Cookie Dough</option>
+              <option>Ben & Jerrys half baked</option>
+              <option>Ben & Jerrys brownie fudge</option>
+              <option>Ben & Jerrys Dough(vegan)</option>
+            </select>
+          </div>
+
+          <!-- Input-SNACKS-GRÖßE -->
+
+          <label class="label">Größe</label>
+          <div class="select is-small">
+            <select class="form-control" formControlName="size">
+              <option selected></option>
+              <option>35g</option>
+              <option>70g</option>
+              <option>100g</option>
+              <option>150g</option>
+              <option>200g</option>
+              <option>250g</option>
+              <option>300g</option>
+              <option>350g</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!--    PREIS    -->
+
+      <div class="mt-6">
+        Gesamtpreis:
+      </div>
+
+      <!-- BUTTONS -->
+
+      <div class="field is-grouped buttons">
+        <div class="control block">
+          <button type="submit" [disabled]="!ticketform.valid" class="button is-success">
+            Tickets kaufen
+          </button>
+        </div>
+        <div class="control block">
+          <button routerLink="/Startseite" class="button is-link is-light">
+            Abbrechen
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

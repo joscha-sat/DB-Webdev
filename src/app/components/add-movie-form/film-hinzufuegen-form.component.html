@@ -1,4 +1,3 @@
-
 <app-titel *ngIf="mode === 'Film_Hinzufuegen'">Film hinzufügen</app-titel>
 <app-titel *ngIf="mode === 'Film_Bearbeiten'">Film bearbeiten</app-titel>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -168,7 +167,8 @@
     <div class="field form-group">
       <label class="label">Beschreibung</label>
       <div class="control has-icons-left block">
-        <textarea class=" input textarea form-control" type="text" placeholder="Beschreibung" formControlName="description"></textarea>
+        <textarea class=" input textarea form-control" type="text" placeholder="Beschreibung"
+          formControlName="description"></textarea>
         <span class="icon is-small is-left">
           <i class="fas fa-align-left"></i>
         </span>
@@ -195,7 +195,7 @@
     <!-- Input-TRAILER -->
 
     <div class="field form-group">
-      <label class="label">Trailer-Link (yt: 'watch?v='  durch 'embed/' ersetzen)</label>
+      <label class="label">Trailer-Link (yt: 'watch?v=' durch 'embed/' ersetzen)</label>
       <div class="control has-icons-left block">
         <input class="input form-control" type="text" placeholder="Trailer-Link" formControlName="trailer">
         <span class="icon is-small is-left">
@@ -253,8 +253,10 @@
 
     <div class="field is-grouped buttons">
       <div class="control block">
-        <button *ngIf="mode === 'Film_Hinzufuegen'" type="submit" [disabled]="!form.valid" class="button is-success">Film hinzufügen</button>
-        <button *ngIf="mode === 'Film_Bearbeiten'" type="submit" [disabled]="!form.valid" class="button is-success">Änderungen speichern</button>
+        <button *ngIf="mode === 'Film_Hinzufuegen'" type="submit" [disabled]="!form.valid"
+          class="button is-success">Film hinzufügen</button>
+        <button *ngIf="mode === 'Film_Bearbeiten'" type="submit" [disabled]="!form.valid"
+          class="button is-success">Änderungen speichern</button>
       </div>
       <div class="control block">
         <button routerLink='/Startseite' class="button is-link is-light">Abbrechen</button>

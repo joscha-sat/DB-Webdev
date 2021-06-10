@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Movie } from 'src/app/interfaces/movie';
 
 import { MovieHttpService } from 'src/app/services/movie-http.service';
-import {mimeType} from './mime-type.validation';
+// import { mimeType } from './mime-type.validation';
 
 @Component({
   selector: 'app-film-hinzufuegen-form',
