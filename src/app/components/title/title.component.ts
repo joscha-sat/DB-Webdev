@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-titel',
-  templateUrl: './titel.component.html',
-  styleUrls: ['./titel.component.scss'],
+  templateUrl: './title.component.html',
+  styleUrls: ['./title.component.scss'],
 })
-export class TitelComponent implements OnInit {
+export class TitleComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

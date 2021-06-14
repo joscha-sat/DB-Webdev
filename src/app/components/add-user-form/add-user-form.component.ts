@@ -6,10 +6,10 @@ import { UserHttpService } from 'src/app/services/user-http.service';
 
 @Component({
   selector: 'app-account-erstellen-form',
-  templateUrl: './account-erstellen-form.component.html',
-  styleUrls: ['./account-erstellen-form.component.scss'],
+  templateUrl: './add-user-form.component.html',
+  styleUrls: ['./add-user-form.component.scss'],
 })
-export class AccountErstellenFormComponent implements OnInit {
+export class AddUserFormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
     private httpService: UserHttpService,

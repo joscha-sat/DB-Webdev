@@ -8,10 +8,10 @@ import { MovieHttpService } from 'src/app/services/movie-http.service';
 
 @Component({
   selector: 'app-film-hinzufuegen-form',
-  templateUrl: './film-hinzufuegen-form.component.html',
-  styleUrls: ['./film-hinzufuegen-form.component.scss'],
+  templateUrl: './add-movie-form.component.html',
+  styleUrls: ['./add-movie-form.component.scss'],
 })
-export class FilmHinzufuegenFormComponent implements OnInit {
+export class AddMovieFormComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
   constructor(
     private httpService: MovieHttpService,

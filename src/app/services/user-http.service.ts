@@ -14,9 +14,9 @@ export class UserHttpService {
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
-  isAuthenticated = false;
+  isAuthenticated: boolean = false;
 
-  isAdmin = false;
+  isAdmin: boolean = false;
 
   token: string | any;
 
@@ -26,9 +26,9 @@ export class UserHttpService {
 
   user: User | any;
 
-  url = 'http://localhost:3000';
+  url: string = 'http://localhost:3000';
 
-  private _updater$ = new Subject<void>();
+  private _updater$: Subject<void> = new Subject<void>();
 
   // ------------------------------------------------------------------------------------- || Getters ||
 

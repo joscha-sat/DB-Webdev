@@ -21,13 +21,13 @@
   object-position: 50% 50%;
 
   border: 1px solid grey;
-  border-radius: var(--border_radius);
+  border-radius: 0.25rem;
 }
 
 /* Das "Gehäuse" / Element in dem die Bilder sind */
 .figure {
-  border-radius: $border_radius;
-  padding: 0.75rem;
+  border-radius: 0.25rem;
+  padding: 0.4rem;
   font-size: 1.2rem;
   text-align: center;
   background-color: var(--card);
