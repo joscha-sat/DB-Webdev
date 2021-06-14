@@ -318,8 +318,6 @@ app.patch('/updateMovie/:movie_id', upload.single('image'), (req, res) => {
     description: req.body.description,
   };
 
-  console.log(changedMovie);
-
   const sql = `UPDATE movie SET ? WHERE movie_id = ${req.params.movie_id}`;
 
   con.query(sql, changedMovie, (err, result) => {

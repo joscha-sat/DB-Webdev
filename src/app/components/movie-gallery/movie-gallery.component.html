@@ -2,7 +2,12 @@
 
 <div class="field">
   <p class="control has-icons-left">
-    <input type="text" class="input is-dark" placeholder="Movie suchen..." [(ngModel)]="search" />
+    <input
+      type="text"
+      class="input is-dark"
+      placeholder="Movie suchen..."
+      [(ngModel)]="search"
+    />
     <span class="icon is-small is-left">
       <i class="fas fa-search"></i>
     </span>
@@ -12,11 +17,9 @@
 <!-- Container: Movie-Galerie || START || -->
 
 <div class="grid">
-
   <figure class="figure" *ngFor="let movie of filteredFilme()">
-
     <div class="images" [routerLink]="['/Details/', movie.movie_id]">
-      <img [src]="movie.image" [alt]='movie.title' />
+      <img [src]="movie.image" [alt]="movie.title" />
     </div>
 
     <figcaption>
@@ -25,16 +28,37 @@
       </div>
 
       <div class="buttons">
-        <button *ngIf="!isAdmin" [routerLink]="['/Details/', movie.movie_id]" class="button is-light">Details</button>
-        <button *ngIf="!isAdmin" [routerLink]="['/Tickets/', movie.movie_id]" class="button is-light">Tickets</button>
+        <button
+          *ngIf="!isAdmin"
+          [routerLink]="['/Details/', movie.movie_id]"
+          class="button is-light"
+        >
+          Details
+        </button>
+        <button
+          *ngIf="!isAdmin"
+          [routerLink]="['/Tickets/', movie.movie_id]"
+          class="button is-light"
+        >
+          Tickets
+        </button>
 
-        <button *ngIf="isAdmin" [routerLink]="['/Film_Bearbeiten', movie.movie_id]"
-          class="button is-info">bearbeiten</button>
-        <button *ngIf="isAdmin" (click)='deleteMovie(movie.movie_id)' class="button is-danger">löschen</button>
-
+        <button
+          *ngIf="isAdmin"
+          [routerLink]="['/Film_Bearbeiten', movie.movie_id]"
+          class="button is-info"
+        >
+          bearbeiten
+        </button>
+        <button
+          *ngIf="isAdmin"
+          (click)="deleteMovie(movie.movie_id)"
+          class="button is-danger"
+        >
+          löschen
+        </button>
       </div>
     </figcaption>
-
   </figure>
 
   <!--  Container: Movie-Galerie || ENDE || -->

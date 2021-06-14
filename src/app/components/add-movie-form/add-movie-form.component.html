@@ -2,14 +2,20 @@
 <app-titel *ngIf="mode === 'Film_Bearbeiten'">Film bearbeiten</app-titel>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="container is-max-desktop p-5 mt-5">
-
     <!-- Input-TITEL -->
 
     <div class="field form-group">
       <label class="label">Film-Titel</label>
       <div class="control black-border has-icons-left block">
-        <input class="input form-control" type="text" placeholder="Film-Titel" formControlName="title"
-          [ngClass]="{ 'is-danger': form.get('title').touched && form.get('title').invalid }">
+        <input
+          class="input form-control"
+          type="text"
+          placeholder="Film-Titel"
+          formControlName="title"
+          [ngClass]="{
+            'is-danger': form.get('title').touched && form.get('title').invalid
+          }"
+        />
         <span class="icon is-small is-left">
           <i class="fas fa-video"></i>
         </span>
@@ -18,15 +24,16 @@
 
     <!-- Error-TITEL -->
 
-    <div class="error" *ngIf="form.get('title').touched && form.get('title').invalid">
-
+    <div
+      class="error"
+      *ngIf="form.get('title').touched && form.get('title').invalid"
+    >
       <div *ngIf="form.get('title').errors.required">
         Movie-Titel darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
-
     </div>
 
     <!-- Input-DAUER -->
@@ -34,8 +41,16 @@
     <div class="field form-group">
       <label class="label">Dauer</label>
       <div class="control has-icons-left block">
-        <input class="input form-control" type="number" placeholder="Dauer in Minuten " formControlName="duration"
-          [ngClass]="{ 'is-danger': form.get('duration').touched && form.get('duration').invalid }">
+        <input
+          class="input form-control"
+          type="number"
+          placeholder="Dauer in Minuten "
+          formControlName="duration"
+          [ngClass]="{
+            'is-danger':
+              form.get('duration').touched && form.get('duration').invalid
+          }"
+        />
         <span class="icon is-small is-left">
           <i class="far fa-clock"></i>
         </span>
@@ -44,15 +59,16 @@
 
     <!-- Error-DAUER -->
 
-    <div class="error" *ngIf="form.get('duration').touched && form.get('duration').invalid">
-
+    <div
+      class="error"
+      *ngIf="form.get('duration').touched && form.get('duration').invalid"
+    >
       <div *ngIf="form.get('duration').errors.required">
         Dauer darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
-
     </div>
 
     <!-- Input-ERSCHEINUNGSJAHR -->
@@ -60,7 +76,12 @@
     <div class="field form-group">
       <label class="label">Erscheinungsjahr</label>
       <div class="control has-icons-left block">
-        <input class="input form-control" type="number" placeholder="Erscheinungsjahr" formControlName="release_year">
+        <input
+          class="input form-control"
+          type="number"
+          placeholder="Erscheinungsjahr"
+          formControlName="release_year"
+        />
         <span class="icon is-small is-left">
           <i class="fas fa-calendar-alt"></i>
         </span>
@@ -69,15 +90,18 @@
 
     <!-- Error-ERSCHEINUNGSJAHR -->
 
-    <div class="error" *ngIf="form.get('release_year').touched && form.get('release_year').invalid">
-
+    <div
+      class="error"
+      *ngIf="
+        form.get('release_year').touched && form.get('release_year').invalid
+      "
+    >
       <div *ngIf="form.get('release_year').errors.required">
         Erscheinungsjahr darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
-
     </div>
 
     <!-- Input-GENRE -->
@@ -85,10 +109,15 @@
     <div class="field form-group">
       <label class="label">Genre</label>
       <div class="control has-icons-left genre">
-
         <div class="select">
-          <select class="form-control" formControlName="genre"
-            [ngClass]="{ 'is-invalid': form.get('genre').touched && form.get('genre').invalid }">
+          <select
+            class="form-control"
+            formControlName="genre"
+            [ngClass]="{
+              'is-invalid':
+                form.get('genre').touched && form.get('genre').invalid
+            }"
+          >
             <option selected>Action</option>
             <option>Abenteuer</option>
             <option>Animation</option>
@@ -114,28 +143,31 @@
 
     <!-- Error-GENRE -->
 
-    <div class="error" *ngIf="form.get('genre').touched && form.get('genre').invalid">
-
+    <div
+      class="error"
+      *ngIf="form.get('genre').touched && form.get('genre').invalid"
+    >
       <div *ngIf="form.get('genre').errors.required">
         Genre darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
-
     </div>
-
-
 
     <!-- Input-ALTERSFREIGABE -->
 
     <div class="field form-group">
       <label class="label">Altersfreigabe</label>
       <div class="control has-icons-left">
-
         <div class="select">
-          <select class="form-control" formControlName="fsk"
-            [ngClass]="{ 'is-invalid': form.get('fsk').touched && form.get('fsk').invalid }">
+          <select
+            class="form-control"
+            formControlName="fsk"
+            [ngClass]="{
+              'is-invalid': form.get('fsk').touched && form.get('fsk').invalid
+            }"
+          >
             <option selected>0</option>
             <option>6</option>
             <option>12</option>
@@ -151,15 +183,16 @@
 
     <!-- Error-ALTERSFREIGABE -->
 
-    <div class="error" *ngIf="form.get('fsk').touched && form.get('fsk').invalid">
-
+    <div
+      class="error"
+      *ngIf="form.get('fsk').touched && form.get('fsk').invalid"
+    >
       <div *ngIf="form.get('altersfreigabe').errors.required">
         Altersfreigabe darf nicht leer sein
         <span class="icon is-small is-left">
           <i class="fas fa-exclamation-triangle"></i>
         </span>
       </div>
-
     </div>
 
     <!-- Input-BESCHREIBUNG -->
@@ -167,8 +200,12 @@
     <div class="field form-group">
       <label class="label">Beschreibung</label>
       <div class="control has-icons-left block">
-        <textarea class=" input textarea form-control" type="text" placeholder="Beschreibung"
-          formControlName="description"></textarea>
+        <textarea
+          class="input textarea form-control"
+          type="text"
+          placeholder="Beschreibung"
+          formControlName="description"
+        ></textarea>
         <span class="icon is-small is-left">
           <i class="fas fa-align-left"></i>
         </span>
@@ -177,8 +214,10 @@
 
     <!-- Error-BESCHREIBUNG -->
 
-    <div class="error" *ngIf="form.get('description').touched && form.get('description').invalid">
-
+    <div
+      class="error"
+      *ngIf="form.get('description').touched && form.get('description').invalid"
+    >
       <div *ngIf="form.get('description').errors.required">
         Beschreibung darf nicht leer sein
         <span class="icon is-small is-left">
@@ -189,15 +228,21 @@
       <div *ngIf="form.get('description').errors.minlength">
         Beschreibung muss mind. 20 Zeichen enthalten.
       </div>
-
     </div>
 
     <!-- Input-TRAILER -->
 
     <div class="field form-group">
-      <label class="label">Trailer-Link (yt: 'watch?v=' durch 'embed/' ersetzen)</label>
+      <label class="label"
+        >Trailer-Link (yt: 'watch?v=' durch 'embed/' ersetzen)</label
+      >
       <div class="control has-icons-left block">
-        <input class="input form-control" type="text" placeholder="Trailer-Link" formControlName="trailer">
+        <input
+          class="input form-control"
+          type="text"
+          placeholder="Trailer-Link"
+          formControlName="trailer"
+        />
         <span class="icon is-small is-left">
           <i class="fas fa-film"></i>
         </span>
@@ -206,8 +251,10 @@
 
     <!-- Error-TRAILER -->
 
-    <div class="error" *ngIf="form.get('trailer').touched && form.get('trailer').invalid">
-
+    <div
+      class="error"
+      *ngIf="form.get('trailer').touched && form.get('trailer').invalid"
+    >
       <div *ngIf="form.get('trailer').errors.required">
         Trailer darf nicht leer sein
         <span class="icon is-small is-left">
@@ -218,7 +265,6 @@
       <div *ngIf="form.get('trailer').errors.minlength">
         Trailer muss mind. 20 Zeichen enthalten.
       </div>
-
     </div>
     <!-- Input-BILD -->
 
@@ -226,42 +272,59 @@
       <label>Bild</label>
 
       <div>
-        <button class="button" (click)="filePicker.click()" type="button"> Bild hochladen </button>
-        <input type="file" (change)="onImagePicked($event)" #filePicker>
+        <button class="button" (click)="filePicker.click()" type="button">
+          Bild hochladen
+        </button>
+        <input type="file" (change)="onImagePicked($event)" #filePicker />
       </div>
     </div>
-
 
     <div *ngIf="preview">
       <div class="label">
         <label> Bild-Vorschau </label>
       </div>
 
-      <img [src]="preview" class="preview" alt="Movie Cover">
+      <img [src]="preview" class="preview" alt="Movie Cover" />
     </div>
 
-    <div class="image-preview" *ngIf="form.get('image').invalid">
-
-      invalid Picture!
-
+    <div
+      class="image-preview error"
+      *ngIf="form.get('image').touched && form.get('image').invalid"
+    >
+      <div *ngIf="form.get('image').errors.required">
+        Bild darf nicht leer sein
+        <span class="icon is-small is-left">
+          <i class="fas fa-exclamation-triangle"></i>
+        </span>
+      </div>
     </div>
-
-
-
 
     <!-- BUTTONS -->
 
     <div class="field is-grouped buttons">
       <div class="control block">
-        <button *ngIf="mode === 'Film_Hinzufuegen'" type="submit" [disabled]="!form.valid"
-          class="button is-success">Film hinzufügen</button>
-        <button *ngIf="mode === 'Film_Bearbeiten'" type="submit" [disabled]="!form.valid"
-          class="button is-success">Änderungen speichern</button>
+        <button
+          *ngIf="mode === 'Film_Hinzufuegen'"
+          type="submit"
+          [disabled]="!form.valid"
+          class="button is-success"
+        >
+          Film hinzufügen
+        </button>
+        <button
+          *ngIf="mode === 'Film_Bearbeiten'"
+          type="submit"
+          [disabled]="!form.valid"
+          class="button is-success"
+        >
+          Änderungen speichern
+        </button>
       </div>
       <div class="control block">
-        <button routerLink='/Startseite' class="button is-link is-light">Abbrechen</button>
+        <button routerLink="/Startseite" class="button is-link is-light">
+          Abbrechen
+        </button>
       </div>
     </div>
-
   </div>
 </form>

@@ -27,20 +27,6 @@ export class MovieHttpService {
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
-  uploadImage(image: File): void {
-    const uploadImageData = new FormData();
-    uploadImageData.append('myFile', image);
-
-    this.http
-      .post('http://localhost:3000/uploadImage', uploadImageData, {
-        reportProgress: true,
-        observe: 'events',
-      })
-      .subscribe((event) => {
-        console.log(event);
-      });
-  }
-
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>('http://localhost:3000/getMovies');
   }
