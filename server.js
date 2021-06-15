@@ -235,6 +235,19 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
 
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
 
+// || Einzelnen USER ABRUFEN-------------------------------------------------------------------------------------------------------------
+app.get('/getUserById/:user_id', (req, res) => {
+  const user_id = req.params.user_id;
+  const sql = `SELECT * FROM user WHERE user_id = '${user_id}' ` ;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+})
 // || ALLE USER ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getUsers', (req, res) => {
@@ -298,6 +311,38 @@ app.delete('/deleteOneMovie/:id', (req, res) => {
 });
 
 // || PATCH Methoden / Daten verändern || ------------------------------------------------------------------------------------------------------------------------ //
+app.patch('/updateUser/:user_id', (req, res) =>{
+  
+
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
+    if (err) {
+      console.log('error');
+      throw err;
+    } else {
+      const changedUser = {
+        user_id: +req.body.user_id,
+        name: req.body.name,
+        email: req.body.email,
+        password: hash,
+        date_of_birth: req.body.date_of_birth
+      };
+      console.log(changedUser);
+      const sql = `UPDATE user SET ? WHERE user_id = ${req.body.user_id}`;
+
+      con.query(sql, changedUser, (err) => {
+        if (err) {
+          console.log('error');
+          throw err;
+        }
+        console.log('updated');
+        return res.status(201).send({
+          message: 'updated',
+        });
+      });
+    }
+  });
+});
+
 
 app.patch('/updateMovie/:movie_id', upload.single('image'), (req, res) => {
   let image = req.body.image;

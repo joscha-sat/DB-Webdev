@@ -8,6 +8,7 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy-ticket.component';
 import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'Film_Bearbeiten/:movie_id',
     component: AddMoviePage,
     canActivate: [AdminGuard],
+  },
+  {
+    path: 'User_Bearbeiten/:user_id',
+    component: UpdateUserComponent,
+    canActivate: [UserGuard],
   },
   {
     path: 'Registrieren',

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
 
@@ -63,6 +64,10 @@ export class UserHttpService {
   registerUser(newUser: User): Observable<User> {
     return this.http.post<User>(this.url + '/register', { newUser });
   }
+  // Get User by Number
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(this.url+ '/getUserById/' + id);
+  }
 
   // || LOGIN || --------------------------------------------------------------------------------------------------------------------------- //
 
@@ -123,7 +128,24 @@ export class UserHttpService {
 
     this.router.navigate(['/Login']);
   }
+  // UPDATE USER ||--------------------------------------------------------------------------------------------------------------------------------------------//
 
+  updateUser(update_User: User): any {
+   
+      
+     
+
+    return this.http
+      .patch(
+        `http://localhost:3000/updateUser/'${update_User.user_id}'`,
+        update_User
+      )
+      .pipe(
+        tap(() => {
+          this._updater$.next();
+        })
+      );
+  }
   // || LOCALSTORAGE + ANGEMELDET BLEIBEN NACH RELOAD || --------------------------------------------------------------------------------------------------------------------------- //
 
   autoAuthUser(): void {

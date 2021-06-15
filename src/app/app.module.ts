@@ -23,6 +23,8 @@ import { SafePipe } from './pipes/safe.pipe';
 import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy-ticket.component';
 import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { UpdateUserPageComponent } from './pages/update-user-page/update-user-page.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { AdminGuard } from './guard/admin.guard';
     MovieDetailsComponent,
     SafePipe,
     MovieBuyTicketComponent,
+    UpdateUserComponent,
+    UpdateUserPageComponent,
   ],
 
   imports: [

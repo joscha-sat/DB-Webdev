@@ -40,6 +40,9 @@
           <a (click)="logout()" class="button is-danger" *ngIf="loggedIn">
             <strong>Logout</strong>
           </a>
+          <a [routerLink]="['/User_Bearbeiten/', user.user_id]" class="button is-danger" *ngIf="loggedIn">
+            <strong>Account</strong>
+          </a>
         </div>
       </div>
     </div>
