@@ -85,20 +85,20 @@ export class MovieBuyTicketComponent implements OnInit {
   }
 
   getFormHasInput(index: number): void {
+    const arrayControl = this.ticketform?.get('snack') as FormArray;
+    const item = arrayControl.at(index);
+
+    if (item.value.snack && item.value.size) {
+      this.formInput.push(1);
+    }
+  }
+
+  getFormHasInput2(index: number): void {
     const arrayControl = this.ticketform?.get('drink') as FormArray;
     const item = arrayControl.at(index);
 
     if (item.value.drink && item.value.size) {
       this.formInput2.push(1);
-    }
-  }
-
-  getFormHasInput2(index: number): void {
-    const arrayControl = this.ticketform?.get('snacks') as FormArray;
-    const item = arrayControl.at(index);
-
-    if (item.value.snack && item.value.size) {
-      this.formInput.push(1);
     }
   }
 

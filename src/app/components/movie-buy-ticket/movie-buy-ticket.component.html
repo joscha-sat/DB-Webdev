@@ -105,7 +105,10 @@
         formArrayName="drink"
         *ngFor="let item of ticketform.get('drink')['controls']; let i = index"
       >
-        <div [formGroupName]="i" (change)="changeInput2(i); getFormHasInput(i)">
+        <div
+          [formGroupName]="i"
+          (change)="changeInput2(i); getFormHasInput2(i)"
+        >
           <label>Getränk</label>
 
           <div class="select is-small ml-4">
@@ -173,7 +176,7 @@
         formArrayName="snack"
         *ngFor="let item of ticketform.get('snack')['controls']; let i = index"
       >
-        <div [formGroupName]="i" (change)="changeInput(i)">
+        <div [formGroupName]="i" (change)="changeInput(i); getFormHasInput(i)">
           <label>Snack</label>
 
           <div class="select is-small ml-4">
