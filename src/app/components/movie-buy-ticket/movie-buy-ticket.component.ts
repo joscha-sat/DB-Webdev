@@ -41,14 +41,14 @@ export class MovieBuyTicketComponent implements OnInit {
 
   ticketform: FormGroup;
 
+  movieId: number;
+
+  loggedIn: boolean = false;
+
   movie = {
     title: '',
     image: '',
   };
-
-  movieId: number;
-
-  loggedIn: boolean = false;
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
@@ -69,64 +69,6 @@ export class MovieBuyTicketComponent implements OnInit {
     }
 
     return sum1 + sum2;
-  }
-
-  getSnack(index: number): void {
-    const arrayControl = this.ticketform?.get('snack') as FormArray;
-    const item = arrayControl.at(index);
-
-    this.httpM
-      .getSnack(item.value.snack, item.value.size)
-      .subscribe((result) => {
-        this.pricesSnacks.push(result[0].price);
-      });
-
-    this.buttonClicked.push(1);
-  }
-
-  getFormHasInput(index: number): void {
-    const arrayControl = this.ticketform?.get('snack') as FormArray;
-    const item = arrayControl.at(index);
-
-    if (item.value.snack && item.value.size) {
-      this.formInput.push(1);
-    }
-  }
-
-  getFormHasInput2(index: number): void {
-    const arrayControl = this.ticketform?.get('drink') as FormArray;
-    const item = arrayControl.at(index);
-
-    if (item.value.drink && item.value.size) {
-      this.formInput2.push(1);
-    }
-  }
-
-  getDrink(index: number): void {
-    const arrayControl = this.ticketform?.get('drink') as FormArray;
-    const item = arrayControl.at(index);
-
-    console.log(item);
-
-    this.httpM
-      .getDrink(item.value.drink, item.value.size)
-      .subscribe((result) => {
-        this.pricesDrinks.push(result[0].price);
-      });
-
-    this.buttonClicked2.push(1);
-  }
-
-  changeInput(i: number): void {
-    this.pricesSnacks.splice(i, 1);
-    this.buttonClicked.splice(i, 1);
-    this.formInput.splice(i, 1);
-  }
-
-  changeInput2(i: number): void {
-    this.pricesDrinks.splice(i, 1);
-    this.buttonClicked2.splice(i, 1);
-    this.formInput2.splice(i, 1);
   }
 
   // | TICKET FORM MANIPULIEREN | ------------------------------- //
@@ -162,10 +104,44 @@ export class MovieBuyTicketComponent implements OnInit {
     this.drinks.push(this.createDrink());
   }
 
+  getDrink(index: number): void {
+    const arrayControl = this.ticketform?.get('drink') as FormArray;
+    const item = arrayControl.at(index);
+
+    console.log(item);
+
+    this.httpM
+      .getDrink(item.value.drink, item.value.size)
+      .subscribe((result) => {
+        this.pricesDrinks.push(result[0].price);
+      });
+
+    this.buttonClicked2.push(1);
+  }
+
   deleteDrink(i: number): void {
     this.drinks = this.ticketform?.get('drink') as FormArray;
     this.drinks.removeAt(i);
 
+    this.pricesDrinks.splice(i, 1);
+    this.buttonClicked2.splice(i, 1);
+    this.formInput2.splice(i, 1);
+  }
+
+  // Prüfe, ob die Form drink bereits input hat, wenn nicht Button "bestätigen" ungültig
+
+  getFormHasInput2(index: number): void {
+    const arrayControl = this.ticketform?.get('drink') as FormArray;
+    const item = arrayControl.at(index);
+
+    if (item.value.drink && item.value.size) {
+      this.formInput2.push(1);
+    }
+  }
+
+  // Prüfe, ob die Form drink nach Input changes nun den vollen Input hat, dann Button "bestätigen" gültig
+
+  changeInput2(i: number): void {
     this.pricesDrinks.splice(i, 1);
     this.buttonClicked2.splice(i, 1);
     this.formInput2.splice(i, 1);
@@ -185,10 +161,42 @@ export class MovieBuyTicketComponent implements OnInit {
     this.snacks.push(this.createSnack());
   }
 
+  getSnack(index: number): void {
+    const arrayControl = this.ticketform?.get('snack') as FormArray;
+    const item = arrayControl.at(index);
+
+    this.httpM
+      .getSnack(item.value.snack, item.value.size)
+      .subscribe((result) => {
+        this.pricesSnacks.push(result[0].price);
+      });
+
+    this.buttonClicked.push(1);
+  }
+
   deleteSnack(i: number): void {
     this.snacks = this.ticketform?.get('snack') as FormArray;
     this.snacks.removeAt(i);
 
+    this.pricesSnacks.splice(i, 1);
+    this.buttonClicked.splice(i, 1);
+    this.formInput.splice(i, 1);
+  }
+
+  // Prüfe, ob die Form snack bereits input hat, wenn nicht Button "bestätigen" ungültig
+
+  getFormHasInput(index: number): void {
+    const arrayControl = this.ticketform?.get('snack') as FormArray;
+    const item = arrayControl.at(index);
+
+    if (item.value.snack && item.value.size) {
+      this.formInput.push(1);
+    }
+  }
+
+  // Prüfe, ob die Form snack nach Input changes nun den vollen Input hat, dann Button "bestätigen" gültig
+
+  changeInput(i: number): void {
     this.pricesSnacks.splice(i, 1);
     this.buttonClicked.splice(i, 1);
     this.formInput.splice(i, 1);
