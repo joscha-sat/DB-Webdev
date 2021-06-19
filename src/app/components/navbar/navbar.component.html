@@ -1,8 +1,13 @@
 <nav class="navbar" role="navigation" aria-label="main navigation" #nav>
-
   <div class="navbar-brand">
-    <a role="button" (click)="navBarItems()" class="navbar-burger" aria-label="menu" aria-expanded="false"
-      data-target="navbarBasicExample">
+    <a
+      role="button"
+      (click)="navBarItems()"
+      class="navbar-burger"
+      aria-label="menu"
+      aria-expanded="false"
+      data-target="navbarBasicExample"
+    >
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -10,38 +15,61 @@
   </div>
 
   <div class="navbar-menu" #navlinks>
-
     <div class="navbar-start">
+      <a class="navbar-item" routerLink="/Startseite"> Startseite </a>
 
-      <a class="navbar-item" routerLink="/Startseite">
-        Startseite
-      </a>
-
-      <a class="navbar-item" routerLink="/Film_Hinzufuegen" *ngIf='isAdmin'>
+      <a class="navbar-item" routerLink="/Film_Hinzufuegen" *ngIf="isAdmin">
         Film Hinzufügen +
       </a>
-
     </div>
 
-
-
     <div class="navbar-end">
-
-      <div class="navbar-item" *ngIf="loggedIn"> hallo {{user.name}}!</div>
+      <div class="navbar-item" *ngIf="loggedIn">hallo {{ user.name }}!</div>
 
       <div class="navbar-item">
         <div class="buttons">
-          <a routerLink="/Registrieren" class="button is-dark" *ngIf="!loggedIn">
+          <a
+            routerLink="/Registrieren"
+            class="button is-dark"
+            *ngIf="!loggedIn"
+          >
             <strong>Registrieren</strong>
           </a>
           <a routerLink="/Login" class="button is-dark" *ngIf="!loggedIn">
             <strong>Einloggen</strong>
           </a>
+
+          <div class="dropdown is-hoverable mr-2" *ngIf="loggedIn">
+            <div class="dropdown-trigger">
+              <button
+                class="button is-info"
+                aria-haspopup="true"
+                aria-controls="dropdown-menu4"
+              >
+                <span>Account</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <a [routerLink]="['/User_Bearbeiten/', user.user_id]"
+                    >Account bearbeiten</a
+                  >
+                </div>
+                <div class="dropdown-item">
+                  <a [routerLink]="['/User_Bearbeiten/', user.user_id]"
+                    >Ticketverlauf ansehen</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
           <a (click)="logout()" class="button is-danger" *ngIf="loggedIn">
             <strong>Logout</strong>
-          </a>
-          <a [routerLink]="['/User_Bearbeiten/', user.user_id]" class="button is-danger" *ngIf="loggedIn">
-            <strong>Account</strong>
           </a>
         </div>
       </div>

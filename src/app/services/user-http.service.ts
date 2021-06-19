@@ -45,10 +45,6 @@ export class UserHttpService {
     return this.isAdmin;
   }
 
-  getToken(): any {
-    return this.token;
-  }
-
   getUser(): User {
     return this.user;
   }
@@ -64,9 +60,10 @@ export class UserHttpService {
   registerUser(newUser: User): Observable<User> {
     return this.http.post<User>(this.url + '/register', { newUser });
   }
+
   // Get User by Number
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.url+ '/getUserById/' + id);
+    return this.http.get<User>(this.url + '/getUserById/' + id);
   }
 
   // || LOGIN || --------------------------------------------------------------------------------------------------------------------------- //
@@ -131,20 +128,17 @@ export class UserHttpService {
   // UPDATE USER ||--------------------------------------------------------------------------------------------------------------------------------------------//
 
   updateUser(update_User: User): any {
-   
-      
-     
-
     return this.http
-      .patch(
-        `http://localhost:3000/updateUser/'${update_User.user_id}'`,
-        update_User
-      )
+      .patch(this.url + '/updateUser/' + update_User.user_id, update_User)
       .pipe(
         tap(() => {
           this._updater$.next();
-          this.clearAuthData();
-          this.loginUser(update_User.email,update_User.password)
+          if (update_User.password.length >= 6) {
+            this.clearAuthData();
+            this.loginUser(update_User.email, update_User.password);
+          } else {
+            this.loginUser(update_User.email, this.getAuthData().user.password);
+          }
         })
       );
   }
