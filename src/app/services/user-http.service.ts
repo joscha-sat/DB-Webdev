@@ -134,29 +134,39 @@ export class UserHttpService {
   // UPDATE USER ||--------------------------------------------------------------------------------------------------------------------------------------------//
 
   updateUser(update_User: User): Observable<User> {
-    return this.http
-      .patch<User>(this.url + '/updateUser/' + update_User.user_id, update_User)
-      .pipe(
-        tap(() => {
-          if (update_User.password.length >= 6) {
-            this.user = update_User;
-            localStorage.setItem('user', JSON.stringify(this.user));
-          } else {
-            const updatedUser = {
-              user_id: this.user.user_id,
-              date_of_birth: this.user.date_of_birth,
-              password: this.user.password,
-              email: update_User.email,
-              name: update_User.name,
-              isAdmin: this.user.isAdmin,
-            };
-            localStorage.setItem('user', JSON.stringify(updatedUser));
-
-            this.user = JSON.parse(localStorage.getItem('user'));
-          }
-          this._updater$.next();
-        })
+    if (update_User.user_id != this.user.user_id) {
+      console.log(
+        'Error: Sie versuchen jmd anderes als Ihren Account zu bearbeiten!'
       );
+      return;
+    } else {
+      return this.http
+        .patch<User>(
+          this.url + '/updateUser/' + update_User.user_id,
+          update_User
+        )
+        .pipe(
+          tap(() => {
+            if (update_User.password.length >= 6) {
+              this.user = update_User;
+              localStorage.setItem('user', JSON.stringify(this.user));
+            } else {
+              const updatedUser = {
+                user_id: this.user.user_id,
+                date_of_birth: this.user.date_of_birth,
+                password: this.user.password,
+                email: update_User.email,
+                name: update_User.name,
+                isAdmin: this.user.isAdmin,
+              };
+              localStorage.setItem('user', JSON.stringify(updatedUser));
+
+              this.user = JSON.parse(localStorage.getItem('user'));
+            }
+            this._updater$.next();
+          })
+        );
+    }
   }
   // || LOCALSTORAGE + ANGEMELDET BLEIBEN NACH RELOAD || --------------------------------------------------------------------------------------------------------------------------- //
 

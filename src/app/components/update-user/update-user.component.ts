@@ -22,7 +22,11 @@ export class UpdateUserComponent implements OnInit {
 
   user_id: number;
 
+  rightPerson: boolean = true;
+
   user: User;
+
+  loggedInUser: User;
 
   onSubmit(): void {
     if (this.form.invalid) {
@@ -43,6 +47,10 @@ export class UpdateUserComponent implements OnInit {
     this.router.navigate(['/Startseite']);
   }
 
+  getLoggedInUser(): void {
+    this.loggedInUser = this.httpService.getUser();
+  }
+
   ngOnInit(): void {
     this.activeRouter.paramMap.subscribe((paramMap) => {
       if (paramMap.has('user_id')) {
@@ -50,6 +58,11 @@ export class UpdateUserComponent implements OnInit {
         console.log(this.user_id);
         this.httpService.getUserById(this.user_id).subscribe((user) => {
           this.user = user[0];
+
+          this.getLoggedInUser();
+          if (this.user.user_id != this.loggedInUser.user_id) {
+            this.rightPerson = false;
+          }
 
           const date = new Date(this.user.date_of_birth);
 
