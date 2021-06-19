@@ -1,11 +1,12 @@
 <!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
 
 <div class="field">
+  <div class="title has-text-grey-light">Film suchen</div>
   <p class="control has-icons-left">
     <input
       type="text"
       class="input is-dark"
-      placeholder="Movie suchen..."
+      placeholder="Film suchen..."
       [(ngModel)]="search"
     />
     <span class="icon is-small is-left">
@@ -14,9 +15,11 @@
   </p>
 </div>
 
+<div class="filme title has-text-grey-light">Filme</div>
+
 <!-- Container: Movie-Galerie || START || -->
 
-<div class="grid">
+<div class="grid mt-4">
   <figure class="figure" *ngFor="let movie of filteredFilme()">
     <div class="images" [routerLink]="['/Details/', movie.movie_id]">
       <img [src]="movie.image" [alt]="movie.title" />
