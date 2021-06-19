@@ -53,7 +53,6 @@ onSubmit(): void{
           this.form.setValue({ 
             name: this.user.name, 
             email: this.user.email,
-            password: this.user.password,
             date_of_birth: this.user.date_of_birth
           });
         } );
