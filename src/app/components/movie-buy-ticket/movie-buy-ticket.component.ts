@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MovieHttpService } from '../../services/movie-http.service';
 import { UserHttpService } from '../../services/user-http.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Movie } from '../../interfaces/movie';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -22,21 +21,57 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
+  pricesSnacks: number[] = [];
+
+  pricesDrinks: number[] = [];
+
   sitzplaetze: FormArray | undefined;
 
-  ticketform: FormGroup;
+  drinks: FormArray | undefined;
 
-  oneMovie: Movie;
+  snacks: FormArray | undefined;
+
+  buttonClicked: number[] = [];
+
+  buttonClicked2: number[] = [];
+
+  formInput: number[] = [];
+
+  formInput2: number[] = [];
+
+  ticketform: FormGroup;
 
   movieId: number;
 
   loggedIn: boolean = false;
+
+  movie = {
+    title: '',
+    image: '',
+  };
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
+
+  getTotalPrice(): number {
+    let sum1 = 0;
+    let sum2 = 0;
+
+    for (let i = 0; i < this.pricesSnacks.length; i++) {
+      sum1 += this.pricesSnacks[i];
+    }
+
+    for (let j = 0; j < this.pricesDrinks.length; j++) {
+      sum2 += this.pricesDrinks[j];
+    }
+
+    return sum1 + sum2;
+  }
+
+  // | TICKET FORM MANIPULIEREN | ------------------------------- //
 
   createTicket(): FormGroup {
     return this.formBuilder.group({
@@ -55,6 +90,118 @@ export class MovieBuyTicketComponent implements OnInit {
     this.sitzplaetze.removeAt(i);
   }
 
+  // | GETRÄNKE FORM MANIPULIEREN | ------------------------------- //
+
+  createDrink(): FormGroup {
+    return this.formBuilder.group({
+      drink: ['', []],
+      size: ['', []],
+    });
+  }
+
+  addDrink(): void {
+    this.drinks = this.ticketform?.get('drink') as FormArray;
+    this.drinks.push(this.createDrink());
+  }
+
+  getDrink(index: number): void {
+    const arrayControl = this.ticketform?.get('drink') as FormArray;
+    const item = arrayControl.at(index);
+
+    console.log(item);
+
+    this.httpM
+      .getDrink(item.value.drink, item.value.size)
+      .subscribe((result) => {
+        this.pricesDrinks.push(result[0].price);
+      });
+
+    this.buttonClicked2.push(1);
+  }
+
+  deleteDrink(i: number): void {
+    this.drinks = this.ticketform?.get('drink') as FormArray;
+    this.drinks.removeAt(i);
+
+    this.pricesDrinks.splice(i, 1);
+    this.buttonClicked2.splice(i, 1);
+    this.formInput2.splice(i, 1);
+  }
+
+  // Prüfe, ob die Form drink bereits input hat, wenn nicht Button "bestätigen" ungültig
+
+  getFormHasInput2(index: number): void {
+    const arrayControl = this.ticketform?.get('drink') as FormArray;
+    const item = arrayControl.at(index);
+
+    if (item.value.drink && item.value.size) {
+      this.formInput2.push(1);
+    }
+  }
+
+  // Prüfe, ob die Form drink nach Input changes nun den vollen Input hat, dann Button "bestätigen" gültig
+
+  changeInput2(i: number): void {
+    this.pricesDrinks.splice(i, 1);
+    this.buttonClicked2.splice(i, 1);
+    this.formInput2.splice(i, 1);
+  }
+
+  // | SNACKS FORM MANIPULIEREN | ------------------------------- //
+
+  createSnack(): FormGroup {
+    return this.formBuilder.group({
+      snack: ['', []],
+      size: ['', []],
+    });
+  }
+
+  addSnack(): void {
+    this.snacks = this.ticketform?.get('snack') as FormArray;
+    this.snacks.push(this.createSnack());
+  }
+
+  getSnack(index: number): void {
+    const arrayControl = this.ticketform?.get('snack') as FormArray;
+    const item = arrayControl.at(index);
+
+    this.httpM
+      .getSnack(item.value.snack, item.value.size)
+      .subscribe((result) => {
+        this.pricesSnacks.push(result[0].price);
+      });
+
+    this.buttonClicked.push(1);
+  }
+
+  deleteSnack(i: number): void {
+    this.snacks = this.ticketform?.get('snack') as FormArray;
+    this.snacks.removeAt(i);
+
+    this.pricesSnacks.splice(i, 1);
+    this.buttonClicked.splice(i, 1);
+    this.formInput.splice(i, 1);
+  }
+
+  // Prüfe, ob die Form snack bereits input hat, wenn nicht Button "bestätigen" ungültig
+
+  getFormHasInput(index: number): void {
+    const arrayControl = this.ticketform?.get('snack') as FormArray;
+    const item = arrayControl.at(index);
+
+    if (item.value.snack && item.value.size) {
+      this.formInput.push(1);
+    }
+  }
+
+  // Prüfe, ob die Form snack nach Input changes nun den vollen Input hat, dann Button "bestätigen" gültig
+
+  changeInput(i: number): void {
+    this.pricesSnacks.splice(i, 1);
+    this.buttonClicked.splice(i, 1);
+    this.formInput.splice(i, 1);
+  }
+
   onBuyTickets(): void {}
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
@@ -68,7 +215,10 @@ export class MovieBuyTicketComponent implements OnInit {
         this.movieId = +paramMap.get('movie_id');
 
         this.httpM.getOneMovie(this.movieId).subscribe((result) => {
-          this.oneMovie = result[0];
+          this.movie = {
+            title: result[0].title,
+            image: result[0].image,
+          };
         });
       }
     });
@@ -83,9 +233,8 @@ export class MovieBuyTicketComponent implements OnInit {
 
     this.ticketform = this.formBuilder.group({
       sitzplatz: this.formBuilder.array([this.createTicket()]),
-      drinks: ['', []],
-      snacks: ['', []],
-      size: ['', []],
+      drink: this.formBuilder.array([this.createDrink()]),
+      snack: this.formBuilder.array([this.createSnack()]),
     });
   }
 }

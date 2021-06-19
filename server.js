@@ -46,6 +46,8 @@ const con = mysql.createConnection({
   user: '21_DB_Grp_2',
   password: `pS!'NWkk5hrb84ijZr3EPJ2+qqd/aV*4`,
   database: '21_DB_Gruppe2',
+
+  multipleStatements: true,
 });
 
 // Connect
@@ -233,6 +235,23 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
   });
 });
 
+// || TICKET KAUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.post('/addTicket', (req, res) => {
+  const ticket = {};
+
+  const sql = 'INSERT INTO movie SET ?';
+
+  con.query(sql, ticket, (err, result) => {
+    if (err) {
+      console.log('Datenbank-Speicherung fehlgeschlagen!');
+      throw err;
+    }
+    console.log('Datenbank-Speicherung erfolgreich!');
+    res.send(result);
+  });
+});
+
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
 
 // || Einzelnen USER ABRUFEN-------------------------------------------------------------------------------------------------------------
@@ -282,6 +301,40 @@ app.get('/getOneMovie/:movie_id', (req, res) => {
   const movie_id = req.params.movie_id;
 
   const sql = `SELECT * FROM movie WHERE movie_id = '${movie_id}' `;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
+// || EIN SNACK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getSnack/:snack_name/:snack_size', (req, res) => {
+  const snack_name = req.params.snack_name;
+  const snack_size = req.params.snack_size;
+
+  const sql = `SELECT price FROM snacks WHERE snack_name = '${snack_name}' AND size = '${snack_size}'`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
+// || EIN DRINK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getDrink/:drink_name/:drink_size', (req, res) => {
+  const drink_name = req.params.drink_name;
+  const drink_size = req.params.drink_size;
+
+  const sql = `SELECT price FROM drinks WHERE drink_name = '${drink_name}' AND size = '${drink_size}'`;
 
   con.query(sql, (err, result) => {
     if (err) {
