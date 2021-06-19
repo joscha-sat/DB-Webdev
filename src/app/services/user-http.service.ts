@@ -27,6 +27,8 @@ export class UserHttpService {
 
   user: User | any;
 
+  hashedPassword: string;
+
   url: string = 'http://localhost:3000';
 
   private _updater$: Subject<void> = new Subject<void>();
@@ -119,6 +121,10 @@ export class UserHttpService {
 
     this.userid = null;
 
+    this.user = null;
+
+    this.hashedPassword = null;
+
     clearTimeout(this.tokenTimer); // setzt den Timer nach Logout zurück
 
     this.clearAuthData(); // Daten aus dem lokalen Speicher löschen
@@ -127,18 +133,28 @@ export class UserHttpService {
   }
   // UPDATE USER ||--------------------------------------------------------------------------------------------------------------------------------------------//
 
-  updateUser(update_User: User): any {
+  updateUser(update_User: User): Observable<User> {
     return this.http
-      .patch(this.url + '/updateUser/' + update_User.user_id, update_User)
+      .patch<User>(this.url + '/updateUser/' + update_User.user_id, update_User)
       .pipe(
         tap(() => {
-          this._updater$.next();
           if (update_User.password.length >= 6) {
-            this.clearAuthData();
-            this.loginUser(update_User.email, update_User.password);
+            this.user = update_User;
+            localStorage.setItem('user', JSON.stringify(this.user));
           } else {
-            this.loginUser(update_User.email, this.getAuthData().user.password);
+            const updatedUser = {
+              user_id: this.user.user_id,
+              date_of_birth: this.user.date_of_birth,
+              password: this.user.password,
+              email: update_User.email,
+              name: update_User.name,
+              isAdmin: this.user.isAdmin,
+            };
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+
+            this.user = JSON.parse(localStorage.getItem('user'));
           }
+          this._updater$.next();
         })
       );
   }

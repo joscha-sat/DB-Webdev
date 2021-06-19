@@ -51,16 +51,18 @@ export class UpdateUserComponent implements OnInit {
         this.httpService.getUserById(this.user_id).subscribe((user) => {
           this.user = user[0];
 
-          const formatDate = (date) => date.toISOString().slice(0, 10);
-
-          const form_date = new Date(this.user.date_of_birth);
-          console.log(form_date);
+          const date = new Date(this.user.date_of_birth);
 
           this.form.setValue({
             name: this.user.name,
             email: this.user.email,
             password: '',
-            date_of_birth: formatDate(form_date),
+            date_of_birth:
+              date.getFullYear() +
+              '-' +
+              (date.getMonth() + 1) +
+              '-' +
+              date.getDate(),
           });
         });
       }
