@@ -51,11 +51,18 @@ export class UpdateUserComponent implements OnInit {
     this.loggedInUser = this.httpService.getUser();
   }
 
+  getMonth(date: Date): string {
+    if (date.getMonth() + 1 < 10) {
+      return '0' + (date.getMonth() + 1);
+    }
+    return (date.getMonth() + 1).toString();
+  }
+
   ngOnInit(): void {
     this.activeRouter.paramMap.subscribe((paramMap) => {
       if (paramMap.has('user_id')) {
         this.user_id = +paramMap.get('user_id');
-        console.log(this.user_id);
+
         this.httpService.getUserById(this.user_id).subscribe((user) => {
           this.user = user[0];
 
@@ -73,7 +80,7 @@ export class UpdateUserComponent implements OnInit {
             date_of_birth:
               date.getFullYear() +
               '-' +
-              (date.getMonth() + 1) +
+              this.getMonth(date) +
               '-' +
               date.getDate(),
           });

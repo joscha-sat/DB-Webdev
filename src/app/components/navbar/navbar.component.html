@@ -59,7 +59,7 @@
                     >Account bearbeiten</a
                   >
                 </div>
-                <div class="dropdown-item">
+                <div class="dropdown-item" *ngIf="!isAdmin">
                   <a>Ticketverlauf ansehen</a>
                 </div>
               </div>
