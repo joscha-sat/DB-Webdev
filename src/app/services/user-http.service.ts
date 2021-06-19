@@ -143,6 +143,8 @@ export class UserHttpService {
       .pipe(
         tap(() => {
           this._updater$.next();
+          this.clearAuthData();
+          this.loginUser(update_User.email,update_User.password)
         })
       );
   }
