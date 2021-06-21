@@ -313,7 +313,7 @@ app.get('/getOneMovie/:movie_id', (req, res) => {
 
 // || EIN SNACK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
-app.get('/getSnack/:snack_name/:snack_size', (req, res) => {
+app.get('/getSnackPrice/:snack_name/:snack_size', (req, res) => {
   const snack_name = req.params.snack_name;
   const snack_size = req.params.snack_size;
 
@@ -328,13 +328,45 @@ app.get('/getSnack/:snack_name/:snack_size', (req, res) => {
   });
 });
 
+// || SNACK-GRÖßEN ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getSnackSizes/:snack_name', (req, res) => {
+  const snack_name = req.params.snack_name;
+
+  const sql = `SELECT size FROM snacks WHERE snack_name = '${snack_name}'`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
 // || EIN DRINK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
-app.get('/getDrink/:drink_name/:drink_size', (req, res) => {
+app.get('/getDrinkPrice/:drink_name/:drink_size', (req, res) => {
   const drink_name = req.params.drink_name;
   const drink_size = req.params.drink_size;
 
   const sql = `SELECT price FROM drinks WHERE drink_name = '${drink_name}' AND size = '${drink_size}'`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
+// || GETRÄNK-GRÖßEN ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getDrinkSizes/:drink_name', (req, res) => {
+  const drink_name = req.params.drink_name;
+
+  const sql = `SELECT size FROM drinks WHERE drink_name = '${drink_name}'`;
 
   con.query(sql, (err, result) => {
     if (err) {

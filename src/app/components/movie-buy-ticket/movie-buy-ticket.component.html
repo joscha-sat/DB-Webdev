@@ -112,7 +112,11 @@
           <label>Getränk</label>
 
           <div class="select is-small ml-4">
-            <select class="form-control" formControlName="drink">
+            <select
+              class="form-control"
+              formControlName="drink"
+              (change)="getDrinkSizes(i)"
+            >
               <option selected></option>
               <option>Wasser</option>
               <option>Cola</option>
@@ -123,7 +127,6 @@
               <option>Becks</option>
               <option>Prosecco</option>
               <option>Krombacher Weizen</option>
-              <option>Rose</option>
             </select>
           </div>
 
@@ -132,11 +135,9 @@
           <div class="select is-small ml-4">
             <select class="form-control" formControlName="size">
               <option selected></option>
-              <option>0.2 Liter</option>
-              <option>0.25 Liter</option>
-              <option>0.33 Liter</option>
-              <option>0.5 Liter</option>
-              <option>0.7 Liter</option>
+              <option *ngFor="let drink of drinkSizes">
+                {{ drink.size }}
+              </option>
             </select>
           </div>
 
@@ -180,28 +181,31 @@
           <label>Snack</label>
 
           <div class="select is-small ml-4">
-            <select class="form-control" formControlName="snack">
+            <select
+              class="form-control"
+              formControlName="snack"
+              (change)="getSnackSizes(i)"
+            >
               <option selected></option>
               <option>Popcorn süß</option>
               <option>Popcorn salzig</option>
-              <option>Popcorn Karamell</option>
+              <option>Popcorn karamell</option>
               <option>Nachos Plain</option>
               <option>Nachos Salsa</option>
               <option>Nachos Käse</option>
               <option>Nachos Chili</option>
-              <option>M&M's Crispy</option>
-              <option>M&M's Peanut</option>
-              <option>Nic Nac's</option>
-              <option>Utje Erdnüsse</option>
+              <option>M&Ms Crispy</option>
+              <option>M&Ms Peanut</option>
+              <option>Ültje Erdnüsse</option>
               <option>Snickers</option>
               <option>Twix</option>
-              <option>Cornetto Vanile</option>
-              <option>Solero Exotic</option>
-              <option>Solero Himbeere</option>
+              <option>Mars</option>
+              <option>Bounty</option>
+              <option>Cornetto Erdbeer</option>
+              <option>Cornetto Schoko</option>
+              <option>Cornetto Vanille</option>
               <option>Ben & Jerrys Cookie Dough</option>
-              <option>Ben & Jerrys half baked</option>
-              <option>Ben & Jerrys brownie fudge</option>
-              <option>Ben & Jerrys Dough(vegan)</option>
+              <option>Ben & Jerrys Cookie Dough vegan</option>
             </select>
           </div>
 
@@ -210,14 +214,9 @@
           <div class="select is-small ml-4">
             <select class="form-control" formControlName="size">
               <option selected></option>
-              <option>35g</option>
-              <option>70g</option>
-              <option>100g</option>
-              <option>150g</option>
-              <option>200g</option>
-              <option>250g</option>
-              <option>300g</option>
-              <option>350g</option>
+              <option *ngFor="let snack of snackSizes">
+                {{ snack.size }}
+              </option>
             </select>
           </div>
 

@@ -3,6 +3,8 @@ import { MovieHttpService } from '../../services/movie-http.service';
 import { UserHttpService } from '../../services/user-http.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Drink } from '../../interfaces/drink';
+import { Snack } from '../../interfaces/snack';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -28,6 +30,10 @@ export class MovieBuyTicketComponent implements OnInit {
   sitzplaetze: FormArray | undefined;
 
   drinks: FormArray | undefined;
+
+  snackSizes: Snack[] = [];
+
+  drinkSizes: Drink[] = [];
 
   snacks: FormArray | undefined;
 
@@ -108,8 +114,6 @@ export class MovieBuyTicketComponent implements OnInit {
     const arrayControl = this.ticketform?.get('drink') as FormArray;
     const item = arrayControl.at(index);
 
-    console.log(item);
-
     this.httpM
       .getDrink(item.value.drink, item.value.size)
       .subscribe((result) => {
@@ -126,6 +130,15 @@ export class MovieBuyTicketComponent implements OnInit {
     this.pricesDrinks.splice(i, 1);
     this.buttonClicked2.splice(i, 1);
     this.formInput2.splice(i, 1);
+  }
+
+  getDrinkSizes(index: number): void {
+    const arrayControl = this.ticketform?.get('drink') as FormArray;
+    const item = arrayControl.at(index);
+
+    this.httpM.getDrinkSizes(item.value.drink).subscribe((result) => {
+      this.drinkSizes = result;
+    });
   }
 
   // Prüfe, ob die Form drink bereits input hat, wenn nicht Button "bestätigen" ungültig
@@ -181,6 +194,15 @@ export class MovieBuyTicketComponent implements OnInit {
     this.pricesSnacks.splice(i, 1);
     this.buttonClicked.splice(i, 1);
     this.formInput.splice(i, 1);
+  }
+
+  getSnackSizes(index: number): void {
+    const arrayControl = this.ticketform?.get('snack') as FormArray;
+    const item = arrayControl.at(index);
+
+    this.httpM.getSnackSizes(item.value.snack).subscribe((result) => {
+      this.snackSizes = result;
+    });
   }
 
   // Prüfe, ob die Form snack bereits input hat, wenn nicht Button "bestätigen" ungültig
