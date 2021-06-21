@@ -6,8 +6,12 @@ import { Movie } from '../interfaces/movie';
 })
 export class ArrayFilterService {
   filteredFilmTitel(array: Array<any>, search: string): Array<Movie> {
-    return array.filter((filme: any) => {
-      return filme.title.toLowerCase().match(search.toLowerCase());
-    });
+    if (!search) {
+      return array;
+    } else {
+      return array.filter((filme: any) => {
+        return filme.title.toLowerCase().match(search.toLowerCase());
+      });
+    }
   }
 }
