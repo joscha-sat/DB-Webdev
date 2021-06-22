@@ -29,6 +29,10 @@ export class MovieBuyTicketComponent implements OnInit {
 
   //
 
+  clicked = false;
+
+  //
+
   snacksPrice: number;
 
   snacksList: Snack[] = [];
@@ -71,16 +75,16 @@ export class MovieBuyTicketComponent implements OnInit {
       !this.ticketform.get('snack_size').value
     ) {
       this.snacksPrice = 0;
-      return;
+    } else {
+      this.httpM
+        .getSnackPrices(
+          this.ticketform.get('snack_name').value,
+          this.ticketform.get('snack_size').value
+        )
+        .subscribe((result) => {
+          this.snacksPrice = result[0].price;
+        });
     }
-    this.httpM
-      .getSnackPrices(
-        this.ticketform.get('snack_name').value,
-        this.ticketform.get('snack_size').value
-      )
-      .subscribe((result) => {
-        this.snacksPrice = result[0].price;
-      });
   }
 
   getSnackSize(): void {
@@ -112,16 +116,16 @@ export class MovieBuyTicketComponent implements OnInit {
       !this.ticketform.get('drink_size').value
     ) {
       this.drinksPrice = 0;
-      return;
+    } else {
+      this.httpM
+        .getDrinkPrices(
+          this.ticketform.get('drink_name').value,
+          this.ticketform.get('drink_size').value
+        )
+        .subscribe((result) => {
+          this.drinksPrice = result[0].price;
+        });
     }
-    this.httpM
-      .getDrinkPrices(
-        this.ticketform.get('drink_name').value,
-        this.ticketform.get('drink_size').value
-      )
-      .subscribe((result) => {
-        this.drinksPrice = result[0].price;
-      });
   }
 
   getDrinkSize(): void {
@@ -138,15 +142,39 @@ export class MovieBuyTicketComponent implements OnInit {
       });
   }
 
+  // | SONSTIGE | ////////////////////////////////////////////////////////////////////////////////
+
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
 
-  getTotalPrice(): number {
+  getTotalPriceSnackAndDrinks(): number {
+    if (!this.snacksPrice && !this.drinksPrice) {
+      return 0;
+    }
+    if (this.snacksPrice && !this.drinksPrice) {
+      return this.snacksPrice;
+    }
+    if (!this.snacksPrice && this.drinksPrice) {
+      return this.drinksPrice;
+    }
     return this.snacksPrice + this.drinksPrice;
   }
 
-  onBuyTickets(): void {}
+  getTotalPrice(): number {
+    if (
+      this.ticketform.get('reihe').value &&
+      this.ticketform.get('platz').value
+    ) {
+      return this.getTotalPriceSnackAndDrinks() + 10;
+    } else {
+      return this.getTotalPriceSnackAndDrinks();
+    }
+  }
+
+  onBuyTickets(): void {
+    this.clicked = true;
+  }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
@@ -186,6 +214,8 @@ export class MovieBuyTicketComponent implements OnInit {
       snack_size: null,
       drink_name: null,
       drink_size: null,
+      tag: [null, Validators.required],
+      uhrzeit: [null, Validators.required],
     });
   }
 }

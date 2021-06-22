@@ -1,6 +1,6 @@
-<app-titel> Tickets für: {{ movie.title }} </app-titel>
+<app-titel *ngIf="!clicked"> Ticket für: {{ movie.title }} </app-titel>
 
-<div class="all-container">
+<div class="all-container" *ngIf="!clicked">
   <div class="movie_image">
     <img [src]="movie.image" [alt]="movie.title" />
   </div>
@@ -97,7 +97,7 @@
 
       <!--  INPUT SNACK    -->
 
-      <div class="form-group">
+      <div class="form-group snack">
         <label>Snack</label>
 
         <div class="select is-small">
@@ -136,7 +136,7 @@
 
       <!--  INPUT GETRÄNK    -->
 
-      <div class="form-group">
+      <div class="form-group drinks">
         <label>Getränk</label>
 
         <div class="select is-small">
@@ -173,26 +173,45 @@
 
       <hr />
 
+      <div class="form-group">
+        <label>Tag</label>
+        <input class="ml-4" type="date" formControlName="tag" />
+
+        <label class="ml-4">Uhrzeit</label>
+        <div class="select is-small ml-4">
+          <select class="select" formControlName="uhrzeit">
+            <option selected></option>
+            <option>18:00 Uhr</option>
+            <option>19:00 Uhr</option>
+            <option>20:00 Uhr</option>
+            <option>21:00 Uhr</option>
+            <option>22:00 Uhr</option>
+            <option>23:00 Uhr</option>
+          </select>
+        </div>
+      </div>
+
+      <hr />
+
       <!--    PREIS    -->
 
       <div class="mt-6">
-        Gesamtpreis:
-        <span class="ml-2" *ngIf="getTotalPrice() > 0">
-          {{ getTotalPrice() }}</span
+        <span class="subtitle has-text-light">Gesamtpreis:</span>
+        <span class="ml-2 subtitle has-text-light" *ngIf="getTotalPrice() > 0">
+          {{ getTotalPrice() }} €</span
         >
-        <span *ngIf="getTotalPrice()">€</span>
       </div>
 
       <!-- BUTTONS -->
 
-      <div class="field is-grouped buttons">
+      <div class="field is-grouped buttons" *ngIf="!clicked">
         <div class="control block">
           <button
             type="submit"
-            [disabled]="!ticketform.valid"
+            [disabled]="!ticketform.valid || clicked"
             class="button is-success"
           >
-            Tickets kaufen
+            Ticket kaufen
           </button>
         </div>
         <div class="control block">
@@ -203,4 +222,49 @@
       </div>
     </div>
   </form>
+</div>
+
+<!-- nachm Kauf-->
+<div class="is-flex is-justify-content-center mt-4" *ngIf="clicked">
+  <div class="kaufnachricht">
+    <div>Film: {{ movie.title }}</div>
+    <div class="mt-4">
+      Sitzplatz: Reihe
+      {{
+        ticketform.get('reihe').value +
+          ' ' +
+          '/' +
+          ' ' +
+          'Platz' +
+          ' ' +
+          ticketform.get('platz').value
+      }}
+    </div>
+
+    <div class="mt-4">
+      Snack:
+      <span *ngIf="ticketform.get('snack_name').value">
+        {{ ticketform.get('snack_name').value }}
+      </span>
+      <span *ngIf="!ticketform.get('snack_name').value"> kein Snack </span>
+    </div>
+
+    <div class="mt-4">
+      Getränk:
+      <span *ngIf="ticketform.get('drink_name').value">
+        {{ ticketform.get('drink_name').value }}
+      </span>
+      <span *ngIf="!ticketform.get('drink_name').value"> kein Getränk </span>
+    </div>
+
+    <div class="mt-4">Tag: {{ ticketform.get('tag').value }}</div>
+    <div class="mt-4">Uhrzeit: {{ ticketform.get('uhrzeit').value }}</div>
+
+    <div class="subtitle has-text-success mt-6">
+      Ticket erfolgreich gekauft!
+      <span>
+        <i class="fas fa-check ml-1"></i>
+      </span>
+    </div>
+  </div>
 </div>

@@ -55,10 +55,22 @@
   margin-left: $margin_5;
 }
 
-.form-group {
+.snack,
+.drinks {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.kaufnachricht {
+  display: flex;
+  flex-direction: column;
+  max-width: 50%;
+  place-content: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--border_radius);
+  padding: 2rem;
 }

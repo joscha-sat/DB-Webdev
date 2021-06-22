@@ -9,6 +9,7 @@ import { MovieBuyTicketComponent } from './components/movie-buy-ticket/movie-buy
 import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
+import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-page.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,7 @@ const routes: Routes = [
   },
   {
     path: 'Tickets/:movie_id',
-    component: MovieBuyTicketComponent,
+    component: BuyPageComponent,
     canActivate: [UserGuard],
   },
 ];
