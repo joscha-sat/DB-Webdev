@@ -21,6 +21,8 @@ export class MovieHttpService {
 
   movie_id: number;
 
+  genre: boolean = false;
+
   private _updater$ = new Subject<void>();
 
   get updater$(): Subject<void> {
@@ -34,6 +36,8 @@ export class MovieHttpService {
   }
 
   getMoviesByGenre(genre: string): Observable<Movie[]> {
+    this.genre = genre !== 'reset';
+
     return this.http.get<Movie[]>(
       'http://localhost:3000/getMoviesByGenre/' + genre
     );

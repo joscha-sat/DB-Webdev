@@ -17,6 +17,8 @@ export class StartseiteComponent implements OnInit {
 
   search: string = '';
 
+  genre: string;
+
   // ------------------------------------------------------------------------------------- || Methods ||
 
   getAllMovies(): void {
@@ -24,6 +26,8 @@ export class StartseiteComponent implements OnInit {
   }
 
   genreFilteredFilme(genre: string): void {
+    this.genre = genre;
+
     this.http.getMoviesByGenre(genre).subscribe((film) => {
       this.filme = film;
     });
@@ -44,10 +48,6 @@ export class StartseiteComponent implements OnInit {
       this.getAllMovies();
     });
 
-    this.http.getMoviesByGenre('reset').subscribe((film) => {
-      this.filme = film;
-    });
-
-    this.getAllMovies();
+    this.genreFilteredFilme('reset');
   }
 }

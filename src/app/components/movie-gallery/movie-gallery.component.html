@@ -75,11 +75,20 @@
   ></app-genre-filter-button>
 </div>
 
-<div class="width70 title has-text-grey-light mt-4">Filme</div>
+<div
+  class="width70 title has-text-grey-light mt-4"
+  *ngIf="getGenreBoolean() && filteredFilme().length > 0"
+>
+  {{ filteredFilme()[0].genre }} Filme
+</div>
+
+<div class="width70 title has-text-grey-light mt-4" *ngIf="!getGenreBoolean()">
+  Alle Filme
+</div>
 
 <!-- Container: Movie-Galerie || START || -->
 
-<div class="grid mt-4" *ngIf="array.length">
+<div class="grid mt-4">
   <!--  <h1>{{ genreFilteredMovies[0].genre }} Filme</h1>-->
 
   <figure class="figure mb-6" *ngFor="let movie of filteredFilme()">
@@ -129,6 +138,6 @@
   <!--  Container: Movie-Galerie || ENDE || -->
 </div>
 
-<div class="width70 mt-4" *ngIf="!array.length">
+<div class="width70 mt-4" *ngIf="!filteredFilme().length">
   Derzeit gibt es keine Filme mit Ihren gewünschten Genre!
 </div>

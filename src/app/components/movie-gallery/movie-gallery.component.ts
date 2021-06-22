@@ -21,6 +21,10 @@ export class MovieGalleryComponent implements OnInit {
 
   isAdmin = false;
 
+  getGenreBoolean(): boolean {
+    return this.httpService.genre;
+  }
+
   // ------------------------------------------------------------------------------------- || Methods ||
 
   getIsAdmin(): void {
