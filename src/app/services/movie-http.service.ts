@@ -111,11 +111,19 @@ export class MovieHttpService {
       );
   }
 
-  getSnack(snack_name: string, snack_size: string): Observable<Snack> {
+  // SNACKS ----------------------------------------------------------------------------------//
+
+  getSnacks(): Observable<Snack[]> {
+    return this.http.get<Snack[]>(`http://localhost:3000/getSnacks`).pipe(
+      tap(() => {
+        this._updater$.next();
+      })
+    );
+  }
+
+  getSnackPrices(name: string, size: string): Observable<Snack> {
     return this.http
-      .get<Snack>(
-        `http://localhost:3000/getSnackPrice/${snack_name}/${snack_size}`
-      )
+      .get<Snack>(`http://localhost:3000/getSnackPrice/${name}/${size}`)
       .pipe(
         tap(() => {
           this._updater$.next();
@@ -133,9 +141,19 @@ export class MovieHttpService {
       );
   }
 
-  getDrink(drink: string, size: string): Observable<Drink> {
+  // DRINKS ----------------------------------------------------------------------------------//
+
+  getDrinks(): Observable<Drink[]> {
+    return this.http.get<Drink[]>(`http://localhost:3000/getDrinks`).pipe(
+      tap(() => {
+        this._updater$.next();
+      })
+    );
+  }
+
+  getDrinkPrices(name: string, size: string): Observable<Drink> {
     return this.http
-      .get<Drink>(`http://localhost:3000/getDrinkPrice/${drink}/${size}`)
+      .get<Drink>(`http://localhost:3000/getDrinkPrice/${name}/${size}`)
       .pipe(
         tap(() => {
           this._updater$.next();

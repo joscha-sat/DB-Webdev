@@ -372,6 +372,20 @@ app.get('/getSnackSizes/:snack_name', (req, res) => {
   });
 });
 
+// || SNACK-NAMEN ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getSnacks', (req, res) => {
+  const sql = `SELECT DISTINCT snack_name FROM snacks `;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
 // || EIN DRINK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getDrinkPrice/:drink_name/:drink_size', (req, res) => {
@@ -395,6 +409,20 @@ app.get('/getDrinkSizes/:drink_name', (req, res) => {
   const drink_name = req.params.drink_name;
 
   const sql = `SELECT size FROM drinks WHERE drink_name = '${drink_name}'`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
+// || DRINK-NAMEN ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getDrinks', (req, res) => {
+  const sql = `SELECT DISTINCT drink_name FROM drinks`;
 
   con.query(sql, (err, result) => {
     if (err) {
