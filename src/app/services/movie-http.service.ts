@@ -33,6 +33,12 @@ export class MovieHttpService {
     return this.http.get<Movie[]>('http://localhost:3000/getMovies');
   }
 
+  getMoviesByGenre(genre: string): Observable<Movie[]> {
+    return this.http.get<Movie[]>(
+      'http://localhost:3000/getMoviesByGenre/' + genre
+    );
+  }
+
   getOneMovie(movie_id: number): Observable<Movie> {
     return this.http.get<Movie>(
       'http://localhost:3000/getOneMovie/' + movie_id

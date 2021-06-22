@@ -31,15 +31,15 @@ export class MovieGalleryComponent implements OnInit {
     return this.suchenService.filteredFilmTitel(this.array, this.search);
   }
 
+  deleteMovie(id: number): void {
+    this.httpService.deleteOneMovie(id).subscribe();
+  }
+
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
   @Input() search: string = '';
 
-  @Input() array: [];
-
-  deleteMovie(id: number): void {
-    this.httpService.deleteOneMovie(id).subscribe();
-  }
+  @Input() array: Movie[];
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {

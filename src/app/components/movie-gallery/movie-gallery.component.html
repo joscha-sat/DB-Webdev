@@ -1,6 +1,6 @@
 <!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
 
-<div class="field">
+<div class="width70 mt-3">
   <div class="title has-text-grey-light">Film suchen</div>
   <p class="control has-icons-left">
     <input
@@ -15,12 +15,74 @@
   </p>
 </div>
 
-<div class="filme title has-text-grey-light">Filme</div>
+<div class="width70 mt-4">
+  <div class="title has-text-grey-light">Nach Genre filtern</div>
+
+  <app-genre-filter-button
+    [genreName]="'Action'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Abenteuer'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Animation'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Drama'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Horror'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Komödie'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Krimi'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Liebe'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Science-Fiction'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Thriller'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Western'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Fantasy'"
+    [color]="'is-primary'"
+  ></app-genre-filter-button>
+</div>
+
+<div class="width70 mt-3">
+  <app-genre-filter-button
+    [genreName]="'reset'"
+    [color]="'is-danger'"
+  ></app-genre-filter-button>
+</div>
+
+<div class="width70 title has-text-grey-light mt-4">Filme</div>
 
 <!-- Container: Movie-Galerie || START || -->
 
-<div class="grid mt-4">
-  <figure class="figure" *ngFor="let movie of filteredFilme()">
+<div class="grid mt-4" *ngIf="array.length">
+  <!--  <h1>{{ genreFilteredMovies[0].genre }} Filme</h1>-->
+
+  <figure class="figure mb-6" *ngFor="let movie of filteredFilme()">
     <div class="images" [routerLink]="['/Details/', movie.movie_id]">
       <img [src]="movie.image" [alt]="movie.title" />
     </div>
@@ -65,4 +127,8 @@
   </figure>
 
   <!--  Container: Movie-Galerie || ENDE || -->
+</div>
+
+<div class="width70 mt-4" *ngIf="!array.length">
+  Derzeit gibt es keine Filme mit Ihren gewünschten Genre!
 </div>

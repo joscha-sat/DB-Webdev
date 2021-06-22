@@ -25,6 +25,7 @@ import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { UpdateUserPageComponent } from './pages/update-user-page/update-user-page.component';
+import { GenreFilterButtonComponent } from './components/genre-filter-button/genre-filter-button.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { UpdateUserPageComponent } from './pages/update-user-page/update-user-pa
     MovieBuyTicketComponent,
     UpdateUserComponent,
     UpdateUserPageComponent,
+    GenreFilterButtonComponent,
   ],
 
   imports: [

@@ -295,6 +295,34 @@ app.get('/getMovies', (req, res) => {
   });
 });
 
+// || ALLE  FILME MIT EINEM GENRE ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getMoviesByGenre/:genre', (req, res) => {
+  const genre = req.params.genre;
+
+  if (genre === 'reset') {
+    const sql = `SELECT * FROM movie`;
+
+    con.query(sql, (err, result) => {
+      if (err) {
+        console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+        throw err;
+      }
+      res.send(result);
+    });
+  } else {
+    const sql = `SELECT * FROM movie WHERE genre = '${genre}' `;
+
+    con.query(sql, (err, result) => {
+      if (err) {
+        console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+        throw err;
+      }
+      res.send(result);
+    });
+  }
+});
+
 // || EINEN FILM ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getOneMovie/:movie_id', (req, res) => {
