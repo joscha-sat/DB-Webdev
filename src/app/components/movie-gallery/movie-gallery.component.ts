@@ -7,7 +7,7 @@ import { UserHttpService } from '../../services/user-http.service';
 @Component({
   selector: 'app-movie-gallery',
   templateUrl: './movie-gallery.component.html',
-  styleUrls: ['./movie-gallery.component.scss'],
+  styleUrls: ['./movie-gallery.component.scss']
 })
 export class MovieGalleryComponent implements OnInit {
   // --------------------------------------------------------------------------------- || Constructor ||
@@ -15,9 +15,11 @@ export class MovieGalleryComponent implements OnInit {
     private suchenService: ArrayFilterService,
     private httpService: MovieHttpService,
     private httpU: UserHttpService
-  ) {}
+  ) {
+  }
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
+  genreFilteredMovies: Movie[] = [];
 
   isAdmin = false;
 
@@ -31,6 +33,17 @@ export class MovieGalleryComponent implements OnInit {
     return this.suchenService.filteredFilmTitel(this.array, this.search);
   }
 
+  genreFilteredFilme(genre: string) {
+
+    this.httpService.getMoviesByGenre(genre).subscribe((film) => {
+
+      this.genreFilteredMovies = film;
+    });
+  }
+
+  resetGenres():void {
+    this.genreFilteredMovies=[];
+  }
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
   @Input() search: string = '';
@@ -39,7 +52,7 @@ export class MovieGalleryComponent implements OnInit {
 
   deleteMovie(id: number): void {
     this.httpService.deleteOneMovie(id).subscribe();
-  }
+  };
 
   // ------------------------------------------------------------------------------------ || ngOnInit ||
   ngOnInit(): void {
@@ -50,5 +63,5 @@ export class MovieGalleryComponent implements OnInit {
     this.httpU.updater$.subscribe(() => {
       this.getIsAdmin();
     });
-  }
+  };
 }

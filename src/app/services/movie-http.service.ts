@@ -4,16 +4,15 @@ import { Subject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Movie } from '../interfaces/movie';
 import { Router } from '@angular/router';
-import { Snack } from '../interfaces/snack';
-import { Drink } from '../interfaces/drink';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MovieHttpService {
   // --------------------------------------------------------------------------------- || Constructor ||
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
@@ -32,6 +31,12 @@ export class MovieHttpService {
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>('http://localhost:3000/getMovies');
   }
+
+
+  getMoviesByGenre(genre:string): Observable<Movie[]> {
+    return this.http.get<Movie[]>('http://localhost:3000/getMoviesByGenre/'+genre);
+  }
+
 
   getOneMovie(movie_id: number): Observable<Movie> {
     return this.http.get<Movie>(
@@ -94,26 +99,6 @@ export class MovieHttpService {
         `http://localhost:3000/updateMovie/'${update_Movie.movie_id}'`,
         movie_daten
       )
-      .pipe(
-        tap(() => {
-          this._updater$.next();
-        })
-      );
-  }
-
-  getSnack(snack_name: string, snack_size: string): Observable<Snack> {
-    return this.http
-      .get<Snack>(`http://localhost:3000/getSnack/${snack_name}/${snack_size}`)
-      .pipe(
-        tap(() => {
-          this._updater$.next();
-        })
-      );
-  }
-
-  getDrink(drink: string, size: string): Observable<Drink> {
-    return this.http
-      .get<Drink>(`http://localhost:3000/getDrink/${drink}/${size}`)
       .pipe(
         tap(() => {
           this._updater$.next();

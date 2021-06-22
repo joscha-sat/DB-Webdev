@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { Router } from '@angular/router';
 
@@ -27,8 +26,6 @@ export class UserHttpService {
 
   user: User | any;
 
-  hashedPassword: string;
-
   url: string = 'http://localhost:3000';
 
   private _updater$: Subject<void> = new Subject<void>();
@@ -47,6 +44,10 @@ export class UserHttpService {
     return this.isAdmin;
   }
 
+  getToken(): any {
+    return this.token;
+  }
+
   getUser(): User {
     return this.user;
   }
@@ -61,11 +62,6 @@ export class UserHttpService {
 
   registerUser(newUser: User): Observable<User> {
     return this.http.post<User>(this.url + '/register', { newUser });
-  }
-
-  // Get User by Number
-  getUserById(id: number): Observable<User> {
-    return this.http.get<User>(this.url + '/getUserById/' + id);
   }
 
   // || LOGIN || --------------------------------------------------------------------------------------------------------------------------- //
@@ -121,53 +117,13 @@ export class UserHttpService {
 
     this.userid = null;
 
-    this.user = null;
-
-    this.hashedPassword = null;
-
     clearTimeout(this.tokenTimer); // setzt den Timer nach Logout zurück
 
     this.clearAuthData(); // Daten aus dem lokalen Speicher löschen
 
     this.router.navigate(['/Login']);
   }
-  // UPDATE USER ||--------------------------------------------------------------------------------------------------------------------------------------------//
 
-  updateUser(update_User: User): Observable<User> {
-    if (update_User.user_id != this.user.user_id) {
-      console.log(
-        'Error: Sie versuchen jmd anderes als Ihren Account zu bearbeiten!'
-      );
-      return;
-    } else {
-      return this.http
-        .patch<User>(
-          this.url + '/updateUser/' + update_User.user_id,
-          update_User
-        )
-        .pipe(
-          tap(() => {
-            if (update_User.password.length >= 6) {
-              this.user = update_User;
-              localStorage.setItem('user', JSON.stringify(this.user));
-            } else {
-              const updatedUser = {
-                user_id: this.user.user_id,
-                date_of_birth: this.user.date_of_birth,
-                password: this.user.password,
-                email: update_User.email,
-                name: update_User.name,
-                isAdmin: this.user.isAdmin,
-              };
-              localStorage.setItem('user', JSON.stringify(updatedUser));
-
-              this.user = JSON.parse(localStorage.getItem('user'));
-            }
-            this._updater$.next();
-          })
-        );
-    }
-  }
   // || LOCALSTORAGE + ANGEMELDET BLEIBEN NACH RELOAD || --------------------------------------------------------------------------------------------------------------------------- //
 
   autoAuthUser(): void {

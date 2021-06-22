@@ -1,12 +1,18 @@
+
+<button class="button" (click)="resetGenres()">Alle Genres</button>
+<app-genre-filter-button [genreName]='"Action"'></app-genre-filter-button>
+<app-genre-filter-button [genreName]='"Western"'></app-genre-filter-button>
+<app-genre-filter-button [genreName]='"Abenteuer"'></app-genre-filter-button>
+<app-genre-filter-button [genreName]='"Thriller"' ></app-genre-filter-button>
+
 <!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
 
 <div class="field">
-  <div class="title has-text-grey-light">Film suchen</div>
   <p class="control has-icons-left">
     <input
       type="text"
       class="input is-dark"
-      placeholder="Film suchen..."
+      placeholder="Movie suchen..."
       [(ngModel)]="search"
     />
     <span class="icon is-small is-left">
@@ -15,13 +21,17 @@
   </p>
 </div>
 
-<div class="filme title has-text-grey-light">Filme</div>
 
-<!-- Container: Movie-Galerie || START || -->
 
-<div class="grid mt-4">
+
+<!-- Container: Movie-Galerie All Genres || START || -->
+
+<div class="grid" *ngIf="!genreFilteredMovies.length">
+
+
   <figure class="figure" *ngFor="let movie of filteredFilme()">
-    <div class="images" [routerLink]="['/Details/', movie.movie_id]">
+
+    <div class="images" [routerLink]="['/Details/', movie.movie_id]" >
       <img [src]="movie.image" [alt]="movie.title" />
     </div>
 
@@ -62,7 +72,65 @@
         </button>
       </div>
     </figcaption>
+
   </figure>
+
+
+  <!--  Container: Movie-Galerie || ENDE || -->
+
+  <!-- Container: Movie-Galerie for one Genre || START || -->
+</div>
+
+
+<div class="grid" *ngIf="genreFilteredMovies.length">
+  <h1>{{genreFilteredMovies[0].genre}} Filme</h1>
+
+  <figure class="figure" *ngFor="let movie of genreFilteredMovies">
+
+    <div class="images" [routerLink]="['/Details/', movie.movie_id]" >
+      <img [src]="movie.image" [alt]="movie.title" />
+    </div>
+
+    <figcaption>
+      <div class="titel">
+        <h2>{{ movie.title }}</h2>
+      </div>
+
+      <div class="buttons">
+        <button
+          *ngIf="!isAdmin"
+          [routerLink]="['/Details/', movie.movie_id]"
+          class="button is-light"
+        >
+          Details
+        </button>
+        <button
+          *ngIf="!isAdmin"
+          [routerLink]="['/Tickets/', movie.movie_id]"
+          class="button is-light"
+        >
+          Tickets
+        </button>
+
+        <button
+          *ngIf="isAdmin"
+          [routerLink]="['/Film_Bearbeiten', movie.movie_id]"
+          class="button is-info"
+        >
+          bearbeiten
+        </button>
+        <button
+          *ngIf="isAdmin"
+          (click)="deleteMovie(movie.movie_id)"
+          class="button is-danger"
+        >
+          löschen
+        </button>
+      </div>
+    </figcaption>
+
+  </figure>
+
 
   <!--  Container: Movie-Galerie || ENDE || -->
 </div>

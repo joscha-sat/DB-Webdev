@@ -46,8 +46,6 @@ const con = mysql.createConnection({
   user: '21_DB_Grp_2',
   password: `pS!'NWkk5hrb84ijZr3EPJ2+qqd/aV*4`,
   database: '21_DB_Gruppe2',
-
-  multipleStatements: true,
 });
 
 // Connect
@@ -235,38 +233,8 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
   });
 });
 
-// || TICKET KAUFEN || --------------------------------------------------------------------------------------------------------------------------- //
-
-app.post('/addTicket', (req, res) => {
-  const ticket = {};
-
-  const sql = 'INSERT INTO movie SET ?';
-
-  con.query(sql, ticket, (err, result) => {
-    if (err) {
-      console.log('Datenbank-Speicherung fehlgeschlagen!');
-      throw err;
-    }
-    console.log('Datenbank-Speicherung erfolgreich!');
-    res.send(result);
-  });
-});
-
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
 
-// || Einzelnen USER ABRUFEN-------------------------------------------------------------------------------------------------------------
-app.get('/getUserById/:user_id', (req, res) => {
-  const user_id = req.params.user_id;
-  const sql = `SELECT * FROM user WHERE user_id = '${user_id}' `;
-
-  con.query(sql, (err, result) => {
-    if (err) {
-      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
-      throw err;
-    }
-    res.send(result);
-  });
-});
 // || ALLE USER ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getUsers', (req, res) => {
@@ -311,30 +279,13 @@ app.get('/getOneMovie/:movie_id', (req, res) => {
   });
 });
 
-// || EIN SNACK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+// || ALLE  FILME MIT EINEM GENRE ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
-app.get('/getSnack/:snack_name/:snack_size', (req, res) => {
-  const snack_name = req.params.snack_name;
-  const snack_size = req.params.snack_size;
 
-  const sql = `SELECT price FROM snacks WHERE snack_name = '${snack_name}' AND size = '${snack_size}'`;
+app.get('/getMoviesByGenre/:movie_genre', (req, res) => {
+  const movie_genre = req.params.movie_genre;
 
-  con.query(sql, (err, result) => {
-    if (err) {
-      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
-      throw err;
-    }
-    res.send(result);
-  });
-});
-
-// || EIN DRINK PREIS ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
-
-app.get('/getDrink/:drink_name/:drink_size', (req, res) => {
-  const drink_name = req.params.drink_name;
-  const drink_size = req.params.drink_size;
-
-  const sql = `SELECT price FROM drinks WHERE drink_name = '${drink_name}' AND size = '${drink_size}'`;
+  const sql = `SELECT * FROM movie WHERE genre = '${movie_genre}' `;
 
   con.query(sql, (err, result) => {
     if (err) {
@@ -344,6 +295,7 @@ app.get('/getDrink/:drink_name/:drink_size', (req, res) => {
     res.send(result);
   });
 });
+
 
 // || DELETE Methoden / Daten löschen || ------------------------------------------------------------------------------------------------------------------------ //
 
@@ -364,56 +316,6 @@ app.delete('/deleteOneMovie/:id', (req, res) => {
 });
 
 // || PATCH Methoden / Daten verändern || ------------------------------------------------------------------------------------------------------------------------ //
-app.patch('/updateUser/:user_id', (req, res) => {
-  if (req.body.password.length >= 6) {
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
-      if (err) {
-        console.log('error');
-        throw err;
-      } else {
-        const changedUser = {
-          user_id: +req.body.user_id,
-          name: req.body.name,
-          email: req.body.email,
-          password: hash,
-          date_of_birth: req.body.date_of_birth,
-        };
-
-        console.log(changedUser);
-        const sql = `UPDATE user SET ? WHERE user_id = ${req.body.user_id}`;
-
-        con.query(sql, changedUser, (err) => {
-          if (err) {
-            console.log('error');
-            throw err;
-          }
-          console.log('updated');
-          return res.status(201).send({
-            message: 'updated',
-          });
-        });
-      }
-    });
-  } else {
-    const user_id = +req.body.user_id;
-    const name = req.body.name;
-    const email = req.body.email;
-    const date_of_birth = req.body.date_of_birth;
-
-    // const values = [name, email, date_of_birth];
-
-    const sql = `UPDATE user SET name = '${name}', email = '${email}', date_of_birth = '${date_of_birth}' WHERE user_id = ${user_id}`;
-
-    con.query(sql, (err, result) => {
-      if (err) {
-        console.log('updaten fehlgeschlagen!');
-        throw err;
-      }
-      console.log('updaten erfolgreich!');
-      res.send(result);
-    });
-  }
-});
 
 app.patch('/updateMovie/:movie_id', upload.single('image'), (req, res) => {
   let image = req.body.image;
