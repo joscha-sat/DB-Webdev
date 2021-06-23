@@ -80,7 +80,8 @@ export class MovieBuyTicketComponent implements OnInit {
     if (
       !this.ticketform.get('snack_name').value ||
       this.ticketform.get('snack_name').value === '' ||
-      !this.ticketform.get('snack_size').value
+      !this.ticketform.get('snack_size').value ||
+      this.ticketform.get('snack_size').value === ''
     ) {
       this.snacksPrice = 0;
     } else {
@@ -96,6 +97,11 @@ export class MovieBuyTicketComponent implements OnInit {
   }
 
   getSnackSize(): void {
+    this.snacksSize = [];
+    this.ticketform.patchValue({
+      snack_size: null,
+    });
+    this.snacksPrice = 0;
     if (
       !this.ticketform.get('snack_name').value ||
       this.ticketform.get('snack_name').value === ''
@@ -137,6 +143,14 @@ export class MovieBuyTicketComponent implements OnInit {
   }
 
   getDrinkSize(): void {
+    this.drinksSize = [];
+
+    this.ticketform.patchValue({
+      drink_size: null,
+    });
+
+    this.drinksPrice = 0;
+
     if (
       !this.ticketform.get('drink_name').value ||
       this.ticketform.get('drink_name').value === ''
