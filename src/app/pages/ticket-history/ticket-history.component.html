@@ -1,7 +1,7 @@
 <app-titel *ngIf="tickets.length">Ticketverlauf</app-titel>
 
 <div class="container mt-6" *ngIf="tickets.length">
-  <div class="card ml-4 mt-2" *ngFor="let ticket of tickets">
+  <div class="card ml-4 mt-4" *ngFor="let ticket of tickets">
     <header class="card-header">
       <p class="card-header-title">Film: {{ ticket.movie_name }}</p>
       <p class="card-header-title">Saal: {{ ticket.id_user }}</p>
@@ -10,40 +10,45 @@
     <div class="card-content">
       <div class="content">
         <div class="is-flex is-justify-content-flex-start">
+          <div class="label">Kaufdatum:</div>
+          <div class="ml-2">{{ ticket.date_bought | date }}:</div>
+        </div>
+
+        <div class="is-flex is-justify-content-flex-start">
           <div class="label">Sitzplatz:</div>
-          <div class="reihe ml-4">Reihe: {{ ticket.seat_row }}</div>
-          <div class="platz ml-4">Platz: {{ ticket.seat_number }}</div>
+          <div class="reihe ml-2">Reihe: {{ ticket.seat_row }}</div>
+          <div class="platz ml-2">Platz: {{ ticket.seat_number }}</div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
           <div class="label">Snack:</div>
-          <div class="name ml-4" *ngIf="ticket.snack_name">
+          <div class="name ml-2" *ngIf="ticket.snack_name">
             {{ ticket.snack_name }}
           </div>
-          <div class="name ml-4" *ngIf="!ticket.snack_name">Kein Snack</div>
+          <div class="name ml-2" *ngIf="!ticket.snack_name">Kein Snack</div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
           <div class="label">Getränk:</div>
-          <div class="name ml-4" *ngIf="ticket.drink_name">
+          <div class="name ml-2" *ngIf="ticket.drink_name">
             {{ ticket.drink_name }}
           </div>
-          <div class="name ml-4" *ngIf="!ticket.drink_name">Kein Getränk</div>
+          <div class="name ml-2" *ngIf="!ticket.drink_name">Kein Getränk</div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
-          <div class="label">Datum:</div>
-          <div class="name ml-4">{{ ticket.date_of_show | date }}</div>
+          <div class="label">Vorstellung:</div>
+          <div class="name ml-2">{{ ticket.date_of_show | date }}</div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
           <div class="label">Uhrzeit:</div>
-          <div class="name ml-4">{{ ticket.time_of_Show }}</div>
+          <div class="name ml-2">{{ ticket.time_of_Show }}</div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
           <div class="label">Gesamtpreis:</div>
-          <div class="name ml-4">{{ ticket.total_price }} €</div>
+          <div class="name ml-2">{{ ticket.total_price }} €</div>
         </div>
       </div>
     </div>

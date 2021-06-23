@@ -180,7 +180,20 @@ export class MovieBuyTicketComponent implements OnInit {
     }
   }
 
+  getMonth(date: Date): string {
+    if (date.getMonth() + 1 < 10) {
+      return '0' + (date.getMonth() + 1);
+    }
+    return (date.getMonth() + 1).toString();
+  }
+
   onBuyTickets(): void {
+    const today = new Date();
+
+    const formatToday = today.toDateString();
+
+    console.log(formatToday);
+
     const ticket: Ticket = {
       id_user: this.loggedInUser.user_id,
 
@@ -201,6 +214,8 @@ export class MovieBuyTicketComponent implements OnInit {
 
       date_of_show: this.ticketform.value.tag,
       time_of_Show: this.ticketform.value.uhrzeit,
+
+      date_bought: formatToday,
     };
 
     this.httpM.addTicket(ticket).subscribe();

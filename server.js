@@ -258,6 +258,8 @@ app.post('/addTicket', (req, res) => {
 
     date_of_show: req.body.date_of_show,
     time_of_Show: req.body.time_of_Show,
+
+    date_bought: req.body.date_bought,
   };
 
   console.log(ticket);

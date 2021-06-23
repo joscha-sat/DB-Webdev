@@ -39,11 +39,11 @@ export class AddUserFormComponent implements OnInit {
       admin_secret: this.form.value.secret,
     };
 
-    this.form.reset();
-    this.router.navigate(['/Login']);
-
     // den neuen User in das Array aus dem Service hinzufügen
     this.httpService.registerUser(neuerKunde).subscribe();
+
+    this.form.reset();
+    this.router.navigate(['/Login']);
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||

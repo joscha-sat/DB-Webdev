@@ -6,6 +6,7 @@ export interface Ticket {
   movie_name: string;
   date_of_show: Date;
   time_of_Show: string;
+  date_bought: string;
 
   seat_row: string;
   seat_number: number;
