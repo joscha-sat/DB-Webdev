@@ -1,7 +1,7 @@
 export interface Ticket {
-  ticket_id?: any;
+  id_ticket?: any;
 
-  user_id: number;
+  id_user?: number;
 
   movie_name: string;
   date_of_show: Date;
@@ -18,7 +18,7 @@ export interface Ticket {
   drink_size: string;
   drink_price: number;
 
-  room: number;
+  room?: number;
 
   total_price: number;
 }

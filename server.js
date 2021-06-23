@@ -238,9 +238,31 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
 // || TICKET KAUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.post('/addTicket', (req, res) => {
-  const ticket = {};
+  const ticket = {
+    id_user: req.body.id_user,
 
-  const sql = 'INSERT INTO movie SET ?';
+    movie_name: req.body.movie_name,
+
+    seat_row: req.body.seat_row,
+    seat_number: req.body.seat_number,
+
+    snack_name: req.body.snack_name,
+    snack_size: req.body.snack_size,
+    snack_price: req.body.snack_price,
+
+    drink_name: req.body.drink_name,
+    drink_size: req.body.drink_size,
+    drink_price: req.body.drink_price,
+
+    total_price: req.body.total_price,
+
+    date_of_show: req.body.date_of_show,
+    time_of_Show: req.body.time_of_Show,
+  };
+
+  console.log(ticket);
+
+  const sql = 'INSERT INTO ticket SET ?';
 
   con.query(sql, ticket, (err, result) => {
     if (err) {
@@ -423,6 +445,20 @@ app.get('/getDrinkSizes/:drink_name', (req, res) => {
 
 app.get('/getDrinks', (req, res) => {
   const sql = `SELECT DISTINCT drink_name FROM drinks`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('Abrufen der Daten aus der Datenbank fehlgeschlagen!');
+      throw err;
+    }
+    res.send(result);
+  });
+});
+
+// || TICKETS Abrufen || --------------------------------------------------------------------------------------------------------------------------- //
+
+app.get('/getTickets/:user_id', (req, res) => {
+  const sql = `SELECT * FROM ticket WHERE id_user = '${req.params.user_id}'`;
 
   con.query(sql, (err, result) => {
     if (err) {

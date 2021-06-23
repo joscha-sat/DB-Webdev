@@ -243,22 +243,48 @@
 
     <div class="mt-4">
       Snack:
-      <span *ngIf="ticketform.get('snack_name').value">
+      <span
+        *ngIf="
+          ticketform.get('snack_name').value &&
+          ticketform.get('snack_size').value
+        "
+      >
         {{ ticketform.get('snack_name').value }}
       </span>
-      <span *ngIf="!ticketform.get('snack_name').value"> kein Snack </span>
+      <span
+        *ngIf="
+          !ticketform.get('snack_name').value ||
+          !ticketform.get('snack_size').value
+        "
+      >
+        kein Snack
+      </span>
     </div>
 
     <div class="mt-4">
       Getränk:
-      <span *ngIf="ticketform.get('drink_name').value">
+      <span
+        *ngIf="
+          ticketform.get('drink_name').value &&
+          ticketform.get('drink_size').value
+        "
+      >
         {{ ticketform.get('drink_name').value }}
       </span>
-      <span *ngIf="!ticketform.get('drink_name').value"> kein Getränk </span>
+      <span
+        *ngIf="
+          !ticketform.get('drink_name').value ||
+          !ticketform.get('drink_size').value
+        "
+      >
+        kein Getränk
+      </span>
     </div>
 
     <div class="mt-4">Tag: {{ ticketform.get('tag').value }}</div>
     <div class="mt-4">Uhrzeit: {{ ticketform.get('uhrzeit').value }}</div>
+
+    <div class="mt-4">Gesamtpreis: {{ getTotalPrice() }} €</div>
 
     <div class="subtitle has-text-success mt-6">
       Ticket erfolgreich gekauft!

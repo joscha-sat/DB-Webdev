@@ -10,6 +10,7 @@ import { UserGuard } from './guard/user.guard';
 import { AdminGuard } from './guard/admin.guard';
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-page.component';
+import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,11 @@ const routes: Routes = [
   {
     path: 'Tickets/:movie_id',
     component: BuyPageComponent,
+    canActivate: [UserGuard],
+  },
+  {
+    path: 'Ticketverlauf',
+    component: TicketHistoryComponent,
     canActivate: [UserGuard],
   },
 ];

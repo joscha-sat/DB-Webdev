@@ -5,6 +5,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Drink } from '../../interfaces/drink';
 import { Snack } from '../../interfaces/snack';
+import { Ticket } from '../../interfaces/ticket';
+import { User } from '../../interfaces/user';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -28,6 +30,8 @@ export class MovieBuyTicketComponent implements OnInit {
   ticketList: FormArray;
 
   //
+
+  loggedInUser: User;
 
   clicked = false;
 
@@ -59,6 +63,10 @@ export class MovieBuyTicketComponent implements OnInit {
   };
 
   // ------------------------------------------------------------------------------------- || Methods ||
+
+  getLoggedInUser(): void {
+    this.loggedInUser = this.httpU.getUser();
+  }
 
   // | SNACKS | ////////////////////////////////////////////////////////////////////////////////
 
@@ -173,6 +181,30 @@ export class MovieBuyTicketComponent implements OnInit {
   }
 
   onBuyTickets(): void {
+    const ticket: Ticket = {
+      id_user: this.loggedInUser.user_id,
+
+      movie_name: this.movie.title,
+
+      seat_row: this.ticketform.value.reihe,
+      seat_number: this.ticketform.value.platz,
+
+      snack_name: this.ticketform.value.snack_name,
+      snack_size: this.ticketform.value.snack_size,
+      snack_price: this.snacksPrice,
+
+      drink_name: this.ticketform.value.drink_name,
+      drink_size: this.ticketform.value.drink_size,
+      drink_price: this.drinksPrice,
+
+      total_price: this.getTotalPrice(),
+
+      date_of_show: this.ticketform.value.tag,
+      time_of_Show: this.ticketform.value.uhrzeit,
+    };
+
+    this.httpM.addTicket(ticket).subscribe();
+
     this.clicked = true;
   }
 
@@ -202,9 +234,12 @@ export class MovieBuyTicketComponent implements OnInit {
 
     this.getDrinks();
 
+    this.getLoggedInUser();
+
     // auf Veränderungen des Users reagieren
     this.httpU.updater$.subscribe(() => {
       this.getIsLoggedIn();
+      this.getLoggedInUser();
     });
 
     this.ticketform = this.formBuilder.group({

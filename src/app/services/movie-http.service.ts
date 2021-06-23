@@ -6,6 +6,7 @@ import { Movie } from '../interfaces/movie';
 import { Router } from '@angular/router';
 import { Snack } from '../interfaces/snack';
 import { Drink } from '../interfaces/drink';
+import { Ticket } from '../interfaces/ticket';
 
 @Injectable({
   providedIn: 'root',
@@ -169,5 +170,17 @@ export class MovieHttpService {
           this._updater$.next();
         })
       );
+  }
+
+  // TICKETS ----------------------------------------------------------------------------------//
+
+  addTicket(ticket: Ticket): Observable<Ticket> {
+    return this.http.post<Ticket>('http://localhost:3000/addTicket', ticket);
+  }
+
+  getTickets(user_id: number): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(
+      'http://localhost:3000/getTickets/' + user_id
+    );
   }
 }

@@ -27,6 +27,7 @@ import { UpdateUserComponent } from './components/update-user/update-user.compon
 import { UpdateUserPageComponent } from './pages/update-user-page/update-user-page.component';
 import { GenreFilterButtonComponent } from './components/genre-filter-button/genre-filter-button.component';
 import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-page.component';
+import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-pag
     UpdateUserPageComponent,
     GenreFilterButtonComponent,
     BuyPageComponent,
+    TicketHistoryComponent,
   ],
 
   imports: [
