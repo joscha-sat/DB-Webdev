@@ -22,18 +22,28 @@
 
         <div class="is-flex is-justify-content-flex-start mt-2">
           <div class="label">Snack:</div>
-          <div class="name ml-2" *ngIf="ticket.snack_name">
+          <div class="name ml-2" *ngIf="ticket.snack_name && ticket.snack_size">
             {{ ticket.snack_name }}
           </div>
-          <div class="name ml-2" *ngIf="!ticket.snack_name">Kein Snack</div>
+          <div
+            class="name ml-2"
+            *ngIf="!ticket.snack_name || !ticket.snack_size"
+          >
+            Kein Snack
+          </div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
           <div class="label">Getränk:</div>
-          <div class="name ml-2" *ngIf="ticket.drink_name">
+          <div class="name ml-2" *ngIf="ticket.drink_name && ticket.drink_size">
             {{ ticket.drink_name }}
           </div>
-          <div class="name ml-2" *ngIf="!ticket.drink_name">Kein Getränk</div>
+          <div
+            class="name ml-2"
+            *ngIf="!ticket.drink_name || !ticket.drink_size"
+          >
+            Kein Getränk
+          </div>
         </div>
 
         <div class="is-flex is-justify-content-flex-start mt-2">
