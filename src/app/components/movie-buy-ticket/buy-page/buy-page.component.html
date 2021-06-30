@@ -4,8 +4,18 @@
   <div id="dynamic" #parent></div>
 </div>
 
-<div class="width10 mb-6">
+<div
+  class="width10 mb-6"
+  *ngIf="!checkFSK(loggedInUser.date_of_birth, movieFSK)"
+>
   <button class="button is-warning mb-6 mt-6" (click)="add()">
     weiteres Ticket
   </button>
+</div>
+
+<div
+  class="error mt-4 error_text"
+  *ngIf="checkFSK(loggedInUser.date_of_birth, movieFSK)"
+>
+  Du bist zu Jung um Tickets für diesen Film zu kaufen!
 </div>

@@ -101,18 +101,19 @@
         <h2>{{ movie.title }}</h2>
       </div>
 
-      <div class="buttons">
+      <div class="buttons" *ngIf="!checkFSK(user.date_of_birth, movie.fsk)">
         <button
           *ngIf="!isAdmin"
           [routerLink]="['/Details/', movie.movie_id]"
-          class="button is-light"
+          class="button is-info"
         >
           Details
         </button>
         <button
           *ngIf="!isAdmin"
           [routerLink]="['/Tickets/', movie.movie_id]"
-          class="button is-light"
+          class="button is-info"
+          [disabled]="checkFSK(user.date_of_birth, movie.fsk)"
         >
           Tickets
         </button>
@@ -120,7 +121,7 @@
         <button
           *ngIf="isAdmin"
           [routerLink]="['/Film_Bearbeiten', movie.movie_id]"
-          class="button is-info"
+          class="button is-inf"
         >
           bearbeiten
         </button>
@@ -131,6 +132,12 @@
         >
           löschen
         </button>
+      </div>
+      <div
+        class="tooYoung is-danger mt-5"
+        *ngIf="checkFSK(user.date_of_birth, movie.fsk)"
+      >
+        <span class="error">Du bist zu Jung für diesen Film, sorry !</span>
       </div>
     </figcaption>
   </figure>

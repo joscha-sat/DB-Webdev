@@ -1,10 +1,10 @@
-<app-titel class="block">Film Details zu: {{oneMovie.title}}</app-titel>
+<app-titel class="block">Film Details zu: {{ oneMovie.title }}</app-titel>
 
 <!-- BESCHREIBUNG ZUM FILM -->
 <div class="container block">
   <div class="description block">
     <h2>Beschreibung:</h2>
-    {{oneMovie.description}}
+    {{ oneMovie.description }}
   </div>
 </div>
 
@@ -12,46 +12,57 @@
 
 <div class="trailer-container">
   <div class="video">
-
     <div class="block">
       <h2>Trailer:</h2>
     </div>
 
     <iframe id="trailer" [src]="oneMovie.trailer | safe" allowfullscreen>
     </iframe>
-
   </div>
 </div>
 
 <!-- WEITERE INFOS ZUM FILM -->
 
 <div class="container block" id="infos">
-
   <div class="duration block">
-    <h3>Dauer: </h3>
-    {{oneMovie.duration}} Minuten
+    <h3>Dauer:</h3>
+    {{ oneMovie.duration }} Minuten
   </div>
 
   <div class="genre block">
-    <h3>Genre: </h3>
-    {{oneMovie.genre}}
+    <h3>Genre:</h3>
+    {{ oneMovie.genre }}
   </div>
 
   <div class="fks block">
-    <h3>FSK: </h3>
-    {{oneMovie.fsk}}
+    <h3>FSK:</h3>
+    {{ oneMovie.fsk }}
   </div>
 
   <div class="release_year block">
-    <h3>Erscheinungsjahr: </h3>
-    {{oneMovie.release_year}}
+    <h3>Erscheinungsjahr:</h3>
+    {{ oneMovie.release_year }}
   </div>
-
 </div>
 
 <div class="container" id="ticket">
   <div *ngIf="loggedIn; else doLogIn" id="ticket_button">
-    <button class="button is-primary" [routerLink]="['/Tickets/', oneMovie.movie_id]">Tickets erwerben</button>
+    <button
+      *ngIf="!checkFSK(user.date_of_birth, oneMovie.fsk)"
+      class="button is-primary"
+      [routerLink]="['/Tickets/', oneMovie.movie_id]"
+    >
+      Tickets erwerben
+    </button>
+    <div
+      class="tooYoung is-danger"
+      *ngIf="checkFSK(user.date_of_birth, oneMovie.fsk)"
+    >
+      <span class="error">Du bist zu Jung für diesen Film, sorry !</span>
+    </div>
   </div>
-  <ng-template #doLogIn>Bitte <a routerLink="/Login">einloggen</a>, um Tickets erwerben zu können</ng-template>
+  <ng-template #doLogIn
+    >Bitte <a routerLink="/Login">einloggen</a>, um Tickets erwerben zu
+    können</ng-template
+  >
 </div>

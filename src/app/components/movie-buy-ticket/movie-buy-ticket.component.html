@@ -1,6 +1,9 @@
 <app-titel *ngIf="!clicked"> Ticket für: {{ movie.title }} </app-titel>
 
-<div class="all-container" *ngIf="!clicked">
+<div
+  class="all-container"
+  *ngIf="!clicked && !checkFSK(loggedInUser.date_of_birth, movie.fsk)"
+>
   <div class="movie_image">
     <img [src]="movie.image" [alt]="movie.title" />
   </div>

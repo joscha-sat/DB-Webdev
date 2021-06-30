@@ -65,7 +65,6 @@ figcaption {
 button {
   margin-top: $margin_4;
   font-weight: bold;
-  padding: $padding_4;
 }
 
 /* Eltern-Element für die Searchbar */
@@ -91,4 +90,10 @@ button {
   .testzweck {
     color: red;
   }
+}
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: $small_text_font_size;
+  margin-bottom: $margin_3;
 }

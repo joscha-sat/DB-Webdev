@@ -85,3 +85,9 @@ html {
 * {
   transition: color 0.05s, background 0.05s;
 }
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: $small_text_font_size;
+  margin-bottom: $margin_3;
+}

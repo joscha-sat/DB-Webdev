@@ -42,3 +42,9 @@
   padding: $padding_5;
   border: 1px solid var(--border);
 }
+
+.error {
+  color: rgb(255, 0, 0);
+  font-size: $small_text_font_size;
+  margin-bottom: $margin_3;
+}

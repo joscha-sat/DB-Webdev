@@ -7,6 +7,7 @@ import { Drink } from '../../interfaces/drink';
 import { Snack } from '../../interfaces/snack';
 import { Ticket } from '../../interfaces/ticket';
 import { User } from '../../interfaces/user';
+import { CheckFSKService } from '../../services/check-fsk.service';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -19,6 +20,7 @@ export class MovieBuyTicketComponent implements OnInit {
   constructor(
     private httpM: MovieHttpService,
     private httpU: UserHttpService,
+    private fskService: CheckFSKService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {}
@@ -60,12 +62,17 @@ export class MovieBuyTicketComponent implements OnInit {
   movie = {
     title: '',
     image: '',
+    fsk: null,
   };
 
   // ------------------------------------------------------------------------------------- || Methods ||
 
   getLoggedInUser(): void {
     this.loggedInUser = this.httpU.getUser();
+  }
+
+  checkFSK(date: Date, fsk: number): boolean {
+    return this.fskService.checkFSK(date, fsk);
   }
 
   // | SNACKS | ////////////////////////////////////////////////////////////////////////////////
@@ -194,12 +201,12 @@ export class MovieBuyTicketComponent implements OnInit {
     }
   }
 
-  getMonth(date: Date): string {
-    if (date.getMonth() + 1 < 10) {
-      return '0' + (date.getMonth() + 1);
-    }
-    return (date.getMonth() + 1).toString();
-  }
+  // getMonth(date: Date): string {
+  //   if (date.getMonth() + 1 < 10) {
+  //     return '0' + (date.getMonth() + 1);
+  //   }
+  //   return (date.getMonth() + 1).toString();
+  // }
 
   onBuyTickets(): void {
     const today = new Date();
@@ -251,6 +258,7 @@ export class MovieBuyTicketComponent implements OnInit {
           this.movie = {
             title: result[0].title,
             image: result[0].image,
+            fsk: result[0].fsk,
           };
         });
       }

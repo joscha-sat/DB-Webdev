@@ -5,6 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { UserHttpService } from '../../services/user-http.service';
 import { User } from '../../interfaces/user';
+import { CheckFSKService } from '../../services/check-fsk.service';
 
 @Component({
   selector: 'app-movie-details-tickets',
@@ -16,7 +17,8 @@ export class MovieDetailsTicketsComponent implements OnInit {
   constructor(
     private httpM: MovieHttpService,
     private httpU: UserHttpService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fskService: CheckFSKService
   ) {}
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
@@ -32,6 +34,14 @@ export class MovieDetailsTicketsComponent implements OnInit {
   // ------------------------------------------------------------------------------------- || Methods ||
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
+  }
+
+  getLoggedInUser(): void {
+    this.user = this.httpU.getUser();
+  }
+
+  checkFSK(date: Date, fsk: number): boolean {
+    return this.fskService.checkFSK(date, fsk);
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
@@ -50,12 +60,14 @@ export class MovieDetailsTicketsComponent implements OnInit {
       }
     });
 
-    // Initialwert setzen für den Status loggedIn
+    // Initialwerte
     this.getIsLoggedIn();
+    this.getLoggedInUser();
 
     // auf Veränderungen des Users reagieren
     this.httpU.updater$.subscribe(() => {
       this.getIsLoggedIn();
+      this.getLoggedInUser();
     });
   }
 }
