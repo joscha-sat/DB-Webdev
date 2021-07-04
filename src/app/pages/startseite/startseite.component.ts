@@ -48,6 +48,6 @@ export class StartseiteComponent implements OnInit {
       this.getAllMovies();
     });
 
-    this.genreFilteredFilme('alle Filme');
+    this.genreFilteredFilme('Alle Filme');
   }
 }
