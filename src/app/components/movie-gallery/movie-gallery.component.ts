@@ -41,6 +41,9 @@ export class MovieGalleryComponent implements OnInit {
   }
 
   checkFSK(date: Date, fsk: number): boolean {
+    if (!date || !fsk) {
+      return false;
+    }
     return this.fskService.checkFSK(date, fsk);
   }
 
