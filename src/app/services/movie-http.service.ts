@@ -37,7 +37,7 @@ export class MovieHttpService {
   }
 
   getMoviesByGenre(genre: string): Observable<Movie[]> {
-    this.genre = genre !== 'reset';
+    this.genre = genre !== 'Alle Filme';
 
     return this.http.get<Movie[]>(
       'http://localhost:3000/getMoviesByGenre/' + genre

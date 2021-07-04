@@ -324,7 +324,7 @@ app.get('/getMovies', (req, res) => {
 app.get('/getMoviesByGenre/:genre', (req, res) => {
   const genre = req.params.genre;
 
-  if (genre === 'reset') {
+  if (genre === 'Alle Filme') {
     const sql = `SELECT * FROM movie`;
 
     con.query(sql, (err, result) => {
