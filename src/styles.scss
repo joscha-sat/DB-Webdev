@@ -1,6 +1,10 @@
 //dateien aus scss
 @use 'app/scss/index'as *;
 
+@import '~@angular/material/theming';
+
+@include mat-core();
+
 // Bulma
 @import './node_modules/bulma/bulma.sass';
 
@@ -90,4 +94,13 @@ html {
   color: rgb(255, 0, 0);
   font-size: $small_text_font_size;
   margin-bottom: $margin_3;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

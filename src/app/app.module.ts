@@ -2,7 +2,7 @@ import { AddMovieFormComponent } from './components/add-movie-form/add-movie-for
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +28,11 @@ import { UpdateUserPageComponent } from './pages/update-user-page/update-user-pa
 import { GenreFilterButtonComponent } from './components/genre-filter-button/genre-filter-button.component';
 import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-page.component';
 import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.component';
+import { ErrorComponent } from './components/error/error.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ErrorInterceptor } from './error-interceptor';
 
 @NgModule({
   declarations: [
@@ -52,6 +57,7 @@ import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.co
     GenreFilterButtonComponent,
     BuyPageComponent,
     TicketHistoryComponent,
+    ErrorComponent,
   ],
 
   imports: [
@@ -60,8 +66,16 @@ import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.co
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
-  providers: [UserGuard, AdminGuard],
+  providers: [
+    UserGuard,
+    AdminGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
+  entryComponents: [ErrorComponent],
 })
 export class AppModule {}

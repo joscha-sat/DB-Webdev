@@ -124,17 +124,21 @@ app.post('/register', (req, res) => {
 
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {
-      console.log('error');
-      throw err;
+      console.log('Email existiert bereits');
+      return res.status(400).send({
+        message: 'Email existiert bereits',
+      });
     } else {
       const sql = `INSERT INTO user (date_of_birth, password, email, name, isAdmin ) VALUES ('${date_of_birth}', '${hash}', '${email}', '${name}', '${
-        admin_secret === 45678
+        admin_secret === 123
       }')`;
 
       con.query(sql, (err) => {
         if (err) {
-          console.log('error');
-          throw err;
+          console.log('Email existiert bereits');
+          return res.status(400).send({
+            message: 'Email existiert bereits',
+          });
         }
         console.log('registriert');
         return res.status(201).send({
@@ -227,8 +231,9 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
 
   con.query(sql, movie, (err, result) => {
     if (err) {
-      console.log('Datenbank-Speicherung fehlgeschlagen!');
-      throw err;
+      return res.status(500).send({
+        message: 'Film hinzufügen ist fehlgeschlagen!',
+      });
     }
     console.log('Datenbank-Speicherung erfolgreich!');
     res.send(result);
@@ -262,16 +267,29 @@ app.post('/addTicket', (req, res) => {
     date_bought: req.body.date_bought,
   };
 
+  if (!ticket.snack_name || !ticket.snack_size) {
+    ticket.snack_name = null;
+    ticket.snack_size = null;
+    ticket.snack_price = 0;
+  }
+
+  if (!ticket.drink_name || !ticket.drink_size) {
+    ticket.drink_name = null;
+    ticket.drink_size = null;
+    ticket.drink_price = 0;
+  }
+
   console.log(ticket);
 
   const sql = 'INSERT INTO ticket SET ?';
 
   con.query(sql, ticket, (err, result) => {
     if (err) {
-      console.log('Datenbank-Speicherung fehlgeschlagen!');
-      throw err;
+      return res.status(500).send({
+        message: 'Ticketkauf ist fehlgeschlagen!',
+      });
     }
-    console.log('Datenbank-Speicherung erfolgreich!');
+    console.log('Ticketkauf erfolgreich!');
     res.send(result);
   });
 });

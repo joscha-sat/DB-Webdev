@@ -26,6 +26,10 @@ export class StartseiteComponent implements OnInit {
   }
 
   genreFilteredFilme(genre: string): void {
+    if (!genre) {
+      return;
+    }
+
     this.genre = genre;
 
     this.http.getMoviesByGenre(genre).subscribe((film) => {

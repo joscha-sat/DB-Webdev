@@ -43,7 +43,6 @@ export class AddUserFormComponent implements OnInit {
     this.httpService.registerUser(neuerKunde).subscribe();
 
     this.form.reset();
-    this.router.navigate(['/Login']);
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
