@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { MovieHttpService } from '../../services/movie-http.service';
-import { UserHttpService } from '../../services/user-http.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Drink } from '../../interfaces/drink';
-import { Snack } from '../../interfaces/snack';
-import { Ticket } from '../../interfaces/ticket';
-import { User } from '../../interfaces/user';
-import { CheckFSKService } from '../../services/check-fsk.service';
+import {Component, OnInit} from '@angular/core';
+import {MovieHttpService} from '../../services/movie-http.service';
+import {UserHttpService} from '../../services/user-http.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Drink} from '../../interfaces/drink';
+import {Snack} from '../../interfaces/snack';
+import {Ticket} from '../../interfaces/ticket';
+import {User} from '../../interfaces/user';
+import {CheckFSKService} from '../../services/check-fsk.service';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -23,7 +23,8 @@ export class MovieBuyTicketComponent implements OnInit {
     private fskService: CheckFSKService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+  }
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
@@ -66,14 +67,14 @@ export class MovieBuyTicketComponent implements OnInit {
   };
 
   // ------------------------------------------------------------------------------------- || Methods ||
-  isSeatTaken(): boolean{
-    let seat=this.ticketform.get('platz').value;
-    let row= this.ticketform.get('reihe').value;
-    let idMovie= this.movieId;
-    let day=this.ticketform.get('tag').value;
-    let time= this.ticketform.get('uhrzeit').value;
+  isSeatTaken(): boolean {
+    let seat = this.ticketform.get('platz').value;
+    let row = this.ticketform.get('reihe').value;
+    let idMovie = this.movieId;
+    let day = this.ticketform.get('tag').value;
+    let time = this.ticketform.get('uhrzeit').value;
 
-    return this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time)==null;
+    return this.httpM.getAvailabilityForShow(idMovie, seat, row, day, time) == null;
 
   }
 
@@ -91,6 +92,30 @@ export class MovieBuyTicketComponent implements OnInit {
     this.httpM.getSnacks().subscribe((snackList) => {
       this.snacksList = snackList;
     });
+  }
+
+  getCurrentDate(): string {
+    let dtToday = new Date();
+
+
+    let month: any = dtToday.getMonth() + 1;
+    let day: any = dtToday.getDate();
+    let year = dtToday.getFullYear();
+
+    if (month < 10) {
+      month = "0" + month.toString();
+    }
+
+    if (day < 10) {
+      day = "0" + day.toString();
+    }
+    var maxDate = year + '-' + month.toString() + '-' + day.toString();
+
+    console.log(maxDate);
+    return maxDate;
+//    today = mm + '/' + dd + '/' + yyyy;
+
+
   }
 
   getSnackPrice(): void {
