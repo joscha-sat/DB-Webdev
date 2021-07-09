@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Snack } from '../interfaces/snack';
 import { Drink } from '../interfaces/drink';
 import { Ticket } from '../interfaces/ticket';
+import { Show } from '../interfaces/show';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,7 @@ export class MovieHttpService {
   }
 
   // ------------------------------------------------------------------------------------- || Methods ||
-
+ 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>('http://localhost:3000/getMovies');
   }
@@ -171,7 +172,16 @@ export class MovieHttpService {
         })
       );
   }
-
+  // SHOW -------------------------------------------------------------------------------------//
+  getAvailabilityForShow(movie_id: number, seat:string, row:string, day: string, time: string):Observable<Show>{
+    console.log("hallo "+movie_id);
+    return this.http.get<Show>(`http://localhost:3000/getAvailabilityOfSeat/${movie_id}/${seat}/${row}/${day}/${time}`)
+    .pipe(
+      tap(() => {
+        this.updater$.next();
+      })
+    )
+  }
   // TICKETS ----------------------------------------------------------------------------------//
 
   addTicket(ticket: Ticket): Observable<Ticket> {

@@ -66,6 +66,16 @@ export class MovieBuyTicketComponent implements OnInit {
   };
 
   // ------------------------------------------------------------------------------------- || Methods ||
+  isSeatTaken(): boolean{
+    let seat=this.ticketform.get('platz').value;
+    let row= this.ticketform.get('reihe').value;
+    let idMovie= this.movieId;
+    let day=this.ticketform.get('tag').value;
+    let time= this.ticketform.get('uhrzeit').value;
+
+    return this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time)==null;
+
+  }
 
   getLoggedInUser(): void {
     this.loggedInUser = this.httpU.getUser();

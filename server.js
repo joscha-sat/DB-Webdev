@@ -380,6 +380,24 @@ app.get('/getSnackPrice/:snack_name/:snack_size', (req, res) => {
   });
 });
 
+//SEAT ABRUFEN||-----------------------------------------------------------------------------------------------------------------------------------------------//
+app.get('/getAvailabilityOfSeat/:movie_id/:seat/:row/:day/:time',(req,res)=> {
+  const seatRow=req.params.row;
+  const seat= req.params.seat;
+  const idMovie= req.params.movie_id;
+  const time=req.params.time;
+  const day= req.params.day;
+  const sql= `SELECT * FROM 21_DB_Gruppe2.shows s
+  WHERE s.id_movie='${idMovie}' AND s.date='${day}' AND s.time='${time}' and s.row='${seatRow}' and s.seat='${seat}'; `;
+  con.query(sql, (err,result)=>{
+    if(err){
+      console.log('ABrufen der Daten aus der Datenbank fehlgeschlagen');
+      throw err;
+    }
+    res.send(result)
+  })
+});
+
 // || SNACK-GRÖßEN ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
 app.get('/getSnackSizes/:snack_name', (req, res) => {
