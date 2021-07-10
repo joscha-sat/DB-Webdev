@@ -15,6 +15,7 @@ import {CheckFSKService} from '../../services/check-fsk.service';
   styleUrls: ['./movie-buy-ticket.component.scss'],
 })
 export class MovieBuyTicketComponent implements OnInit {
+
   // --------------------------------------------------------------------------------- || Constructor ||
 
   constructor(
@@ -45,6 +46,10 @@ export class MovieBuyTicketComponent implements OnInit {
   snacksList: Snack[] = [];
 
   snacksSize: Snack[] = [];
+
+  //
+
+  timeslots: String[] = ["19:00 Uhr", "23:00 Uhr"];
 
   //
 
@@ -94,29 +99,6 @@ export class MovieBuyTicketComponent implements OnInit {
     });
   }
 
-  getCurrentDate(): string {
-    let dtToday = new Date();
-
-
-    let month: any = dtToday.getMonth() + 1;
-    let day: any = dtToday.getDate();
-    let year = dtToday.getFullYear();
-
-    if (month < 10) {
-      month = "0" + month.toString();
-    }
-
-    if (day < 10) {
-      day = "0" + day.toString();
-    }
-    var maxDate = year + '-' + month.toString() + '-' + day.toString();
-
-    console.log(maxDate);
-    return maxDate;
-//    today = mm + '/' + dd + '/' + yyyy;
-
-
-  }
 
   getSnackPrice(): void {
     if (
@@ -212,6 +194,34 @@ export class MovieBuyTicketComponent implements OnInit {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
 
+  gettimeSlots(): String[] {
+    let availableTimeSlots=   [];
+    for (let i = 0; i < this.timeslots.length; i++){
+      if( !(Number (this.timeslots[i].slice(0,2)) < new Date().getHours())){
+        availableTimeSlots.push(this.timeslots[i])
+      }
+    }
+    return availableTimeSlots;
+  }
+
+  getCurrentDate(): string {
+    let dtToday = new Date();
+    let month: any = dtToday.getMonth() + 1;
+    let day: any = dtToday.getDate();
+    let year = dtToday.getFullYear();
+
+    if (month < 10) {
+      month = "0" + month.toString();
+    }
+
+    if (day < 10) {
+      day = "0" + day.toString();
+    }
+    return year + '-' + month.toString() + '-' + day.toString();
+
+  }
+
+
   getTotalPriceSnackAndDrinks(): number {
     if (!this.snacksPrice && !this.drinksPrice) {
       return 0;
@@ -236,12 +246,6 @@ export class MovieBuyTicketComponent implements OnInit {
     }
   }
 
-  // getMonth(date: Date): string {
-  //   if (date.getMonth() + 1 < 10) {
-  //     return '0' + (date.getMonth() + 1);
-  //   }
-  //   return (date.getMonth() + 1).toString();
-  // }
 
   onBuyTickets(): void {
     const today = new Date();
