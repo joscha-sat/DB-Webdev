@@ -9,6 +9,7 @@ import {Ticket} from '../../interfaces/ticket';
 import {User} from '../../interfaces/user';
 import {CheckFSKService} from '../../services/check-fsk.service';
 
+
 @Component({
   selector: 'app-movie-buy-ticket',
   templateUrl: './movie-buy-ticket.component.html',
@@ -190,15 +191,28 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // | SONSTIGE | ////////////////////////////////////////////////////////////////////////////////
 
+
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
 
   gettimeSlots(): String[] {
     let availableTimeSlots=   [];
+    let dtToday = new Date();
+
+    let selectedDate=new Date( this.ticketform.get('tag').value);
+
+
+
     for (let i = 0; i < this.timeslots.length; i++){
-      if( !(Number (this.timeslots[i].slice(0,2)) < new Date().getHours())){
-        availableTimeSlots.push(this.timeslots[i])
+      availableTimeSlots.push(this.timeslots[i]);
+      //if date ist today
+      if((selectedDate.getTime() <dtToday.getTime())  ){
+        //if timeslot is past
+        if((Number (this.timeslots[i].slice(0,2)) < dtToday.getHours())){
+
+          availableTimeSlots.pop();
+        }
       }
     }
     return availableTimeSlots;
