@@ -262,7 +262,6 @@ app.post('/addTicket', (req, res) => {
     date_bought: req.body.date_bought,
   };
 
-  console.log(ticket);
 
   const sql = 'INSERT INTO ticket SET ?';
 
