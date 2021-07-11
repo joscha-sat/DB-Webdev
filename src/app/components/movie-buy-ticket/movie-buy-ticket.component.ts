@@ -48,7 +48,8 @@ export class MovieBuyTicketComponent implements OnInit {
   snacksList: Snack[] = [];
 
   snacksSize: Snack[] = [];
-
+  
+  isSeatTaken:boolean=false;
   //
 
   timeslots: String[] = ["19:00 Uhr", "23:00 Uhr"];
@@ -101,26 +102,6 @@ export class MovieBuyTicketComponent implements OnInit {
     })
   }
 
-
-  isSeatTaken(): boolean {
-    let seat = this.ticketform.get('platz').value;
-    let row = this.ticketform.get('reihe').value;
-    let idMovie = this.movieId;
-    let day = this.ticketform.get('tag').value;
-    let time = this.ticketform.get('uhrzeit').value;
-
-
-    this.httpM.getAvailabilityForShow(idMovie, seat, row, day, time).subscribe((show) => {
-      console.log(show.length);
-      if (show.length > 0) {
-        return true;
-
-      }
-      return false;
-
-    });
-    return true;
-  }
 
   getLoggedInUser(): void {
     this.loggedInUser = this.httpU.getUser();
@@ -343,9 +324,11 @@ export class MovieBuyTicketComponent implements OnInit {
     this.httpM.addTicket(ticket).subscribe();
     this.httpM.addShow(show).subscribe();
 
-   this.getAvailableSubscription().subscribe(isTaken =>{
+    this.getAvailableSubscription().subscribe(isTaken =>{
       if (isTaken){
+        this.isSeatTaken=true;
       }else{
+        this.isSeatTaken=false;
         this.clicked = true;
       }
     });

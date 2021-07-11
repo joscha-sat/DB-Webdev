@@ -59,6 +59,8 @@ const routes: Routes = [
     component: TicketHistoryComponent,
     canActivate: [UserGuard],
   },
+  { path: '**',  
+    redirectTo: '/Startseite'},
 ];
 
 @NgModule({

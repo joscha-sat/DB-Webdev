@@ -200,7 +200,7 @@
           {{ getTotalPrice() }} €</span
         >
       </div>
-
+      <div *ngIf="isSeatTaken" class="notification is-primary">Der gewünschte Platz ist leider nicht mehr verfügbar. Bitte wählen Sie einen anderen und probieren es erneut.  </div>
       <!-- BUTTONS -->
 
       <div class="field is-grouped buttons" *ngIf="!clicked">
