@@ -238,7 +238,7 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
 
 // || TICKET KAUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 app.post('/addControlTicket',(req,res) =>{
-  
+
   const show={
   id_movie:req.body.id_movie,
   row: req.body.row,
@@ -416,6 +416,7 @@ app.get('/getAvailabilityOfSeat/:movie_id/:seat/:row/:day/:time',(req,res)=> {
       console.log('ABrufen der Daten aus der Datenbank fehlgeschlagen');
       throw err;
     }
+  
     res.send(result)
   })
 });

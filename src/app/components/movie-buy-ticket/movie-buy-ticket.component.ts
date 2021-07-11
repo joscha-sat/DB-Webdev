@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { MovieHttpService } from '../../services/movie-http.service';
-import { UserHttpService } from '../../services/user-http.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Drink } from '../../interfaces/drink';
-import { Snack } from '../../interfaces/snack';
-import { Ticket } from '../../interfaces/ticket';
-import { User } from '../../interfaces/user';
-import { CheckFSKService } from '../../services/check-fsk.service';
-import { Show } from 'src/app/interfaces/show';
+import {Component, OnInit} from '@angular/core';
+import {MovieHttpService} from '../../services/movie-http.service';
+import {UserHttpService} from '../../services/user-http.service';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Drink} from '../../interfaces/drink';
+import {Snack} from '../../interfaces/snack';
+import {Ticket} from '../../interfaces/ticket';
+import {User} from '../../interfaces/user';
+import {CheckFSKService} from '../../services/check-fsk.service';
+import {Show} from 'src/app/interfaces/show';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -75,16 +76,50 @@ export class MovieBuyTicketComponent implements OnInit {
   };
 
   // ------------------------------------------------------------------------------------- || Methods ||
-  isSeatTaken(): boolean{
-    let seat=this.ticketform.get('platz').value;
-    let row= this.ticketform.get('reihe').value;
-    let idMovie= this.movieId;
-    let day=this.ticketform.get('tag').value;
-    let time= this.ticketform.get('uhrzeit').value;
-    console.log("helloooo "+this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time).subscribe());
 
-    return this.httpM.getAvailabilityForShow(idMovie, seat, row, day, time) == null;
+  getAvailableSubscription(): Observable<boolean> {
+    let seat = this.ticketform.get('platz').value;
+    let row = this.ticketform.get('reihe').value;
+    let idMovie = this.movieId;
+    let day = this.ticketform.get('tag').value;
+    let time = this.ticketform.get('uhrzeit').value;
 
+    return new Observable<boolean>(subscriber => {
+      this.httpM.getAvailabilityForShow(idMovie, seat, row, day, time).subscribe((show) => {
+
+        subscriber.next(true);
+        if (show.length > 0) {
+          subscriber.next(true);
+
+        }else{
+          subscriber.next(false);
+        }
+
+
+      });
+
+    })
+  }
+
+
+  isSeatTaken(): boolean {
+    let seat = this.ticketform.get('platz').value;
+    let row = this.ticketform.get('reihe').value;
+    let idMovie = this.movieId;
+    let day = this.ticketform.get('tag').value;
+    let time = this.ticketform.get('uhrzeit').value;
+
+
+    this.httpM.getAvailabilityForShow(idMovie, seat, row, day, time).subscribe((show) => {
+      console.log(show.length);
+      if (show.length > 0) {
+        return true;
+
+      }
+      return false;
+
+    });
+    return true;
   }
 
   getLoggedInUser(): void {
@@ -200,24 +235,27 @@ export class MovieBuyTicketComponent implements OnInit {
   }
 
   gettimeSlots(): String[] {
-    let availableTimeSlots=   [];
+    let availableTimeSlots = [];
     let dtToday = new Date();
 
-    let selectedDate=new Date( this.ticketform.get('tag').value);
+    let selectedDate = new Date(this.ticketform.get('tag').value);
 
 
-
-    for (let i = 0; i < this.timeslots.length; i++){
+    for (let i = 0; i < this.timeslots.length; i++) {
       availableTimeSlots.push(this.timeslots[i]);
       //if date ist today
-      if((selectedDate.getTime() <dtToday.getTime())  ){
+      if ((selectedDate.getTime() < dtToday.getTime())) {
         //if timeslot is past
-        if((Number (this.timeslots[i].slice(0,2)) < dtToday.getHours())){
+        if ((Number(this.timeslots[i].slice(0, 2)) < dtToday.getHours())) {
 
           availableTimeSlots.pop();
         }
       }
     }
+    if(this.ticketform.get('uhrzeit').value==null){
+      this.ticketform.controls['uhrzeit'].setValue(availableTimeSlots[0]);
+    }
+
     return availableTimeSlots;
   }
 
@@ -294,18 +332,28 @@ export class MovieBuyTicketComponent implements OnInit {
 
       date_bought: formatToday,
     };
-    const show={
-      id_movie : this.movieId,
+    const show = {
+      id_movie: this.movieId,
       row: this.ticketform.value.reihe,
       seat: this.ticketform.value.platz,
       day: this.ticketform.value.tag,
       time: this.ticketform.value.uhrzeit
-      };
-    console.log("hier movie id: "+show.id_movie);
+    };
+
     this.httpM.addTicket(ticket).subscribe();
     this.httpM.addShow(show).subscribe();
-    console.log("test "+this.isSeatTaken());
-    this.clicked = true;
+
+   this.getAvailableSubscription().subscribe(isTaken =>{
+      if (isTaken){
+      }else{
+        this.clicked = true;
+      }
+    });
+
+
+
+
+
   }
 
   // ------------------------------------------------------------------------------------- || @Inputs ||
