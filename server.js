@@ -242,17 +242,18 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
 });
 
 // || TICKET KAUFEN || --------------------------------------------------------------------------------------------------------------------------- //
-app.post('/addControlTicket',(req,res) =>{
-
-  const show={
-  id_movie:req.body.id_movie,
-  row: req.body.row,
-  seat: req.body.seat,
-  day: req.body.day,
-  time: req.body.time
+app.post('/addControlTicket', (req, res) => {
+  const show = {
+    id_movie: req.body.id_movie,
+    row: req.body.row,
+    seat: req.body.seat,
+    day: req.body.day,
+    time: req.body.time,
   };
-  console.log(`INSERT INTO shows (id_show,id_movie,date,time,row,seat) Values (default,${show.id_movie},'${show.day}','${show.time}'','${show.row}','${show.seat}')`);
-  const sql=`INSERT INTO shows (id_show,id_movie,date,time,row,seat) Values (default,${show.id_movie},'${show.day}','${show.time}','${show.row}','${show.seat}')`;
+  console.log(
+    `INSERT INTO shows (id_show,id_movie,date,time,row,seat) Values (default,${show.id_movie},'${show.day}','${show.time}'','${show.row}','${show.seat}')`
+  );
+  const sql = `INSERT INTO shows (id_show,id_movie,date,time,row,seat) Values (default,${show.id_movie},'${show.day}','${show.time}','${show.row}','${show.seat}')`;
   con.query(sql, show, (err, result) => {
     if (err) {
       console.log('Datenbank-Speicherung fehlgeschlagen!');
@@ -261,8 +262,7 @@ app.post('/addControlTicket',(req,res) =>{
     console.log('Datenbank-Speicherung erfolgreich!');
     res.send(result);
   });
-
-})
+});
 app.post('/addTicket', (req, res) => {
   console.log('INSERT INTO ticket SET ?');
   const ticket = {
@@ -314,7 +314,6 @@ app.post('/addTicket', (req, res) => {
     console.log('Ticketkauf erfolgreich!');
     res.send(result);
   });
-
 });
 
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //
@@ -422,23 +421,26 @@ app.get('/getSnackPrice/:snack_name/:snack_size', (req, res) => {
 });
 
 //SEAT ABRUFEN||-----------------------------------------------------------------------------------------------------------------------------------------------//
-app.get('/getAvailabilityOfSeat/:movie_id/:seat/:row/:day/:time',(req,res)=> {
-  const seatRow=req.params.row;
-  const seat= req.params.seat;
-  const idMovie= req.params.movie_id;
-  const time=req.params.time;
-  const day= req.params.day;
-  const sql= `SELECT * FROM 21_DB_Gruppe2.shows s
+app.get(
+  '/getAvailabilityOfSeat/:movie_id/:seat/:row/:day/:time',
+  (req, res) => {
+    const seatRow = req.params.row;
+    const seat = req.params.seat;
+    const idMovie = req.params.movie_id;
+    const time = req.params.time;
+    const day = req.params.day;
+    const sql = `SELECT * FROM 21_DB_Gruppe2.shows s
   WHERE s.id_movie='${idMovie}' AND s.date='${day}' AND s.time='${time}' and s.row='${seatRow}' and s.seat='${seat}'; `;
-  con.query(sql, (err,result)=>{
-    if(err){
-      console.log('ABrufen der Daten aus der Datenbank fehlgeschlagen');
-      throw err;
-    }
-  
-    res.send(result)
-  })
-});
+    con.query(sql, (err, result) => {
+      if (err) {
+        console.log('ABrufen der Daten aus der Datenbank fehlgeschlagen');
+        throw err;
+      }
+
+      res.send(result);
+    });
+  }
+);
 
 // || SNACK-GRÖßEN ABRUFEN || --------------------------------------------------------------------------------------------------------------------------- //
 
