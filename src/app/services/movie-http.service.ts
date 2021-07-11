@@ -172,23 +172,32 @@ export class MovieHttpService {
         })
       );
   }
-  // SHOW -------------------------------------------------------------------------------------//
-  getAvailabilityForShow(movie_id: number, seat:string, row:string, day: string, time: string):Observable<Show[]>{
 
-      return this.http.get<Show[]>(`http://localhost:3000/getAvailabilityOfSeat/${movie_id}/${seat}/${row}/${day}/${time}`)
-    .pipe(
-      tap(() => {
-        this.updater$.next();
-      })
-    )
+  // SHOW -------------------------------------------------------------------------------------//
+  getAvailabilityForShow(
+    movie_id: number,
+    seat: string,
+    row: string,
+    day: string,
+    time: string
+  ): Observable<Show[]> {
+    return this.http
+      .get<Show[]>(
+        `http://localhost:3000/getAvailabilityOfSeat/${movie_id}/${seat}/${row}/${day}/${time}`
+      )
+      .pipe(
+        tap(() => {
+          this.updater$.next();
+        })
+      );
   }
+
   addShow(show: Show): Observable<Show> {
-    return this.http.post<Show>(`http://localhost:3000/addControlTicket`,show);
+    return this.http.post<Show>(`http://localhost:3000/addControlTicket`, show);
   }
   // TICKETS ----------------------------------------------------------------------------------//
 
   addTicket(ticket: Ticket): Observable<Ticket> {
-
     return this.http.post<Ticket>('http://localhost:3000/addTicket', ticket);
   }
 
