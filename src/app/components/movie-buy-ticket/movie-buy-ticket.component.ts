@@ -16,6 +16,7 @@ import { Show } from 'src/app/interfaces/show';
   styleUrls: ['./movie-buy-ticket.component.scss'],
 })
 export class MovieBuyTicketComponent implements OnInit {
+
   // --------------------------------------------------------------------------------- || Constructor ||
 
   constructor(
@@ -24,7 +25,8 @@ export class MovieBuyTicketComponent implements OnInit {
     private fskService: CheckFSKService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
-  ) {}
+  ) {
+  }
 
   // ------------------------------------------------------------------------- || Variables + Objects ||
 
@@ -45,6 +47,10 @@ export class MovieBuyTicketComponent implements OnInit {
   snacksList: Snack[] = [];
 
   snacksSize: Snack[] = [];
+
+  //
+
+  timeslots: String[] = ["19:00 Uhr", "23:00 Uhr"];
 
   //
 
@@ -77,7 +83,7 @@ export class MovieBuyTicketComponent implements OnInit {
     let time= this.ticketform.get('uhrzeit').value;
     console.log("helloooo "+this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time).subscribe());
 
-    return this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time)==null;
+    return this.httpM.getAvailabilityForShow(idMovie, seat, row, day, time) == null;
 
   }
 
@@ -96,6 +102,7 @@ export class MovieBuyTicketComponent implements OnInit {
       this.snacksList = snackList;
     });
   }
+
 
   getSnackPrice(): void {
     if (
@@ -187,9 +194,50 @@ export class MovieBuyTicketComponent implements OnInit {
 
   // | SONSTIGE | ////////////////////////////////////////////////////////////////////////////////
 
+
   getIsLoggedIn(): void {
     this.loggedIn = this.httpU.getIsLoggedIn();
   }
+
+  gettimeSlots(): String[] {
+    let availableTimeSlots=   [];
+    let dtToday = new Date();
+
+    let selectedDate=new Date( this.ticketform.get('tag').value);
+
+
+
+    for (let i = 0; i < this.timeslots.length; i++){
+      availableTimeSlots.push(this.timeslots[i]);
+      //if date ist today
+      if((selectedDate.getTime() <dtToday.getTime())  ){
+        //if timeslot is past
+        if((Number (this.timeslots[i].slice(0,2)) < dtToday.getHours())){
+
+          availableTimeSlots.pop();
+        }
+      }
+    }
+    return availableTimeSlots;
+  }
+
+  getCurrentDate(): string {
+    let dtToday = new Date();
+    let month: any = dtToday.getMonth() + 1;
+    let day: any = dtToday.getDate();
+    let year = dtToday.getFullYear();
+
+    if (month < 10) {
+      month = "0" + month.toString();
+    }
+
+    if (day < 10) {
+      day = "0" + day.toString();
+    }
+    return year + '-' + month.toString() + '-' + day.toString();
+
+  }
+
 
   getTotalPriceSnackAndDrinks(): number {
     if (!this.snacksPrice && !this.drinksPrice) {
@@ -215,12 +263,6 @@ export class MovieBuyTicketComponent implements OnInit {
     }
   }
 
-  // getMonth(date: Date): string {
-  //   if (date.getMonth() + 1 < 10) {
-  //     return '0' + (date.getMonth() + 1);
-  //   }
-  //   return (date.getMonth() + 1).toString();
-  // }
 
   onBuyTickets(): void {
     const today = new Date();

@@ -29,6 +29,9 @@ import { GenreFilterButtonComponent } from './components/genre-filter-button/gen
 import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-page.component';
 import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.component';
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +55,8 @@ import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.co
     GenreFilterButtonComponent,
     BuyPageComponent,
     TicketHistoryComponent,
+
+
   ],
 
   imports: [
