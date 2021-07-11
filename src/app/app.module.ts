@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { StartseiteComponent } from './pages/startseite/startseite.component';
 import { AddMoviePage } from './pages/add-movie-page/add-movie-page';
-import { KundenComponent } from './components/users/kunden.component';
 import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
 import { RegistrierenComponent } from './pages/registrieren/registrieren.component';
 import { TitleComponent } from './components/title/title.component';
@@ -34,9 +33,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorInterceptor } from './error-interceptor';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +40,6 @@ import { ErrorInterceptor } from './error-interceptor';
     AddMoviePage,
     NavbarComponent,
     MovieGalleryComponent,
-    KundenComponent,
     AddUserFormComponent,
     RegistrierenComponent,
     TitleComponent,
