@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { __values } = require('tslib');
 
 const app = express();
 
@@ -236,8 +237,29 @@ app.post('/addMovie', upload.single('image'), (req, res) => {
 });
 
 // || TICKET KAUFEN || --------------------------------------------------------------------------------------------------------------------------- //
+app.post('/addControlTicket',(req,res) =>{
+  
+  const show={
+  id_movie:req.body.id_movie,
+  row: req.body.row,
+  seat: req.body.seat,
+  day: req.body.day,
+  time: req.body.time
+  };
+  console.log(`INSERT INTO shows (id_show,id_movie,date,time,row,seat) Values (default,${show.id_movie},'${show.day}','${show.time}'','${show.row}','${show.seat}')`);
+  const sql=`INSERT INTO shows (id_show,id_movie,date,time,row,seat) Values (default,${show.id_movie},'${show.day}','${show.time}','${show.row}','${show.seat}')`;
+  con.query(sql, show, (err, result) => {
+    if (err) {
+      console.log('Datenbank-Speicherung fehlgeschlagen!');
+      throw err;
+    }
+    console.log('Datenbank-Speicherung erfolgreich!');
+    res.send(result);
+  });
 
+})
 app.post('/addTicket', (req, res) => {
+  console.log('INSERT INTO ticket SET ?');
   const ticket = {
     id_user: req.body.id_user,
 
@@ -273,6 +295,7 @@ app.post('/addTicket', (req, res) => {
     console.log('Datenbank-Speicherung erfolgreich!');
     res.send(result);
   });
+
 });
 
 // || GET Methoden / Daten abrufen || --------------------------------------------------------------------------------------------------------------------------- //

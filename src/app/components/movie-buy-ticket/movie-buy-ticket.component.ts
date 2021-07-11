@@ -8,6 +8,7 @@ import { Snack } from '../../interfaces/snack';
 import { Ticket } from '../../interfaces/ticket';
 import { User } from '../../interfaces/user';
 import { CheckFSKService } from '../../services/check-fsk.service';
+import { Show } from 'src/app/interfaces/show';
 
 @Component({
   selector: 'app-movie-buy-ticket',
@@ -57,6 +58,8 @@ export class MovieBuyTicketComponent implements OnInit {
 
   movieId: number;
 
+  show: Show;
+
   loggedIn: boolean = false;
 
   movie = {
@@ -72,6 +75,7 @@ export class MovieBuyTicketComponent implements OnInit {
     let idMovie= this.movieId;
     let day=this.ticketform.get('tag').value;
     let time= this.ticketform.get('uhrzeit').value;
+    console.log("helloooo "+this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time).subscribe());
 
     return this.httpM.getAvailabilityForShow(idMovie,seat,row,day,time)==null;
 
@@ -248,9 +252,17 @@ export class MovieBuyTicketComponent implements OnInit {
 
       date_bought: formatToday,
     };
-
+    const show={
+      id_movie : this.movieId,
+      row: this.ticketform.value.reihe,
+      seat: this.ticketform.value.platz,
+      day: this.ticketform.value.tag,
+      time: this.ticketform.value.uhrzeit
+      };
+    console.log("hier movie id: "+show.id_movie);
     this.httpM.addTicket(ticket).subscribe();
-
+    this.httpM.addShow(show).subscribe();
+    console.log("test "+this.isSeatTaken());
     this.clicked = true;
   }
 
