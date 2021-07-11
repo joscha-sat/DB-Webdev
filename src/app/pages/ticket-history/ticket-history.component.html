@@ -60,6 +60,15 @@
           <div class="label">Gesamtpreis:</div>
           <div class="name ml-2">{{ ticket.total_price }} €</div>
         </div>
+
+        <footer class="card-footer">
+          <button
+            class="button is-danger mt-2"
+            (click)="deleteTicket(ticket.id_ticket)"
+          >
+            löschen
+          </button>
+        </footer>
       </div>
     </div>
   </div>

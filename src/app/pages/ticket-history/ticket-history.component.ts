@@ -34,6 +34,10 @@ export class TicketHistoryComponent implements OnInit {
     });
   }
 
+  deleteTicket(id_ticket: number): void {
+    this.httpM.deleteTicket(id_ticket).subscribe();
+  }
+
   // ------------------------------------------------------------------------------------- || @Inputs ||
 
   // ---------------------------------------------------------------------------------- || @ViewChild ||
@@ -43,5 +47,9 @@ export class TicketHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.getLoggedInUser();
     this.getTickets();
+
+    this.httpM.updater$.subscribe(() => {
+      this.getTickets();
+    });
   }
 }

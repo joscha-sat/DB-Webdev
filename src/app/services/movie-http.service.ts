@@ -206,4 +206,14 @@ export class MovieHttpService {
       'http://localhost:3000/getTickets/' + user_id
     );
   }
+
+  deleteTicket(ticket_id: number): Observable<Ticket> {
+    return this.http
+      .delete<Ticket>('http://localhost:3000/deleteOneTicket/' + ticket_id)
+      .pipe(
+        tap(() => {
+          this._updater$.next();
+        })
+      );
+  }
 }

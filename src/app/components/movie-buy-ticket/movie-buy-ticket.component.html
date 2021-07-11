@@ -177,20 +177,25 @@
       <hr />
 
       <div class="form-group">
-
         <label>Tag</label>
-        <input class="ml-4" type="date" min={{getCurrentDate()}} formControlName="tag" />
+        <input
+          class="ml-4"
+          type="date"
+          min="{{ getCurrentDate() }}"
+          formControlName="tag"
+        />
 
         <label class="ml-4">Uhrzeit</label>
         <div class="select is-small ml-4">
           <select class="select" formControlName="uhrzeit">
-            <option *ngFor="let timeslot of gettimeSlots()" >{{timeslot}}</option>
+            <option *ngFor="let timeslot of gettimeSlots()">
+              {{ timeslot }}
+            </option>
           </select>
         </div>
       </div>
 
       <hr />
-
 
       <!--    PREIS    -->
 
@@ -200,7 +205,10 @@
           {{ getTotalPrice() }} €</span
         >
       </div>
-      <div *ngIf="isSeatTaken" class="notification is-primary">Der gewünschte Platz ist leider nicht mehr verfügbar. Bitte wählen Sie einen anderen und probieren es erneut.  </div>
+      <div *ngIf="isSeatTaken" class="notification is-primary">
+        Der gewünschte Platz ist leider nicht mehr verfügbar. Bitte wählen Sie
+        einen anderen und probieren es erneut.
+      </div>
       <!-- BUTTONS -->
 
       <div class="field is-grouped buttons" *ngIf="!clicked">
@@ -222,8 +230,6 @@
     </div>
   </form>
 </div>
-
-
 
 <!-- nachm Kauf-->
 <div class="is-flex is-justify-content-center mt-4" *ngIf="clicked">

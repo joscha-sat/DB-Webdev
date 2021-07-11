@@ -551,6 +551,20 @@ app.delete('/deleteOneMovie/:id', (req, res) => {
   });
 });
 
+app.delete('/deleteOneTicket/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = `DELETE FROM ticket WHERE id_ticket = ${id}`;
+
+  con.query(sql, (err, result) => {
+    if (err) {
+      console.log('löschen fehlgeschlagen!');
+      throw err;
+    }
+    console.log('löschen erfolgreich!');
+    res.send(result);
+  });
+});
+
 // || PATCH Methoden / Daten verändern || ------------------------------------------------------------------------------------------------------------------------ //
 app.patch('/updateUser/:user_id', (req, res) => {
   if (req.body.password.length >= 6) {
