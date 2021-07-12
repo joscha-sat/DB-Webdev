@@ -1,23 +1,25 @@
-.navbar{
+.navbar {
   background-color: black;
   box-shadow: 0 4px 2px -2px white;
   border-radius: 0.25rem;
-
 }
 
-.is-info{
+.is-info {
   background-color: #041e3d !important;
 }
 
-.is-danger{
+.is-danger {
   background-color: #990000 !important;
 }
 
-.navbar-item{
-  color:white !important;
+.navbar-item {
+  color: white !important;
 }
 
+.logo {
+  max-height: 75px;
 
-.logo{
-  max-height: 100px;
+  &:hover {
+    cursor: pointer;
+  }
 }

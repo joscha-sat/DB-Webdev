@@ -1,10 +1,6 @@
 <!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
 
-
-
-<div class="width70 mt-4">
-
-
+<div class="width70 mt-6">
   <app-genre-filter-button
     [genreName]="'Action'"
     [color]="'is-dark'"
@@ -57,13 +53,11 @@
 
 <div class="width70 mt-3">
   <app-genre-filter-button
-
     [genreName]="'Alle Filme'"
     [color]="'is-danger'"
-
   ></app-genre-filter-button>
 </div>
-<div class="width70 mt-3">
+<div class="width70 mt-5 mb-5">
   <p class="control has-icons-left">
     <input
       type="text"
@@ -80,13 +74,11 @@
   class="has-text-centered"
   *ngIf="getGenreBoolean() && filteredFilme().length > 0"
 >
-  <h1>
-  {{ filteredFilme()[0].genre }} Filme
-  </h1>
+  <h1>{{ filteredFilme()[0].genre }} Filme</h1>
 </div>
 
 <div class="has-text-centered" *ngIf="!getGenreBoolean()">
- <h1> Alle Filme</h1>
+  <h1>Alle Filme</h1>
 </div>
 
 <!-- Container: Movie-Galerie || START || -->
