@@ -5,7 +5,7 @@ import { User } from 'src/app/interfaces/user';
 import { UserHttpService } from 'src/app/services/user-http.service';
 
 @Component({
-  selector: 'app-account-erstellen-form',
+  selector: 'app-add-user-form',
   templateUrl: './add-user-form.component.html',
   styleUrls: ['./add-user-form.component.scss'],
 })
