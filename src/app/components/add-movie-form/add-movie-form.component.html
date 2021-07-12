@@ -1,6 +1,6 @@
 <app-titel *ngIf="mode === 'Film_Hinzufuegen'">Film hinzufügen</app-titel>
 <app-titel *ngIf="mode === 'Film_Bearbeiten'">Film bearbeiten</app-titel>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="mb-6">
   <div class="container is-max-desktop p-5 mt-5">
     <!-- Input-TITEL -->
 
