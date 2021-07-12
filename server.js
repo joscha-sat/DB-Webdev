@@ -120,7 +120,7 @@ app.post('/register', (req, res) => {
   const email = req.body.newUser.email;
   const password = req.body.newUser.password;
   const date_of_birth = req.body.newUser.date_of_birth;
-  const admin_secret = req.body.newUser.admin_secret;
+  const admin_secret = +req.body.newUser.admin_secret;
 
   bcrypt.hash(password, 10, (err, hash) => {
     if (err) {

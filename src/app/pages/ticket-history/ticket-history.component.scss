@@ -1,5 +1,8 @@
 .card {
   width: 350px;
+  -webkit-box-shadow: 0 0 0.8rem 0.1rem #fff;
+  background: var(--card);
+  color: var(--secondary_text);
 }
 
 .container {
@@ -7,4 +10,5 @@
   place-items: center;
   place-content: center;
   flex-wrap: wrap;
+  gap: 55px;
 }

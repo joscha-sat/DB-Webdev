@@ -12,7 +12,7 @@
 
 .container {
   background: var(--card);
-  border: 0px solid var(--border);
+  -webkit-box-shadow: 0 0 0.8rem 0.1rem #fff;
   border-radius: var(--border_radius);
   max-width: 600px;
 }
@@ -20,7 +20,6 @@
 .label {
   color: #ffffff !important;
 }
-
 
 .error {
   color: rgb(255, 0, 0);
@@ -50,8 +49,8 @@
   object-fit: cover;
   object-position: 50% 50%;
 
-  border: 0.1rem solid white;
-  -webkit-box-shadow: 0 0 0.2rem 0.2rem #fff;
+  //border: 0.1rem solid white;
+  -webkit-box-shadow: 0 0 0.8rem 0.1rem #fff;
   border-radius: 0.25rem;
 }
 
@@ -75,10 +74,7 @@
   place-content: center;
   background: var(--card);
   border: 0.1rem solid white;
-  -webkit-box-shadow: 0 0 0.2rem 0.2rem #fff;
+  -webkit-box-shadow: 0 0 0.8rem 0.1rem #fff;
   border-radius: 0.25rem;
   padding: 2rem;
 }
-
-
-
