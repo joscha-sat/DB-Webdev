@@ -1,25 +1,21 @@
-<app-titel class="block">Film Details zu: {{ oneMovie.title }}</app-titel>
+<app-titel class="block">{{ oneMovie.title }}</app-titel>
 
-<!-- BESCHREIBUNG ZUM FILM -->
-<div class="container block">
-  <div class="description block">
-    <h2>Beschreibung:</h2>
-    {{ oneMovie.description }}
-  </div>
-</div>
 
 <!-- VIDEO -->
 
 <div class="trailer-container">
   <div class="video">
     <div class="block">
+      <!--
       <h2>Trailer:</h2>
+      -->
     </div>
 
     <iframe id="trailer" [src]="oneMovie.trailer | safe" allowfullscreen>
     </iframe>
   </div>
 </div>
+
 
 <!-- WEITERE INFOS ZUM FILM -->
 
@@ -65,4 +61,12 @@
     >Bitte <a routerLink="/Login">einloggen</a>, um Tickets erwerben zu
     können</ng-template
   >
+</div>
+
+<!-- BESCHREIBUNG ZUM FILM -->
+<div class="container block">
+  <div class="description block">
+    <h2>Beschreibung:</h2>
+    {{ oneMovie.description }}
+  </div>
 </div>

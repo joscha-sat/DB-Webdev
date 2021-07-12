@@ -20,7 +20,8 @@
   object-fit: cover;
   object-position: 50% 50%;
 
-  border: 1px solid grey;
+  border: 0.1rem solid white;
+  -webkit-box-shadow: 0 0 0.2rem 0.2rem #fff;
   border-radius: 0.25rem;
 }
 
@@ -31,12 +32,12 @@
   font-size: 1.2rem;
   text-align: center;
   background-color: var(--card);
-  border: 1px solid var(--border);
+  border: 0px solid var(--border);
   color: var(--text);
   overflow: hidden;
 
   &:hover {
-    cursor: pointer;
+    //cursor: pointer;
     background: var(--hover_card);
   }
 }
@@ -56,15 +57,20 @@ figcaption {
 /* Das Unter-"Gehäuse" / Unter-Element in dem die zwei Buttons sind */
 .buttons {
   display: flex;
+  color: #041e3d;
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 1rem;
 }
 
 /* der button-tag */
-button {
+.button {
   margin-top: $margin_4;
   font-weight: bold;
+}
+
+.is-primary{
+  background-color: #041e3d !important;
 }
 
 /* Eltern-Element für die Searchbar */

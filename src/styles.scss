@@ -20,7 +20,15 @@
   // Text
   --primary_text: #{$primary_text_color};
   --secondary_text: #{$secondary_text_color};
+
+  //Button
+  --button_colorR: #{$button_color_red};
+  --button_colorB: #{$button_color_blue};
+
+
 }
+
+
 
 body {
   background: var(--background);
@@ -29,6 +37,9 @@ body {
   font-family: $font_family;
   font-size: $normal_text_font_size;
 
+
+
+
   line-height: 1.6;
   word-break: break-word;
   min-height: 100vh;
@@ -36,20 +47,23 @@ body {
   padding: 0;
 
   h1 {
+    font-family: Gravesend Sans, sans-serif;
+    font-weight: bold;
     font-size: $h1_font_size;
     color: var(--primary_text);
-    font-weight: bold;
     margin: 0;
   }
 
   h2 {
+    font-family: Gravesend Sans, sans-serif;
     font-size: $h2_font_size;
     color: var(--primary_text);
-    font-weight: bold;
+    font-weight: lighter;
     margin: 0;
   }
 
   h3 {
+    font-family: Gravesend Sans, sans-serif;
     font-size: $h3_font_size;
     color: var(--primary_text);
     font-weight: bold;
@@ -86,8 +100,14 @@ html {
   transition: color 0.05s, background 0.05s;
 }
 
+.Logo{
+
+}
+
 .error {
   color: rgb(255, 0, 0);
   font-size: $small_text_font_size;
   margin-bottom: $margin_3;
 }
+
+

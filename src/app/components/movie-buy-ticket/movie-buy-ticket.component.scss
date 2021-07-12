@@ -12,13 +12,14 @@
 
 .container {
   background: var(--card);
-  border: 1px solid var(--border);
+  border: 0px solid var(--border);
   border-radius: var(--border_radius);
 }
 
 .label {
-  color: var(--text);
+  color: #ffffff !important;
 }
+
 
 .error {
   color: rgb(255, 0, 0);
@@ -47,8 +48,10 @@
   height: 550px;
   object-fit: cover;
   object-position: 50% 50%;
-  border: 1px solid var(--border);
-  border-radius: var(--border_radius);
+
+  border: 0.1rem solid white;
+  -webkit-box-shadow: 0 0 0.2rem 0.2rem #fff;
+  border-radius: 0.25rem;
 }
 
 #platz {
@@ -70,7 +73,11 @@
   max-width: 50%;
   place-content: center;
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--border_radius);
+  border: 0.1rem solid white;
+  -webkit-box-shadow: 0 0 0.2rem 0.2rem #fff;
+  border-radius: 0.25rem;
   padding: 2rem;
 }
+
+
+

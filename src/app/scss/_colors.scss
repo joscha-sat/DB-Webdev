@@ -2,13 +2,13 @@
 
 // Text
 
-$primary_text_color: #e4e6eb;
-$secondary_text_color: #b0b3b8;
+$primary_text_color: #fff;
+$secondary_text_color: #f0f0f0;
 
 // Background | Hintergrund
 
-$background_color: #181818;
-$card_color: #242526;
+$background_color: #000000;
+$card_color:#000000;
 
 // Hover
 
@@ -17,6 +17,24 @@ $hover_text_color: yellowgreen;
 
 // Border | Rahmen
 
-$border_color: #f7f7f7;
+$border_color: white;
+
+//Button Colors
+
+$button_color_red: #990000;
+
+$button_color_blue: #041e3d;
+
+//Alle Primären Farben
+
+$enable-grid-classes:false;
+$primary:#041E3D;
+$secondary:#6c757d;
+$success:#3b6663;
+$danger:#990000;
+$info:#0dcaf0;
+$warning:#F19325;
+$light:#f8f9fa;
+$dark:#212529;
 
 // ----------------------------------------------------- || WEITERE ||
