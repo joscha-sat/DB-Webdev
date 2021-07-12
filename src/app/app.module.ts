@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 
-import { FooterComponent } from './components/footer/footer.component';
+
 
 import { StartseiteComponent } from './pages/startseite/startseite.component';
 import { AddMoviePage } from './pages/add-movie-page/add-movie-page';
@@ -31,7 +31,7 @@ import { UpdateUserPageComponent } from './pages/update-user-page/update-user-pa
 import { GenreFilterButtonComponent } from './components/genre-filter-button/genre-filter-button.component';
 import { BuyPageComponent } from './components/movie-buy-ticket/buy-page/buy-page.component';
 import { TicketHistoryComponent } from './pages/ticket-history/ticket-history.component';
-import { ComponentFooterComponent } from './component-footer/component-footer.component';
+
 
 @NgModule({
   declarations: [
@@ -39,7 +39,6 @@ import { ComponentFooterComponent } from './component-footer/component-footer.co
     StartseiteComponent,
     AddMoviePage,
     NavbarComponent,
-    FooterComponent,
     MovieGalleryComponent,
     KundenComponent,
     AddUserFormComponent,
@@ -57,7 +56,6 @@ import { ComponentFooterComponent } from './component-footer/component-footer.co
     GenreFilterButtonComponent,
     BuyPageComponent,
     TicketHistoryComponent,
-    ComponentFooterComponent,
   ],
 
   imports: [

@@ -45,7 +45,7 @@
   <div *ngIf="loggedIn; else doLogIn" id="ticket_button">
     <button
       *ngIf="!checkFSK(user.date_of_birth, oneMovie.fsk)"
-      class="button is-primary"
+      class="button is-danger"
       [routerLink]="['/Tickets/', oneMovie.movie_id]"
     >
       Tickets erwerben
@@ -65,8 +65,9 @@
 
 <!-- BESCHREIBUNG ZUM FILM -->
 <div class="container block">
+<div class='padding'>
   <div class="description block">
     <h2>Beschreibung:</h2>
     {{ oneMovie.description }}
-  </div>
+  </div></div>
 </div>
