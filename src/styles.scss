@@ -28,11 +28,7 @@
   //Button
   --button_colorR: #{$button_color_red};
   --button_colorB: #{$button_color_blue};
-
-
 }
-
-
 
 body {
   background: var(--background);
@@ -40,9 +36,6 @@ body {
 
   font-family: $font_family;
   font-size: $normal_text_font_size;
-
-
-
 
   line-height: 1.6;
   word-break: break-word;
@@ -104,13 +97,15 @@ html {
   transition: color 0.05s, background 0.05s;
 }
 
-.Logo{
-
-}
-
 .error {
   color: rgb(255, 0, 0);
   font-size: $small_text_font_size;
   margin-bottom: $margin_3;
 }
 
+// Button colors
+
+.is-info,
+.is-primary {
+  background: $button_color_blue !important;
+}

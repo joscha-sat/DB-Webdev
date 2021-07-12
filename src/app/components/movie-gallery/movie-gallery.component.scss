@@ -4,7 +4,7 @@
 .grid {
   display: grid;
   justify-content: center;
-  grid-gap: 1.25rem;
+  grid-gap: 2rem;
   grid-auto-flow: row;
 
   max-width: 1300px;
@@ -20,25 +20,25 @@
   object-fit: cover;
   object-position: 50% 50%;
 
-  border: 0.1rem solid white;
-  -webkit-box-shadow: 0 0 0.3rem 0.15rem #fff;
+  //border: 0.1rem solid white;
+  //-webkit-box-shadow: 0 0 0.3rem 0.15rem #fff;
   border-radius: 0.25rem;
 }
 
 /* Das "Gehäuse" / Element in dem die Bilder sind */
 .figure {
   border-radius: 0.25rem;
-  padding: 0.4rem;
+  //padding: 0.4rem;
   font-size: 1.2rem;
   text-align: center;
+  background: var(--card);
   //background-color: var(--card);
-  //border: 0px solid var(--border);
+  -webkit-box-shadow: 0 0 0.3rem 0.15rem #fff;
   color: var(--text);
   overflow: hidden;
 
   &:hover {
     cursor: pointer;
-    background: var(--hover_card);
   }
 }
 
@@ -69,10 +69,6 @@ figcaption {
   font-weight: bold;
 }
 
-.is-primary {
-  background-color: #041e3d !important;
-}
-
 /* Eltern-Element für die Searchbar */
 .field {
   width: 70%;
@@ -82,10 +78,6 @@ figcaption {
 .width70 {
   width: 70%;
   margin: 0 auto 0;
-}
-
-.is-info {
-  background: $button_color_blue;
 }
 
 /* Die Searchbar, also das <input> tag selbst */
