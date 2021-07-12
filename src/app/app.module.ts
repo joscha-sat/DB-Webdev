@@ -8,6 +8,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
+
+
+
 import { StartseiteComponent } from './pages/startseite/startseite.component';
 import { AddMoviePage } from './pages/add-movie-page/add-movie-page';
 import { AddUserFormComponent } from './components/add-user-form/add-user-form.component';
@@ -32,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ErrorInterceptor } from './error-interceptor';
+
 
 @NgModule({
   declarations: [

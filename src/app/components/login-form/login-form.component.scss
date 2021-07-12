@@ -2,12 +2,14 @@
 
 .container {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--border_radius);
+  border: 0.1rem solid white;
+  -webkit-box-shadow: 0 0 0.2rem 0.2rem #fff;
+  border-radius: 0.25rem;
 }
 
 .label {
-  color: var(--text);
+  // color: var(--text);
+  color: white;
 }
 
 .error {

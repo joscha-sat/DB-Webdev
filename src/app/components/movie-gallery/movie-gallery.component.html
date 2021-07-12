@@ -1,7 +1,69 @@
 <!-------------------------------------------------------------------------------------------- || Filme Suchen || -->
 
+
+
+<div class="width70 mt-4">
+
+
+  <app-genre-filter-button
+    [genreName]="'Action'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Abenteuer'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Animation'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Drama'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Horror'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Komödie'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Krimi'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Liebe'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Science-Fiction'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Thriller'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Western'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+  <app-genre-filter-button
+    [genreName]="'Fantasy'"
+    [color]="'is-dark'"
+  ></app-genre-filter-button>
+</div>
+
 <div class="width70 mt-3">
-  <div class="title has-text-grey-light">Film suchen</div>
+  <app-genre-filter-button
+
+    [genreName]="'Alle Filme'"
+    [color]="'is-danger'"
+
+  ></app-genre-filter-button>
+</div>
+<div class="width70 mt-3">
   <p class="control has-icons-left">
     <input
       type="text"
@@ -14,76 +76,17 @@
     </span>
   </p>
 </div>
-
-<div class="width70 mt-4">
-  <div class="title has-text-grey-light">Nach Genre filtern</div>
-
-  <app-genre-filter-button
-    [genreName]="'Action'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Abenteuer'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Animation'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Drama'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Horror'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Komödie'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Krimi'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Liebe'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Science-Fiction'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Thriller'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Western'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-  <app-genre-filter-button
-    [genreName]="'Fantasy'"
-    [color]="'is-primary'"
-  ></app-genre-filter-button>
-</div>
-
-<div class="width70 mt-3">
-  <app-genre-filter-button
-    [genreName]="'Alle Filme'"
-    [color]="'is-danger'"
-  ></app-genre-filter-button>
-</div>
-
 <div
-  class="width70 title has-text-grey-light mt-4"
+  class="has-text-centered"
   *ngIf="getGenreBoolean() && filteredFilme().length > 0"
 >
+  <h1>
   {{ filteredFilme()[0].genre }} Filme
+  </h1>
 </div>
 
-<div class="width70 title has-text-grey-light mt-4" *ngIf="!getGenreBoolean()">
-  Alle Filme
+<div class="has-text-centered" *ngIf="!getGenreBoolean()">
+ <h1> Alle Filme</h1>
 </div>
 
 <!-- Container: Movie-Galerie || START || -->
@@ -108,14 +111,14 @@
         <button
           *ngIf="!isAdmin"
           [routerLink]="['/Details/', movie.movie_id]"
-          class="button is-info"
+          class="button is-primary"
         >
           Details
         </button>
         <button
           *ngIf="!isAdmin"
           [routerLink]="['/Tickets/', movie.movie_id]"
-          class="button is-info"
+          class="button is-danger"
           [disabled]="checkFSK(user.date_of_birth, movie.fsk)"
         >
           Tickets
