@@ -10,7 +10,6 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { __values } = require('tslib');
 
 const app = express();
 
@@ -165,7 +164,7 @@ app.post('/login', (req, res) => {
       throw err;
     }
 
-    // Falls nicht, dann Error ausgeben | (!result.length) = kein Ergebnis in Form eines Users zu der Email gefunden
+    // Falls kein User gefunden, dann Error ausgeben | (!result.length) = kein Ergebnis in Form eines Users zu der Email gefunden
 
     if (!result.length) {
       console.log('Email oder Passwort ist falsch!');
@@ -263,6 +262,7 @@ app.post('/addControlTicket', (req, res) => {
     res.send(result);
   });
 });
+
 app.post('/addTicket', (req, res) => {
   console.log('INSERT INTO ticket SET ?');
   const ticket = {
