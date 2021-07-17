@@ -1,5 +1,4 @@
-<app-titel class="block">{{ oneMovie.title }}</app-titel>
-
+<app-titel class="block" *ngIf="oneMovie">{{ oneMovie.title }}</app-titel>
 
 <!-- VIDEO -->
 
@@ -11,31 +10,35 @@
       -->
     </div>
 
-    <iframe id="trailer" [src]="oneMovie.trailer | safe" allowfullscreen>
+    <iframe
+      *ngIf="oneMovie"
+      id="trailer"
+      [src]="oneMovie.trailer | safe"
+      allowfullscreen
+    >
     </iframe>
   </div>
 </div>
 
-
 <!-- WEITERE INFOS ZUM FILM -->
 
 <div class="container block" id="infos">
-  <div class="duration block">
+  <div class="duration block" *ngIf="oneMovie">
     <h3>Dauer:</h3>
     {{ oneMovie.duration }} Minuten
   </div>
 
-  <div class="genre block">
+  <div class="genre block" *ngIf="oneMovie">
     <h3>Genre:</h3>
     {{ oneMovie.genre }}
   </div>
 
-  <div class="fks block">
+  <div class="fks block" *ngIf="oneMovie">
     <h3>FSK:</h3>
     {{ oneMovie.fsk }}
   </div>
 
-  <div class="release_year block">
+  <div class="release_year block" *ngIf="oneMovie">
     <h3>Erscheinungsjahr:</h3>
     {{ oneMovie.release_year }}
   </div>
@@ -64,10 +67,11 @@
 </div>
 
 <!-- BESCHREIBUNG ZUM FILM -->
-<div class="container block">
-<div class='padding'>
-  <div class="description block">
-    <h2>Beschreibung:</h2>
-    {{ oneMovie.description }}
-  </div></div>
+<div class="container block" *ngIf="oneMovie">
+  <div class="padding">
+    <div class="description block">
+      <h2>Beschreibung:</h2>
+      {{ oneMovie.description }}
+    </div>
+  </div>
 </div>

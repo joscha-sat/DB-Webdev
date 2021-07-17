@@ -55,7 +55,9 @@ export class MovieDetailsTicketsComponent implements OnInit {
         this.movieId = +paramMap.get('movie_id');
 
         this.httpM.getOneMovie(this.movieId).subscribe((result) => {
-          this.oneMovie = result[0];
+          if (result) {
+            this.oneMovie = result[0];
+          }
         });
       }
     });

@@ -68,49 +68,6 @@ app.listen(3000, function () {
 
 // || HTTP - METHODEN || ---------------------------------------------------------------------------------------------------------------------------------------- //
 
-// | MULTER | ----------------------------------------------------------------- //
-
-// mime type prüfen, nur jpg und png zulassen
-
-const MIME_TYPE_MAP = {
-  'image/png': 'png',
-
-  'image/jpeg': 'jpg',
-
-  'image/jpg': 'jpg',
-};
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // mime type prüfen, ggfalls error ausgeben
-
-    const isValid = MIME_TYPE_MAP[file.mimetype];
-
-    let error = new Error('invalid mime type');
-
-    if (isValid) {
-      error = null;
-    }
-
-    // relativer pfad von server.js zum Ordner, wo die img gespeichert werden sollen
-
-    cb(error, 'src/assets');
-  },
-
-  // Name des img: nur originalname + file_ending geht auch, aber hier best
-  // practise mit random values sodass keine doppelten Namen passieren können.
-
-  filename: (req, file, cb) => {
-    const name = file.originalname.toLowerCase().split(' ').join('-');
-
-    const file_ending = MIME_TYPE_MAP[file.mimetype];
-
-    cb(null, name + '-' + Date.now() + '.' + file_ending);
-  },
-});
-
-const upload = multer({ storage: storage });
-
 // || POST Methoden / Daten hochladen || ------------------------------------------------------------------------------------------------------------------------ //
 
 // || REGISTRIEREN || --------------------------------------------------------------------------------------------------------------------------- //
@@ -135,7 +92,6 @@ app.post('/register', (req, res) => {
 
       con.query(sql, (err) => {
         if (err) {
-          console.log('Email existiert bereits');
           return res.status(400).send({
             message: 'Email existiert bereits',
           });
@@ -167,7 +123,6 @@ app.post('/login', (req, res) => {
     // Falls kein User gefunden, dann Error ausgeben | (!result.length) = kein Ergebnis in Form eines Users zu der Email gefunden
 
     if (!result.length) {
-      console.log('Email oder Passwort ist falsch!');
       return res.status(400).send({
         message: 'Email oder Passwort ist falsch!',
       });
@@ -212,6 +167,49 @@ app.post('/login', (req, res) => {
     });
   });
 });
+
+// | MULTER | ----------------------------------------------------------------- //
+
+// mime type prüfen, nur jpg und png zulassen
+
+const MIME_TYPE_MAP = {
+  'image/png': 'png',
+
+  'image/jpeg': 'jpg',
+
+  'image/jpg': 'jpg',
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // mime type prüfen, ggfalls error ausgeben
+
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+
+    let error = new Error('invalid mime type');
+
+    if (isValid) {
+      error = null;
+    }
+
+    // relativer pfad von server.js zum Ordner, wo die img gespeichert werden sollen
+
+    cb(error, 'src/assets');
+  },
+
+  // Name des img: nur originalname + file_ending geht auch, aber hier best
+  // practise mit random values sodass keine doppelten Namen passieren können.
+
+  filename: (req, file, cb) => {
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+
+    const file_ending = MIME_TYPE_MAP[file.mimetype];
+
+    cb(null, name + '-' + Date.now() + '.' + file_ending);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // || FILM HINZUFÜGEN || --------------------------------------------------------------------------------------------------------------------------- //
 

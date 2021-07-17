@@ -139,10 +139,9 @@
       </div>
     </figcaption>
   </figure>
-
   <!--  Container: Movie-Galerie || ENDE || -->
 </div>
 
-<div class="width70 mt-4" *ngIf="!filteredFilme().length">
+<div class="width70 mt-4" *ngIf="filteredFilme() && !filteredFilme().length">
   Aktuell gibt es keine Filme zu Ihrem Suchkriterium!
 </div>

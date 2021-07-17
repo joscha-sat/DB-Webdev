@@ -8,10 +8,12 @@ export class ArrayFilterService {
   filteredFilmTitel(array: Array<any>, search: string): Array<Movie> {
     if (!search) {
       return array;
-    } else {
-      return array.filter((filme: any) => {
-        return filme.title.toLowerCase().match(search.toLowerCase());
-      });
     }
+    if (!array) {
+      return;
+    }
+    return array.filter((filme: any) => {
+      return filme.title.toLowerCase().match(search.toLowerCase());
+    });
   }
 }
